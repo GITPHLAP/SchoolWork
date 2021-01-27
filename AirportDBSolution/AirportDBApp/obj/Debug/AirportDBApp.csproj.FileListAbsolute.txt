@@ -1,0 +1,12 @@
+C:\Users\kjedt\source\repos_git\AirportDBSolution\AirportDBApp\bin\Debug\AirportDBApp.exe.config
+C:\Users\kjedt\source\repos_git\AirportDBSolution\AirportDBApp\bin\Debug\AirportDBApp.exe
+C:\Users\kjedt\source\repos_git\AirportDBSolution\AirportDBApp\bin\Debug\AirportDBApp.pdb
+C:\Users\kjedt\source\repos_git\AirportDBSolution\AirportDBApp\bin\Debug\EntityFramework.dll
+C:\Users\kjedt\source\repos_git\AirportDBSolution\AirportDBApp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\kjedt\source\repos_git\AirportDBSolution\AirportDBApp\bin\Debug\EntityFramework.xml
+C:\Users\kjedt\source\repos_git\AirportDBSolution\AirportDBApp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\kjedt\source\repos_git\AirportDBSolution\AirportDBApp\obj\Debug\AirportDBApp.csprojAssemblyReference.cache
+C:\Users\kjedt\source\repos_git\AirportDBSolution\AirportDBApp\obj\Debug\AirportDBApp.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\AirportDBSolution\AirportDBApp\obj\Debug\AirportDBApp.csproj.CopyComplete
+C:\Users\kjedt\source\repos_git\AirportDBSolution\AirportDBApp\obj\Debug\AirportDBApp.exe
+C:\Users\kjedt\source\repos_git\AirportDBSolution\AirportDBApp\obj\Debug\AirportDBApp.pdb

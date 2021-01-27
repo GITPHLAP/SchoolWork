@@ -1,0 +1,12 @@
+C:\Users\kjedt\source\repos_git\CocktailSolution\CocktailApp\bin\Debug\CocktailApp.exe.config
+C:\Users\kjedt\source\repos_git\CocktailSolution\CocktailApp\bin\Debug\CocktailApp.exe
+C:\Users\kjedt\source\repos_git\CocktailSolution\CocktailApp\bin\Debug\CocktailApp.pdb
+C:\Users\kjedt\source\repos_git\CocktailSolution\CocktailApp\bin\Debug\EntityFramework.dll
+C:\Users\kjedt\source\repos_git\CocktailSolution\CocktailApp\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\kjedt\source\repos_git\CocktailSolution\CocktailApp\bin\Debug\EntityFramework.xml
+C:\Users\kjedt\source\repos_git\CocktailSolution\CocktailApp\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\kjedt\source\repos_git\CocktailSolution\CocktailApp\obj\Debug\CocktailApp.csprojAssemblyReference.cache
+C:\Users\kjedt\source\repos_git\CocktailSolution\CocktailApp\obj\Debug\CocktailApp.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\CocktailSolution\CocktailApp\obj\Debug\CocktailApp.csproj.CopyComplete
+C:\Users\kjedt\source\repos_git\CocktailSolution\CocktailApp\obj\Debug\CocktailApp.exe
+C:\Users\kjedt\source\repos_git\CocktailSolution\CocktailApp\obj\Debug\CocktailApp.pdb

@@ -1,0 +1,13 @@
+C:\Users\kjedt\source\repos_git\MyBanker\MyBanker\bin\Debug\netcoreapp3.1\MyBanker.exe
+C:\Users\kjedt\source\repos_git\MyBanker\MyBanker\bin\Debug\netcoreapp3.1\MyBanker.deps.json
+C:\Users\kjedt\source\repos_git\MyBanker\MyBanker\bin\Debug\netcoreapp3.1\MyBanker.runtimeconfig.json
+C:\Users\kjedt\source\repos_git\MyBanker\MyBanker\bin\Debug\netcoreapp3.1\MyBanker.runtimeconfig.dev.json
+C:\Users\kjedt\source\repos_git\MyBanker\MyBanker\bin\Debug\netcoreapp3.1\MyBanker.dll
+C:\Users\kjedt\source\repos_git\MyBanker\MyBanker\bin\Debug\netcoreapp3.1\MyBanker.pdb
+C:\Users\kjedt\source\repos_git\MyBanker\MyBanker\obj\Debug\netcoreapp3.1\MyBanker.csprojAssemblyReference.cache
+C:\Users\kjedt\source\repos_git\MyBanker\MyBanker\obj\Debug\netcoreapp3.1\MyBanker.AssemblyInfoInputs.cache
+C:\Users\kjedt\source\repos_git\MyBanker\MyBanker\obj\Debug\netcoreapp3.1\MyBanker.AssemblyInfo.cs
+C:\Users\kjedt\source\repos_git\MyBanker\MyBanker\obj\Debug\netcoreapp3.1\MyBanker.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\MyBanker\MyBanker\obj\Debug\netcoreapp3.1\MyBanker.dll
+C:\Users\kjedt\source\repos_git\MyBanker\MyBanker\obj\Debug\netcoreapp3.1\MyBanker.pdb
+C:\Users\kjedt\source\repos_git\MyBanker\MyBanker\obj\Debug\netcoreapp3.1\MyBanker.genruntimeconfig.cache

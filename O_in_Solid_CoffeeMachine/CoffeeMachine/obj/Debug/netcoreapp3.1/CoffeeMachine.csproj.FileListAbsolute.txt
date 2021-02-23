@@ -1,0 +1,13 @@
+C:\Users\kjedt\source\repos_git\_SchoolWork\O_in_Solid_CoffeeMachine\CoffeeMachine\bin\Debug\netcoreapp3.1\CoffeeMachine.exe
+C:\Users\kjedt\source\repos_git\_SchoolWork\O_in_Solid_CoffeeMachine\CoffeeMachine\bin\Debug\netcoreapp3.1\CoffeeMachine.deps.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\O_in_Solid_CoffeeMachine\CoffeeMachine\bin\Debug\netcoreapp3.1\CoffeeMachine.runtimeconfig.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\O_in_Solid_CoffeeMachine\CoffeeMachine\bin\Debug\netcoreapp3.1\CoffeeMachine.runtimeconfig.dev.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\O_in_Solid_CoffeeMachine\CoffeeMachine\bin\Debug\netcoreapp3.1\CoffeeMachine.dll
+C:\Users\kjedt\source\repos_git\_SchoolWork\O_in_Solid_CoffeeMachine\CoffeeMachine\bin\Debug\netcoreapp3.1\CoffeeMachine.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\O_in_Solid_CoffeeMachine\CoffeeMachine\obj\Debug\netcoreapp3.1\CoffeeMachine.csprojAssemblyReference.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\O_in_Solid_CoffeeMachine\CoffeeMachine\obj\Debug\netcoreapp3.1\CoffeeMachine.AssemblyInfoInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\O_in_Solid_CoffeeMachine\CoffeeMachine\obj\Debug\netcoreapp3.1\CoffeeMachine.AssemblyInfo.cs
+C:\Users\kjedt\source\repos_git\_SchoolWork\O_in_Solid_CoffeeMachine\CoffeeMachine\obj\Debug\netcoreapp3.1\CoffeeMachine.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\O_in_Solid_CoffeeMachine\CoffeeMachine\obj\Debug\netcoreapp3.1\CoffeeMachine.dll
+C:\Users\kjedt\source\repos_git\_SchoolWork\O_in_Solid_CoffeeMachine\CoffeeMachine\obj\Debug\netcoreapp3.1\CoffeeMachine.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\O_in_Solid_CoffeeMachine\CoffeeMachine\obj\Debug\netcoreapp3.1\CoffeeMachine.genruntimeconfig.cache

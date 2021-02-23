@@ -9,6 +9,8 @@ namespace CoffeeMachine
         //TODO: 3. hæld kaffebønner i maskinen
         //TODO: 4. Tænd kaffemaskinen
 
+
+        //TODO: Change how watertank works
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
@@ -19,13 +21,17 @@ namespace CoffeeMachine
 
             coffee.TurnMachineOff();
 
-
-
             TeaMachine tea = new TeaMachine(2, "Tea", "Tealeaves", 4);
 
             tea.TurnMachineOn();
 
             tea.TurnMachineOff();
+
+            EspressoMachine espresso = new EspressoMachine( "Espresso", "Coffebeans", EspressoMachine.EspressoShotsInGram.Two);
+
+            espresso.TurnMachineOn();
+
+            espresso.TurnMachineOff();
         }
     }
 }

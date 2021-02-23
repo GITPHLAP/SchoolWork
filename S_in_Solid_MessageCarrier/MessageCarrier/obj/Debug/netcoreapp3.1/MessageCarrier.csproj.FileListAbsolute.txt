@@ -1,0 +1,13 @@
+C:\Users\kjedt\source\repos_git\_SchoolWork\S_in_Solid_MessageCarrier\MessageCarrier\bin\Debug\netcoreapp3.1\MessageCarrier.exe
+C:\Users\kjedt\source\repos_git\_SchoolWork\S_in_Solid_MessageCarrier\MessageCarrier\bin\Debug\netcoreapp3.1\MessageCarrier.deps.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\S_in_Solid_MessageCarrier\MessageCarrier\bin\Debug\netcoreapp3.1\MessageCarrier.runtimeconfig.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\S_in_Solid_MessageCarrier\MessageCarrier\bin\Debug\netcoreapp3.1\MessageCarrier.runtimeconfig.dev.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\S_in_Solid_MessageCarrier\MessageCarrier\bin\Debug\netcoreapp3.1\MessageCarrier.dll
+C:\Users\kjedt\source\repos_git\_SchoolWork\S_in_Solid_MessageCarrier\MessageCarrier\bin\Debug\netcoreapp3.1\MessageCarrier.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\S_in_Solid_MessageCarrier\MessageCarrier\obj\Debug\netcoreapp3.1\MessageCarrier.csprojAssemblyReference.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\S_in_Solid_MessageCarrier\MessageCarrier\obj\Debug\netcoreapp3.1\MessageCarrier.AssemblyInfoInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\S_in_Solid_MessageCarrier\MessageCarrier\obj\Debug\netcoreapp3.1\MessageCarrier.AssemblyInfo.cs
+C:\Users\kjedt\source\repos_git\_SchoolWork\S_in_Solid_MessageCarrier\MessageCarrier\obj\Debug\netcoreapp3.1\MessageCarrier.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\S_in_Solid_MessageCarrier\MessageCarrier\obj\Debug\netcoreapp3.1\MessageCarrier.dll
+C:\Users\kjedt\source\repos_git\_SchoolWork\S_in_Solid_MessageCarrier\MessageCarrier\obj\Debug\netcoreapp3.1\MessageCarrier.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\S_in_Solid_MessageCarrier\MessageCarrier\obj\Debug\netcoreapp3.1\MessageCarrier.genruntimeconfig.cache

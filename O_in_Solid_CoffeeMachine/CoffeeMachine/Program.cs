@@ -19,6 +19,13 @@ namespace CoffeeMachine
 
             coffee.TurnMachineOff();
 
+
+
+            TeaMachine tea = new TeaMachine(2, "Tea", "Tealeaves", 4);
+
+            tea.TurnMachineOn();
+
+            tea.TurnMachineOff();
         }
     }
 }

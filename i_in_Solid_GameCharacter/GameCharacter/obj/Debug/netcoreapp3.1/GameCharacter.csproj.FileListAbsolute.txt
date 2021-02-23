@@ -1,0 +1,13 @@
+C:\Users\kjedt\source\repos_git\_SchoolWork\i_in_Solid_GameCharacter\GameCharacter\bin\Debug\netcoreapp3.1\GameCharacter.exe
+C:\Users\kjedt\source\repos_git\_SchoolWork\i_in_Solid_GameCharacter\GameCharacter\bin\Debug\netcoreapp3.1\GameCharacter.deps.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\i_in_Solid_GameCharacter\GameCharacter\bin\Debug\netcoreapp3.1\GameCharacter.runtimeconfig.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\i_in_Solid_GameCharacter\GameCharacter\bin\Debug\netcoreapp3.1\GameCharacter.runtimeconfig.dev.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\i_in_Solid_GameCharacter\GameCharacter\bin\Debug\netcoreapp3.1\GameCharacter.dll
+C:\Users\kjedt\source\repos_git\_SchoolWork\i_in_Solid_GameCharacter\GameCharacter\bin\Debug\netcoreapp3.1\GameCharacter.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\i_in_Solid_GameCharacter\GameCharacter\obj\Debug\netcoreapp3.1\GameCharacter.csprojAssemblyReference.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\i_in_Solid_GameCharacter\GameCharacter\obj\Debug\netcoreapp3.1\GameCharacter.AssemblyInfoInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\i_in_Solid_GameCharacter\GameCharacter\obj\Debug\netcoreapp3.1\GameCharacter.AssemblyInfo.cs
+C:\Users\kjedt\source\repos_git\_SchoolWork\i_in_Solid_GameCharacter\GameCharacter\obj\Debug\netcoreapp3.1\GameCharacter.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\i_in_Solid_GameCharacter\GameCharacter\obj\Debug\netcoreapp3.1\GameCharacter.dll
+C:\Users\kjedt\source\repos_git\_SchoolWork\i_in_Solid_GameCharacter\GameCharacter\obj\Debug\netcoreapp3.1\GameCharacter.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\i_in_Solid_GameCharacter\GameCharacter\obj\Debug\netcoreapp3.1\GameCharacter.genruntimeconfig.cache

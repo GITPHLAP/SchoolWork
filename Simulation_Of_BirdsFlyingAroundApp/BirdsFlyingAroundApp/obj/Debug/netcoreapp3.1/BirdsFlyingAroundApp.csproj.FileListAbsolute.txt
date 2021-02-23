@@ -1,0 +1,13 @@
+C:\Users\kjedt\source\repos_git\_SchoolWork\Simulation_Of_BirdsFlyingAroundApp\BirdsFlyingAroundApp\bin\Debug\netcoreapp3.1\BirdsFlyingAroundApp.exe
+C:\Users\kjedt\source\repos_git\_SchoolWork\Simulation_Of_BirdsFlyingAroundApp\BirdsFlyingAroundApp\bin\Debug\netcoreapp3.1\BirdsFlyingAroundApp.deps.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\Simulation_Of_BirdsFlyingAroundApp\BirdsFlyingAroundApp\bin\Debug\netcoreapp3.1\BirdsFlyingAroundApp.runtimeconfig.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\Simulation_Of_BirdsFlyingAroundApp\BirdsFlyingAroundApp\bin\Debug\netcoreapp3.1\BirdsFlyingAroundApp.runtimeconfig.dev.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\Simulation_Of_BirdsFlyingAroundApp\BirdsFlyingAroundApp\bin\Debug\netcoreapp3.1\BirdsFlyingAroundApp.dll
+C:\Users\kjedt\source\repos_git\_SchoolWork\Simulation_Of_BirdsFlyingAroundApp\BirdsFlyingAroundApp\bin\Debug\netcoreapp3.1\BirdsFlyingAroundApp.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\Simulation_Of_BirdsFlyingAroundApp\BirdsFlyingAroundApp\obj\Debug\netcoreapp3.1\BirdsFlyingAroundApp.csprojAssemblyReference.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\Simulation_Of_BirdsFlyingAroundApp\BirdsFlyingAroundApp\obj\Debug\netcoreapp3.1\BirdsFlyingAroundApp.AssemblyInfoInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\Simulation_Of_BirdsFlyingAroundApp\BirdsFlyingAroundApp\obj\Debug\netcoreapp3.1\BirdsFlyingAroundApp.AssemblyInfo.cs
+C:\Users\kjedt\source\repos_git\_SchoolWork\Simulation_Of_BirdsFlyingAroundApp\BirdsFlyingAroundApp\obj\Debug\netcoreapp3.1\BirdsFlyingAroundApp.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\Simulation_Of_BirdsFlyingAroundApp\BirdsFlyingAroundApp\obj\Debug\netcoreapp3.1\BirdsFlyingAroundApp.dll
+C:\Users\kjedt\source\repos_git\_SchoolWork\Simulation_Of_BirdsFlyingAroundApp\BirdsFlyingAroundApp\obj\Debug\netcoreapp3.1\BirdsFlyingAroundApp.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\Simulation_Of_BirdsFlyingAroundApp\BirdsFlyingAroundApp\obj\Debug\netcoreapp3.1\BirdsFlyingAroundApp.genruntimeconfig.cache

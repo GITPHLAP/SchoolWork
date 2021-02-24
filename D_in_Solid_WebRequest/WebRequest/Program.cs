@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace WebRequester
 {
@@ -16,6 +17,13 @@ namespace WebRequester
                     )
                 );
 
+            Console.WriteLine("--------------------------------------------------");
+            LocalFileRequester fileRequester = new LocalFileRequester();
+
+            //Set the full path on file
+            Directory.SetCurrentDirectory(@"C:\");
+            //put relative path 
+            fileRequester.WriteToConsole(@"Users\kjedt\Documents\Test.txt");
 
         }
     }

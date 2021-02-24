@@ -29,7 +29,6 @@ namespace WebRequester
             //status
             Console.WriteLine(((HttpWebResponse)response).StatusDescription);
 
-
             //use stream to read the response
             Stream dataStream = response.GetResponseStream();
 
@@ -42,7 +41,6 @@ namespace WebRequester
 
             //Close steam
             dataStream.Close();
-
 
             //Close response
             response.Close();

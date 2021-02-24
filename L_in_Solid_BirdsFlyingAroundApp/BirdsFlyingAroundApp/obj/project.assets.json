@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kjedt\\source\\repos_git\\_SchoolWork\\Simulation_Of_BirdsFlyingAroundApp\\BirdsFlyingAroundApp\\BirdsFlyingAroundApp.csproj",
+      "projectUniqueName": "C:\\Users\\kjedt\\source\\repos_git\\_SchoolWork\\L_in_Solid_BirdsFlyingAroundApp\\BirdsFlyingAroundApp\\BirdsFlyingAroundApp.csproj",
       "projectName": "BirdsFlyingAroundApp",
-      "projectPath": "C:\\Users\\kjedt\\source\\repos_git\\_SchoolWork\\Simulation_Of_BirdsFlyingAroundApp\\BirdsFlyingAroundApp\\BirdsFlyingAroundApp.csproj",
+      "projectPath": "C:\\Users\\kjedt\\source\\repos_git\\_SchoolWork\\L_in_Solid_BirdsFlyingAroundApp\\BirdsFlyingAroundApp\\BirdsFlyingAroundApp.csproj",
       "packagesPath": "C:\\Users\\kjedt\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\kjedt\\source\\repos_git\\_SchoolWork\\Simulation_Of_BirdsFlyingAroundApp\\BirdsFlyingAroundApp\\obj\\",
+      "outputPath": "C:\\Users\\kjedt\\source\\repos_git\\_SchoolWork\\L_in_Solid_BirdsFlyingAroundApp\\BirdsFlyingAroundApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kjedt\\AppData\\Roaming\\NuGet\\NuGet.Config",

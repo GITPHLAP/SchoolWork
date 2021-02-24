@@ -1,0 +1,13 @@
+C:\Users\kjedt\source\repos_git\_SchoolWork\D_in_Solid_WebRequest\WebRequest\bin\Debug\netcoreapp3.1\WebRequester.exe
+C:\Users\kjedt\source\repos_git\_SchoolWork\D_in_Solid_WebRequest\WebRequest\bin\Debug\netcoreapp3.1\WebRequester.deps.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\D_in_Solid_WebRequest\WebRequest\bin\Debug\netcoreapp3.1\WebRequester.runtimeconfig.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\D_in_Solid_WebRequest\WebRequest\bin\Debug\netcoreapp3.1\WebRequester.runtimeconfig.dev.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\D_in_Solid_WebRequest\WebRequest\bin\Debug\netcoreapp3.1\WebRequester.dll
+C:\Users\kjedt\source\repos_git\_SchoolWork\D_in_Solid_WebRequest\WebRequest\bin\Debug\netcoreapp3.1\WebRequester.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\D_in_Solid_WebRequest\WebRequest\obj\Debug\netcoreapp3.1\WebRequester.AssemblyInfoInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\D_in_Solid_WebRequest\WebRequest\obj\Debug\netcoreapp3.1\WebRequester.AssemblyInfo.cs
+C:\Users\kjedt\source\repos_git\_SchoolWork\D_in_Solid_WebRequest\WebRequest\obj\Debug\netcoreapp3.1\WebRequester.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\D_in_Solid_WebRequest\WebRequest\obj\Debug\netcoreapp3.1\WebRequester.dll
+C:\Users\kjedt\source\repos_git\_SchoolWork\D_in_Solid_WebRequest\WebRequest\obj\Debug\netcoreapp3.1\WebRequester.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\D_in_Solid_WebRequest\WebRequest\obj\Debug\netcoreapp3.1\WebRequester.genruntimeconfig.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\D_in_Solid_WebRequest\WebRequest\obj\Debug\netcoreapp3.1\WebRequester.csprojAssemblyReference.cache

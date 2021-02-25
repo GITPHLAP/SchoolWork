@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\kjedt\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\kjedt\\.nuget\\packages"
+    ]
+  }
+}

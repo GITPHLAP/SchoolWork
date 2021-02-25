@@ -1,0 +1,12 @@
+C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\obj\Debug\netcoreapp3.1\ChrewNPhew.AssemblyInfoInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\obj\Debug\netcoreapp3.1\ChrewNPhew.AssemblyInfo.cs
+C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\obj\Debug\netcoreapp3.1\ChrewNPhew.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\bin\Debug\netcoreapp3.1\ChrewNPhew.exe
+C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\bin\Debug\netcoreapp3.1\ChrewNPhew.deps.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\bin\Debug\netcoreapp3.1\ChrewNPhew.runtimeconfig.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\bin\Debug\netcoreapp3.1\ChrewNPhew.runtimeconfig.dev.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\bin\Debug\netcoreapp3.1\ChrewNPhew.dll
+C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\bin\Debug\netcoreapp3.1\ChrewNPhew.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\obj\Debug\netcoreapp3.1\ChrewNPhew.dll
+C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\obj\Debug\netcoreapp3.1\ChrewNPhew.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\obj\Debug\netcoreapp3.1\ChrewNPhew.genruntimeconfig.cache

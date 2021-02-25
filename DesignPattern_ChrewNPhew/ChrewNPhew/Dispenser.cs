@@ -10,13 +10,27 @@ namespace ChrewNPhew
         //Constant int 
         const int maxGum = 55;
 
+        private static Dispenser instance;
+
         List<Gum> gumList = new List<Gum>();
 
         public List<Gum> GumList { get => gumList; private set => gumList = value; }
 
+        //create instance to dispenser
+        public static Dispenser Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Dispenser();
+                }
+                return instance;
+            }
+        }
 
         //Constructor
-        public Dispenser()
+        private Dispenser()
         {
             FillAll();
         }
@@ -37,8 +51,12 @@ namespace ChrewNPhew
             }
         }
 
-        void FillAll()
+        public void FillAll()
         {
+            if (gumList.Count != 0)
+            {
+                throw new NotImplementedException();
+            }
             //foreach type in enum we fill 
             foreach (var item in Enum.GetValues(typeof(GumColor)))
             {

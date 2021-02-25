@@ -10,3 +10,4 @@ C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\
 C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\obj\Debug\netcoreapp3.1\ChrewNPhew.dll
 C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\obj\Debug\netcoreapp3.1\ChrewNPhew.pdb
 C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\obj\Debug\netcoreapp3.1\ChrewNPhew.genruntimeconfig.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\DesignPattern_ChrewNPhew\ChrewNPhew\obj\Debug\netcoreapp3.1\ChrewNPhew.csprojAssemblyReference.cache

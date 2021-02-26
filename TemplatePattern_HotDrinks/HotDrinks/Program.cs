@@ -7,6 +7,13 @@ namespace HotDrinks
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+
+
+            CupHotDrink coffee = new CupCoffee();
+
+            CupHotDrink tea = new CupTea();
+
+
         }
     }
 }

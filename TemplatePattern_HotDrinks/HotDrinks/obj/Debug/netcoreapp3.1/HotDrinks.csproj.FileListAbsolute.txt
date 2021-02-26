@@ -1,0 +1,13 @@
+C:\Users\kjedt\source\repos_git\_SchoolWork\TemplatePattern_HotDrinks\HotDrinks\bin\Debug\netcoreapp3.1\HotDrinks.exe
+C:\Users\kjedt\source\repos_git\_SchoolWork\TemplatePattern_HotDrinks\HotDrinks\bin\Debug\netcoreapp3.1\HotDrinks.deps.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\TemplatePattern_HotDrinks\HotDrinks\bin\Debug\netcoreapp3.1\HotDrinks.runtimeconfig.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\TemplatePattern_HotDrinks\HotDrinks\bin\Debug\netcoreapp3.1\HotDrinks.runtimeconfig.dev.json
+C:\Users\kjedt\source\repos_git\_SchoolWork\TemplatePattern_HotDrinks\HotDrinks\bin\Debug\netcoreapp3.1\HotDrinks.dll
+C:\Users\kjedt\source\repos_git\_SchoolWork\TemplatePattern_HotDrinks\HotDrinks\bin\Debug\netcoreapp3.1\HotDrinks.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\TemplatePattern_HotDrinks\HotDrinks\obj\Debug\netcoreapp3.1\HotDrinks.csprojAssemblyReference.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\TemplatePattern_HotDrinks\HotDrinks\obj\Debug\netcoreapp3.1\HotDrinks.AssemblyInfoInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\TemplatePattern_HotDrinks\HotDrinks\obj\Debug\netcoreapp3.1\HotDrinks.AssemblyInfo.cs
+C:\Users\kjedt\source\repos_git\_SchoolWork\TemplatePattern_HotDrinks\HotDrinks\obj\Debug\netcoreapp3.1\HotDrinks.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\TemplatePattern_HotDrinks\HotDrinks\obj\Debug\netcoreapp3.1\HotDrinks.dll
+C:\Users\kjedt\source\repos_git\_SchoolWork\TemplatePattern_HotDrinks\HotDrinks\obj\Debug\netcoreapp3.1\HotDrinks.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\TemplatePattern_HotDrinks\HotDrinks\obj\Debug\netcoreapp3.1\HotDrinks.genruntimeconfig.cache

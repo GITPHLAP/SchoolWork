@@ -1,0 +1,7 @@
+C:\Users\kjedt\source\repos_git\Assignment3_ThreadingPools\Assignment3_ThreadingPools\bin\Debug\Assignment3_ThreadingPools.exe.config
+C:\Users\kjedt\source\repos_git\Assignment3_ThreadingPools\Assignment3_ThreadingPools\bin\Debug\Assignment3_ThreadingPools.exe
+C:\Users\kjedt\source\repos_git\Assignment3_ThreadingPools\Assignment3_ThreadingPools\bin\Debug\Assignment3_ThreadingPools.pdb
+C:\Users\kjedt\source\repos_git\Assignment3_ThreadingPools\Assignment3_ThreadingPools\obj\Debug\Assignment3_ThreadingPools.csprojAssemblyReference.cache
+C:\Users\kjedt\source\repos_git\Assignment3_ThreadingPools\Assignment3_ThreadingPools\obj\Debug\Assignment3_ThreadingPools.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\Assignment3_ThreadingPools\Assignment3_ThreadingPools\obj\Debug\Assignment3_ThreadingPools.exe
+C:\Users\kjedt\source\repos_git\Assignment3_ThreadingPools\Assignment3_ThreadingPools\obj\Debug\Assignment3_ThreadingPools.pdb

@@ -1,0 +1,6 @@
+C:\Users\kjedt\source\repos_git\Assignment0_ThreadPool\ThreadPool\obj\Debug\ThreadPool.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\Assignment0_ThreadPool\ThreadPool\bin\Debug\ThreadPoolDemo.exe.config
+C:\Users\kjedt\source\repos_git\Assignment0_ThreadPool\ThreadPool\bin\Debug\ThreadPoolDemo.exe
+C:\Users\kjedt\source\repos_git\Assignment0_ThreadPool\ThreadPool\bin\Debug\ThreadPoolDemo.pdb
+C:\Users\kjedt\source\repos_git\Assignment0_ThreadPool\ThreadPool\obj\Debug\ThreadPoolDemo.exe
+C:\Users\kjedt\source\repos_git\Assignment0_ThreadPool\ThreadPool\obj\Debug\ThreadPoolDemo.pdb

@@ -1,0 +1,7 @@
+C:\Users\kjedt\source\repos_git\Assignment1_ThreadSync\Assignment1_ThreadSync\bin\Debug\Assignment1_ThreadSync.exe.config
+C:\Users\kjedt\source\repos_git\Assignment1_ThreadSync\Assignment1_ThreadSync\bin\Debug\Assignment1_ThreadSync.exe
+C:\Users\kjedt\source\repos_git\Assignment1_ThreadSync\Assignment1_ThreadSync\bin\Debug\Assignment1_ThreadSync.pdb
+C:\Users\kjedt\source\repos_git\Assignment1_ThreadSync\Assignment1_ThreadSync\obj\Debug\Assignment1_ThreadSync.csprojAssemblyReference.cache
+C:\Users\kjedt\source\repos_git\Assignment1_ThreadSync\Assignment1_ThreadSync\obj\Debug\Assignment1_ThreadSync.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\Assignment1_ThreadSync\Assignment1_ThreadSync\obj\Debug\Assignment1_ThreadSync.exe
+C:\Users\kjedt\source\repos_git\Assignment1_ThreadSync\Assignment1_ThreadSync\obj\Debug\Assignment1_ThreadSync.pdb

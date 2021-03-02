@@ -1,7 +1,0 @@
-C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync_BottleMachine\BottleMachine\bin\Debug\BottleMachine.exe.config
-C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync_BottleMachine\BottleMachine\bin\Debug\BottleMachine.exe
-C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync_BottleMachine\BottleMachine\bin\Debug\BottleMachine.pdb
-C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync_BottleMachine\BottleMachine\obj\Debug\BottleMachine.csprojAssemblyReference.cache
-C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync_BottleMachine\BottleMachine\obj\Debug\BottleMachine.csproj.CoreCompileInputs.cache
-C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync_BottleMachine\BottleMachine\obj\Debug\BottleMachine.exe
-C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync_BottleMachine\BottleMachine\obj\Debug\BottleMachine.pdb

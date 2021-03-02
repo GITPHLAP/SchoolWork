@@ -8,9 +8,22 @@ namespace BaggageHandlingSystem
 {
     class Program
     {
+
+        //ReservationSystem
+        //FlightSchedule
+        //Desks
+        //SortingSystem
+        //Gates
         static void Main(string[] args)
         {
+            ReservationSystem r = new ReservationSystem();
 
+            r.Test();
+
+            r.ReadCSVFileAndAddToList(@"test.csv");
+
+
+            Console.ReadLine();
         }
     }
 }

@@ -18,10 +18,6 @@ namespace BaggageHandlingSystem
         {
             ReservationSystem r = new ReservationSystem();
 
-            r.Test();
-
-            r.ReadCSVFileAndAddToList(@"test.csv");
-
 
             Console.ReadLine();
         }

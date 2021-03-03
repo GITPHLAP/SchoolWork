@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Threading;
+
 
 namespace BaggageHandlingSystem
 {
@@ -33,7 +35,7 @@ namespace BaggageHandlingSystem
                     string[] values = readerline.Split(';');
 
                     //add new reservatio to list and create a new reservation
-                    Reservations.Add(new Reservation(Convert.ToInt32(values[0]), values[1], Convert.ToInt32(values[2])));
+                    Reservations.Add(new Reservation(Convert.ToInt32(values[0]), values[1], values[2]));
                 }
                 else
                 {

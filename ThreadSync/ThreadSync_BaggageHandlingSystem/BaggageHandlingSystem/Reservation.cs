@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+
 
 namespace BaggageHandlingSystem
 {
@@ -11,19 +13,19 @@ namespace BaggageHandlingSystem
         //properties 
         int passengerNumber;
         string name;
-        int departureNumber;
+        string departure;
 
         //encapsulate properties
         public int PassengerNumber { get => passengerNumber; set => passengerNumber = value; }
         public string Name { get => name; set => name = value; }
-        public int DepartureNumber { get => departureNumber; set => departureNumber = value; }
+        public string Departure { get => departure; set => departure = value; }
 
         //Constructer
-        public Reservation(int passengerNumber, string name, int departureNumber)
+        public Reservation(int passengerNumber, string name, string departureNumber)
         {
             this.passengerNumber = passengerNumber;
             this.name = name;
-            this.departureNumber = departureNumber;
+            this.departure = departureNumber;
         }
 
     }

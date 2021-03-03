@@ -4,29 +4,46 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Threading;
+
 
 namespace BaggageHandlingSystem
 {
     class Logging
     {
 
-        public static void WriteToLog(string input)
+        static object locks = new object();
+
+public static void WriteToLog(string input)
         {
 
-            string datestr = DateTime.Now.ToString("yyyy-MM-dd");
 
-            // file path
-            string filepath = $@"LogFile{datestr}.txt";
+            try
+            {
+                lock (locks)
+                {
+                    string datestr = DateTime.Now.ToString("yyyy-MM-dd");
 
-            // create stream writer true so its not overwriting file
-            StreamWriter streamwrite = new StreamWriter(filepath, true);
-            // add some lines
-            streamwrite.WriteLine(input);
-            // clear buffer
-            streamwrite.Flush();
+                    // file path
+                    string filepath = $@"LogFile{datestr}.txt";
 
-            // close file and streamwriter
-            streamwrite.Close();
+                    // create stream writer true so its not overwriting file
+                    StreamWriter streamwrite = new StreamWriter(filepath, true);
+                    // add some lines
+                    streamwrite.WriteLine(input);
+                    // clear buffer
+                    streamwrite.Flush();
+
+                    // close file and streamwriter
+                    streamwrite.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("We should never end up here, but sometimes we do.");
+            }
+
+            
             
         }
 

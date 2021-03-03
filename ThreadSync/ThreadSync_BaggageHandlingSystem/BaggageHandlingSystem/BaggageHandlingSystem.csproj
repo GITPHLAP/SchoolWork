@@ -44,11 +44,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BufferQueue.cs" />
+    <Compile Include="Desk.cs" />
+    <Compile Include="FlightSchedule.cs" />
+    <Compile Include="Gate.cs" />
     <Compile Include="Logging.cs" />
+    <Compile Include="Luggage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reservation.cs" />
     <Compile Include="ReservationSystem.cs" />
+    <Compile Include="SimulationManager.cs" />
+    <Compile Include="SortingSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

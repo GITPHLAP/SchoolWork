@@ -1,0 +1,470 @@
+Gate1 is opened
+Desk1 is opened
+Desk2 is opened
+Desk1 enqueue: LON
+Gate2 is opened
+Desk2 enqueue: LON
+Gate3 is opened
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk1 enqueue: LON
+Desk2 enqueue: STO
+Desk1 enqueue: STO
+SortingThread Consume luggage to: LON
+Gate1 forced to close
+Gate1 is closed
+Desk2 enqueue: 
+Desk1 enqueue: STO
+Desk2 enqueue: 
+SortingThread Consume luggage to: LON
+Desk1 enqueue: CPH
+Gate2 forced to close
+Gate2 is closed
+Desk2 enqueue: CPH
+SortingThread Consume luggage to: STO
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: STO
+Desk1 enqueue: 
+Gate3 forced to close
+Gate3 is closed
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: STO
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: CPH
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: CPH
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+Desk2 Closed
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+Desk2 Closed
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+Desk2 Closed
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+Desk2 Closed
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+Desk2 Closed
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+SortingThread Consume luggage to: 
+Desk1 enqueue: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 enqueue: 
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed
+SortingThread Consume luggage to: 
+Desk2 enqueue: 
+Desk1 Closed

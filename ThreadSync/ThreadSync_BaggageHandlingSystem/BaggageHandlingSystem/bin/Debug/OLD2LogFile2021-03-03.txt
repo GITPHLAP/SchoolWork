@@ -1,0 +1,266 @@
+Desk1 enqueue: LON
+Desk2 enqueue: STO
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+GateNumber 1 deque
+Desk2 enqueue: LON
+Desk1 enqueue: LON
+Desk2 enqueue: STO
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+GateNumber 2 deque
+Desk1 enqueue: STO
+Desk2 enqueue: CPH
+Desk1 enqueue: CPH
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+GateNumber 1 deque
+Desk2 enqueue: LON
+Desk1 enqueue: LON
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+GateNumber 1 deque
+Desk2 enqueue: LON
+Desk1 enqueue: LON
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+GateNumber 2 deque
+Desk2 enqueue: STO
+Desk1 enqueue: STO
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+GateNumber 2 deque
+Desk2 enqueue: CPH
+Desk1 enqueue: CPH
+Desk2 enqueue: CPH
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+GateNumber 3 deque
+Desk1 enqueue: CPH
+Desk2 enqueue: CPH
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+GateNumber 3 deque
+Desk1 enqueue: CPH
+Desk2 enqueue: STO
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+GateNumber 1 deque
+Desk1 enqueue: STO
+Desk2 enqueue: LON
+Desk1 enqueue: LON
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+GateNumber 1 deque
+Desk2 enqueue: LON
+Desk1 enqueue: LON
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+GateNumber 1 deque
+Desk2 enqueue: LON
+Desk1 enqueue: LON
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+GateNumber 1 deque
+Desk2 enqueue: CPH
+BaggageHandlingSystem.Gate is opened
+BaggageHandlingSystem.Desk is opened
+Desk1 enqueue: LON
+BaggageHandlingSystem.Desk is opened
+BaggageHandlingSystem.Gate is opened
+Desk2 enqueue: LON
+BaggageHandlingSystem.Gate is opened
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk2 enqueue: STO
+Desk1 enqueue: STO
+GateNumber 1 deque
+Desk2 enqueue: LON
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk1 enqueue: STO
+Desk2 enqueue: LON
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+GateNumber 2 deque
+Desk1 enqueue: LON
+Desk2 enqueue: LON
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+Desk1 enqueue: CPH
+Desk2 enqueue: CPH
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk1 enqueue: CPH
+Desk2 enqueue: LON
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+Desk2 enqueue: STO
+Desk1 enqueue: CPH
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk1 enqueue: LON
+Desk2 enqueue: CPH
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk1 enqueue: LON
+Desk2 enqueue: STO
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk1 enqueue: LON
+Desk2 enqueue: LON
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+Desk1 enqueue: STO
+Desk2 enqueue: LON
+GateNumber 3 deque
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+Desk1 enqueue: STO
+Desk2 enqueue: LON
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+Desk1 enqueue: CPH
+Desk2 enqueue: CPH
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk1 enqueue: STO
+Desk2 enqueue: LON
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+Desk2 enqueue: LON
+Desk1 enqueue: LON
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+Desk1 enqueue: CPH
+Desk2 enqueue: STO
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk1 enqueue: CPH
+Desk2 enqueue: LON
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+Desk1 enqueue: CPH
+Desk2 enqueue: LON
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+Desk2 enqueue: STO
+Desk1 Wait...
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk2 enqueue: STO
+Desk1 Wait...
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk2 enqueue: CPH
+Desk1 Wait...
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk2 enqueue: CPH
+Desk1 Wait...
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+Desk2 enqueue: STO
+Desk1 Wait...
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk2 enqueue: CPH
+Desk1 Wait...
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+Desk2 enqueue: CPH
+Desk1 Wait...
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk2 enqueue: STO
+Desk1 Wait...
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk2 enqueue: STO
+Desk1 Wait...
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+Desk2 enqueue: STO
+Desk1 Wait...
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: STO
+Consumer/Splitter add luggage to STO 
+Desk2 enqueue: LON
+Desk1 Wait...
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+Desk2 enqueue: CPH
+Desk1 Wait...
+SortingThread Consume luggage to: CPH
+Consumer/Splitter add luggage to CPH 
+Desk2 enqueue: CPH
+Desk1 Wait...
+SortingThread Consume luggage to: LON
+Consumer/Splitter add luggage to LON 
+Desk2 enqueue: STO
+Desk1 Wait...
+SortingThread Consume luggage to: LON
+Consumer/Splitter Wait for Luggage...

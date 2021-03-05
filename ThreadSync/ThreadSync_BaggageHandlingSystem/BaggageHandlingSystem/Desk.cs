@@ -50,11 +50,6 @@ namespace BaggageHandlingSystem
 
         }
 
-
-
-
-
-
         public void ProduceBottles()
         {
             //To pick a random index 
@@ -62,16 +57,22 @@ namespace BaggageHandlingSystem
 
             while (!StopThread)
             {
-
-                if (StopThread)
+                //this wait for destinations
+                //stay in while if there is not a destination
+                if (SimulationManager.Gates.All(g => g.Destination == null))
                 {
-                    Thread.CurrentThread.Abort();
+                    Logging.WriteToLog($"{Thread.CurrentThread.Name} wait for destinations");
+
+                    lock (SimulationManager.CentralLock)
+                    {
+                        Monitor.Wait(SimulationManager.CentralLock);
+                    }
                 }
-                else if (SortingSystem.AllLuggages.IsLimitReached())
+                if (SortingSystem.AllLuggages.IsLimitReached())
                 {
                     //Console.BackgroundColor = ConsoleColor.Red;
                     //wait for a push
-                    Logging.WriteToLog($"{Thread.CurrentThread.Name} Closed");
+                    Logging.WriteToLog($"{Thread.CurrentThread.Name} wait buffer is full");
 
 
                     Monitor.Enter(SortingSystem.AllLuggages);
@@ -82,26 +83,29 @@ namespace BaggageHandlingSystem
                 else if (Monitor.TryEnter(SortingSystem.AllLuggages) && !SortingSystem.AllLuggages.IsLimitReached())
                 {
 
-                    int counter = 1;
+                    //int counter = 1;
 
-                    //if limit not reache then do the stuff in whie
+                    ////if limit not reache then do the stuff in whie
+
+                    //bool testbool = SimulationManager.Gates.Any(g => g.Destination == null);
+
 
                         //get a random number from 0 to 2 
-                        int tempindex = random.Next(SimulationManager.departures.Count);
+                    int tempindex = random.Next(SimulationManager.Gates.Where(g => g.Destination != null).Count());
 
                         //take name from index of varians-list and add it to a new bottle 
-                        SortingSystem.AllLuggages.Enqueue(new Luggage(SimulationManager.departures[tempindex].ToString()));
+                        SortingSystem.AllLuggages.Enqueue(new Luggage(SimulationManager.Gates.Where(g => g.Destination != null).ToList()[tempindex].Destination));
 
                         //Console.BackgroundColor = ConsoleColor.Red;
-                        Logging.WriteToLog($"{Thread.CurrentThread.Name} enqueue: {SimulationManager.departures[tempindex]}");
+                        Logging.WriteToLog($"{Thread.CurrentThread.Name} enqueue: {SimulationManager.Gates.Where(g => g.Destination != null).ToList()[tempindex].Destination}");
+
                         //increase counter
-                        counter++;
+                        //counter++;
+
                         Monitor.PulseAll(SortingSystem.AllLuggages);
                     Monitor.Exit(SortingSystem.AllLuggages);
 
                     Thread.Sleep(500);
-
-
 
                 }
 

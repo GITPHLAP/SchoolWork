@@ -14,11 +14,15 @@ namespace BaggageHandlingSystem
 
         public static List<Luggage> LostLuggages = new List<Luggage>();
 
+        public static List<BufferQueue<Luggage>> BusinessClassList = new List<BufferQueue<Luggage>>();
+
+
 
         public void SplitterMethod()
         {
             while (true)
             {
+
                 ConsumeBottles();
             }
         }
@@ -57,9 +61,33 @@ namespace BaggageHandlingSystem
             }
         }
 
+
         public void ConsumeBottles()
         {
             Thread.Sleep(500);
+
+            lock (BusinessClassList)
+            {
+                while (BusinessClassList.Any(buf => buf.Count > 0))
+                {
+                    foreach (var item in BusinessClassList)
+                    {
+                        while (item.Count > 0)
+                        {
+                            if (SimulationManager.Gates.Any(g => g.Destination == item.Peek().Departure))
+                            {
+                                Split(SimulationManager.Gates.First(g => g.Destination == item.Peek().Departure), item.Dequeue());
+                            }
+
+                        }
+
+                    }
+                    //remove all because it had take all luggage
+                    BusinessClassList.RemoveRange(0, BusinessClassList.Count);
+
+                }
+            }
+
 
             //try to enter buffer
             Monitor.Enter(AllLuggages);
@@ -86,7 +114,7 @@ namespace BaggageHandlingSystem
             //TODO: Use FlightScheduler HERE!!
             foreach (var item in SimulationManager.Gates)
             {
-                if (item.Departure == templuggage.Departure)
+                if (item.Destination == templuggage.Departure)
                 {
                     Split(item, templuggage);
                 }
@@ -100,5 +128,6 @@ namespace BaggageHandlingSystem
 
 
         }
+
     }
 }

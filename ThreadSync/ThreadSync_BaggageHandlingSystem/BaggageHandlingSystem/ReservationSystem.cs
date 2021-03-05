@@ -34,8 +34,16 @@ namespace BaggageHandlingSystem
                     //split the line into arrays
                     string[] values = readerline.Split(';');
 
-                    //add new reservatio to list and create a new reservation
-                    Reservations.Add(new Reservation(Convert.ToInt32(values[0]), values[1], values[2]));
+                    //add new reservatio to list and create a new reservation and FlightSchedule
+                    Reservations.Add(new Reservation(Convert.ToInt32(values[0]),
+                        values[1],
+                        FindFlightSchedule(
+                            values[2],
+                            Convert.ToInt32(values[3]),
+                            Convert.ToDateTime(values[4].ToString()),
+                            Convert.ToDateTime(values[5].ToString()))
+                        ));
+
                 }
                 else
                 {
@@ -44,12 +52,27 @@ namespace BaggageHandlingSystem
 
 
             }
-                
+
             //Close streamreader and file stream
             streamreader.Close();
 
             streamfile.Close();
 
+        }
+
+
+        FlightSchedule FindFlightSchedule(string destination, int gateNum, DateTime arrival, DateTime departure)
+        {
+            FlightSchedule scheduleToCheck = new FlightSchedule(destination, gateNum, arrival, departure);
+
+            //is there any schedules equals the line
+            bool dotheyMatch = SimulationManager.Flightplans.Any(fp => fp.Equals(scheduleToCheck));
+            if (!dotheyMatch)
+            {
+                //if no then add it to FlightSchedule
+                SimulationManager.Flightplans.Add(scheduleToCheck);
+            }
+            return SimulationManager.Flightplans.Where(fp => fp.Equals(scheduleToCheck)).First();
         }
 
 

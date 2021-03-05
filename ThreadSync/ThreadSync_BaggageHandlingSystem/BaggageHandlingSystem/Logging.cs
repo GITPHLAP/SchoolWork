@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
+using System.Diagnostics;
 
 
 namespace BaggageHandlingSystem
@@ -16,7 +17,7 @@ namespace BaggageHandlingSystem
 
 public static void WriteToLog(string input)
         {
-
+            Debug.WriteLine(input);
 
             try
             {

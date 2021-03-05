@@ -10,16 +10,20 @@ namespace BaggageHandlingSystem
 {
     class SimulationManager
     {
+        //THIS COULD MAYBE BE CENTRAL SERVER
         //TODO: ReservationSystem
         //TODO: FlightSchedule
         //TODO: Desks
         //TODO: SortingSystem
         //TODO: Gates
         //TODO: Simulator Manager Klasse
+        //TODO: Build Central server
 
+        //Central Thread wait lock
+        public static object CentralLock = new object();
 
         //Destination string list
-        public static List<string> departures = new List<string>();
+        public static List<string> Destinations = new List<string>();
 
         //List of gates 
         public static List<Gate> Gates = new List<Gate>();
@@ -29,51 +33,77 @@ namespace BaggageHandlingSystem
 
 
         //list with flightplans
-        List<FlightSchedule> flightplans = new List<FlightSchedule>();
+        public static List<FlightSchedule> Flightplans = new List<FlightSchedule>();
+
+
+        //void CentralServerMethod()
+        //{
+        //    while (true)
+        //    {
+
+        //    }
+        //}
+
+
+        void OpenDesksAndGates()
+        {
+            lock (CentralLock)
+            {
+                Monitor.PulseAll(CentralLock);
+            }
+        }
+
+        void NewFlightSchedule()
+        {
+
+        }
 
         public void StartSimulation()
         {
-            flightplans.Add(new FlightSchedule("LON", 1, DateTime.Now));
-            flightplans.Add(new FlightSchedule("STO", 2, DateTime.Now));
-            flightplans.Add(new FlightSchedule("CPH", 3, DateTime.Now));
+            //Thread centralThread = new Thread(CentralServerMethod);
+            //centralThread.Name = "CentralThread";
+
+
+
+
+            Flightplans.Add(new FlightSchedule("LON", 1, DateTime.Now, DateTime.Now.AddMinutes(2)));
+            Flightplans.Add(new FlightSchedule("STO", 2, DateTime.Now, DateTime.Now.AddMinutes(1)));
+            Flightplans.Add(new FlightSchedule("CPH", 3, DateTime.Now, DateTime.Now.AddMinutes(2)));
+
+            Flightplans.Add(new FlightSchedule("LON", 3, DateTime.Now.AddMinutes(5), DateTime.Now.AddMinutes(7)));
+            Flightplans.Add(new FlightSchedule("STO", 1, DateTime.Now.AddMinutes(5), DateTime.Now.AddMinutes(8)));
+            Flightplans.Add(new FlightSchedule("CPH", 2, DateTime.Now.AddMinutes(5), DateTime.Now.AddMinutes(7)));
+
+
 
             //add gates
-            Gates.Add(new Gate(1, 20, ""));
-            Gates.Add(new Gate(2, 20, ""));
-            Gates.Add(new Gate(3, 20, ""));
+            Gates.Add(new Gate(1, 20));
+            Gates.Add(new Gate(2, 20));
+            Gates.Add(new Gate(3, 20));
 
             desks.Add(new Desk("Desk1"));
             desks.Add(new Desk("Desk2"));
 
             SortingSystem sortingSystem = new SortingSystem();
 
-
-
-            Thread controler = new Thread(ControllerMethod);
-            controler.Name = "Manager";
-            controler.Priority = ThreadPriority.AboveNormal;
-
             Thread sortT = new Thread(sortingSystem.SplitterMethod);
             sortT.Name = "SortingThread";
             sortT.Priority = ThreadPriority.Highest;
 
 
-            controler.Start();
 
 
+            desks[0].StartDesk();
+            desks[1].StartDesk();
 
-
-            //desks[0].StartDesk();
-            //desks[1].StartDesk();
+            Thread.Sleep(500);
+            //start all gate threads
+            foreach (var item in Gates)
+            {
+                item.StartGate();
+            }
 
             sortT.Start();
-
-            ////start all gate threads
-            //foreach (var item in Gates)
-            //{
-            //    item.StartGate();
-            //}
-
         }
 
 
@@ -104,8 +134,12 @@ namespace BaggageHandlingSystem
             {
 
                 Console.WriteLine("Open new desk press 1");
-                Console.WriteLine("List of open desks press 2");
+                Console.WriteLine("Show List of desk and Gate status press 2");
                 Console.WriteLine("Close desk press 3");
+                Console.WriteLine("Show flightplan press 4");
+                Console.WriteLine("Start gates and desks press 5");
+
+
 
                 userInput = Console.ReadKey().KeyChar;
                 switch (userInput)
@@ -131,7 +165,10 @@ namespace BaggageHandlingSystem
                     case '2':
                         Console.WriteLine("---------------------");
                         Console.WriteLine("This is a list of desks");
-                        ShowOpenDesks();
+                        ShowDeskStatus();
+                        Console.WriteLine("---------------------");
+                        Console.WriteLine("This is a list of desks");
+                        ShowGateStatus();
                         Console.WriteLine("---------------------");
                         break;
                     case '3':
@@ -144,6 +181,15 @@ namespace BaggageHandlingSystem
                         desknameinput = Console.ReadLine();
                         CloseDesk(desknameinput);
                         break;
+                    case '4':
+                        Console.WriteLine("---------------------");
+                        Console.WriteLine("This is a list of flightplans");
+                        ShowFlightPlan();
+                        Console.WriteLine("---------------------");
+                        break;
+                    case '5':
+                        OpenDesksAndGates();
+                        break;
                     default:
                         break;
                 }
@@ -153,6 +199,22 @@ namespace BaggageHandlingSystem
             }
 
         }
+
+        void ShowDeskStatus()
+        {
+            foreach (var item in desks)
+            {
+                Console.WriteLine(item.deskT.ThreadState);
+            }
+        }
+        void ShowGateStatus()
+        {
+            foreach (var item in Gates)
+            {
+                Console.WriteLine(item.gateT.ThreadState);
+            }
+        }
+
 
         void CloseDesk(string deskname)
         {
@@ -189,123 +251,130 @@ namespace BaggageHandlingSystem
             }
         }
 
-        #region Controller Methods
-        void ControllerMethod()
+        void ShowFlightPlan()
         {
-            while (true)
+            foreach (var item in Flightplans)
             {
-                foreach (var item in flightplans)
-                {
-                    // and if its not already begin
-                    if (item.From <= DateTime.Now && !item.IsStarted)
-                    {
-                        CheckInControl(item);
-                        item.IsStarted = true;
-                    }
-                }
-
-                //if there is any there should take off
-                if (flightplans.Any(fp => fp.To >= DateTime.Now))
-                {
-                    //temp to be sure is the same FlightPlan the mothod will touch
-                    FlightSchedule plan = flightplans.Where(fp => fp.To >= DateTime.Now).First();
-                    //TODO: Could let user decide if gate should forced to close
-                    TimeToTakeOff(plan);
-                    flightplans.Remove(plan);
-                }
+                Console.WriteLine("{0} Done? status: {1}", item.Distination, item.IsDone);
             }
         }
 
-        void CheckInControl(FlightSchedule item)
-        {
-            //we found the gate there match the flightplans gatenumber
-            Gate thisGate = Gates.Where(g => g.GateNumber == item.GateNum).FirstOrDefault();
+        //#region Controller Methods
+        //void ControllerMethod()
+        //{
+        //    while (true)
+        //    {
+        //        foreach (var item in Flightplans)
+        //        {
+        //            // and if its not already begin
+        //            if (item.From <= DateTime.Now && !item.IsDone)
+        //            {
+        //                CheckInControl(item);
+        //                item.IsDone = true;
+        //            }
+        //        }
 
-            //If gate is alive nothing happend
-            //while (thisGate.gateT == null ? false : true)
-            //{
-            //    Debug.WriteLine($"{thisGate.gateT} is Alive");
-            //}
+        //        //if there is any there should take off
+        //        if (Flightplans.Any(fp => fp.To >= DateTime.Now))
+        //        {
+        //            //temp to be sure is the same FlightPlan the mothod will touch
+        //            FlightSchedule plan = Flightplans.Where(fp => fp.To >= DateTime.Now).First();
+        //            //TODO: Could let user decide if gate should forced to close
+        //            TimeToTakeOff(plan);
+        //            Flightplans.Remove(plan);
+        //        }
+        //    }
+        //}
 
-            //Update departures list
-            UpdateDepartures(thisGate.Departure, item.Departure);
+        //void CheckInControl(FlightSchedule item)
+        //{
+        //    //we found the gate there match the flightplans gatenumber
+        //    Gate thisGate = Gates.Where(g => g.GateNumber == item.GateNum).FirstOrDefault();
 
-            //We set the departure on the gate
-            thisGate.Departure = item.Departure;
+        //    //If gate is alive nothing happend
+        //    //while (thisGate.gateT == null ? false : true)
+        //    //{
+        //    //    Debug.WriteLine($"{thisGate.gateT} is Alive");
+        //    //}
 
+        //    //Update departures list
+        //    UpdateDepartures(thisGate.Destination, item.Departure);
 
-            //start gate
-            thisGate.StartGate();
-            Logging.WriteToLog($"{thisGate.gateT.Name} is opened");
-
-
-            //all gates have 10 seconds from this step.
-            //add "to" date time which is from now and 10 sec
-            item.To = DateTime.Now.AddSeconds(10);
-
-
-            //if all desk is (null) not alive then wake them all
-            if (desks.All(d => d.deskT == null))
-            {
-                foreach (var desk in desks)
-                {
-                    desk.StartDesk();
-                    Logging.WriteToLog($"{desk.deskT.Name} is opened");
-                }
-            }
-        }
-
-        void TimeToTakeOff(FlightSchedule item)
-        {
-            //we found the gate there match the flightplans gatenumber
-            Gate gateToClose = Gates.Where(g => g.GateNumber == item.GateNum).FirstOrDefault();
+        //    //We set the departure on the gate
+        //    thisGate.Destination = item.Departure;
 
 
-            if (gateToClose.gateT.IsAlive)
-            {
-                //If gate still working give them a second
-                Thread.Sleep(1000);
+        //    //start gate
+        //    thisGate.StartGate();
+        //    Logging.WriteToLog($"{thisGate.gateT.Name} is opened");
 
-                Logging.WriteToLog($"{gateToClose.gateT.Name} forced to close");
 
-                //Update departures list
-                UpdateDepartures(gateToClose.Departure, "");
+        //    //if all desk is (null) not alive then wake them all
+        //    if (desks.All(d => d.deskT == null))
+        //    {
+        //        foreach (var desk in desks)
+        //        {
+        //            desk.StartDesk();
+        //            Logging.WriteToLog($"{desk.deskT.Name} is opened");
+        //        }
+        //    }
 
-                //We set the departure on the gate
-                gateToClose.Departure = "";
+        //    //all gates have 10 seconds from this step.
+        //    //add "to" date time which is from now and 10 sec
+        //    item.To = DateTime.Now.AddSeconds(10);
+        //}
 
-                //close gate
-                gateToClose.CloseGate();
-                Logging.WriteToLog($"{gateToClose.gateT.Name} is closed");
+        //void TimeToTakeOff(FlightSchedule item)
+        //{
+        //    //we found the gate there match the flightplans gatenumber
+        //    Gate gateToClose = Gates.Where(g => g.GateNumber == item.GateNum).FirstOrDefault();
 
-            }
-            else
-            {
-                //Update departures list
-                UpdateDepartures(gateToClose.Departure, "");
 
-                //We set the departure on the gate
-                gateToClose.Departure = "";
-            }
+        //    if (gateToClose.gateT.IsAlive)
+        //    {
+        //        //If gate still working give them a second
+        //        Thread.Sleep(1000);
 
-            //if all gates is (null) not alive then close all desks
-            if (Gates.All(d => d.gateT == null))
-            {
-                foreach (var desk in desks)
-                {
-                    desk.CloseDesk();
-                    Logging.WriteToLog($"{desk.deskT.Name} is closed");
+        //        Logging.WriteToLog($"{gateToClose.gateT.Name} forced to close");
 
-                }
-            }
-        }
+        //        //Update departures list
+        //        UpdateDepartures(gateToClose.Destination, "");
 
-        void UpdateDepartures(string olddep, string newdep)
-        {
-            departures.Remove(olddep);
+        //        //We set the departure on the gate
+        //        gateToClose.Destination = "";
 
-            departures.Add(newdep);
-        }
-        #endregion
+        //        //close gate
+        //        gateToClose.CloseGate();
+        //        Logging.WriteToLog($"{gateToClose.gateT.Name} is closed");
+
+        //    }
+        //    else
+        //    {
+        //        //Update departures list
+        //        UpdateDepartures(gateToClose.Destination, "");
+
+        //        //We set the departure on the gate
+        //        gateToClose.Destination = "";
+        //    }
+
+        //    //if all gates is (null) not alive then close all desks
+        //    if (Gates.All(d => d.gateT == null))
+        //    {
+        //        foreach (var desk in desks)
+        //        {
+        //            desk.CloseDesk();
+        //            Logging.WriteToLog($"{desk.deskT.Name} is closed");
+
+        //        }
+        //    }
+        //}
+
+        //void UpdateDepartures(string olddep, string newdep)
+        //{
+        //    departures.Remove(olddep);
+
+        //    departures.Add(newdep);
+        //}
+        //#endregion
     }
 }

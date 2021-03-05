@@ -10,7 +10,7 @@ namespace BaggageHandlingSystem
     {
 
         //TODO: Destination instead of departure
-        string distination;
+        string destination;
 
         int gateNum;
 
@@ -21,7 +21,7 @@ namespace BaggageHandlingSystem
         bool isDone;
 
 
-        public string Distination { get => distination; set => distination = value; }
+        public string Destination { get => destination; set => destination = value; }
         public int GateNum { get => gateNum; set => gateNum = value; }
         public DateTime Arrival { get => arrival; set => arrival = value; }
         public DateTime Departure { get => departure; set => departure = value; }
@@ -29,7 +29,7 @@ namespace BaggageHandlingSystem
 
         public FlightSchedule(string distination, int gateNum, DateTime arrival, DateTime departure)
         {
-            this.distination = distination;
+            this.destination = distination;
             this.gateNum = gateNum;
             this.arrival = arrival;
             this.departure = departure;
@@ -38,7 +38,7 @@ namespace BaggageHandlingSystem
         public override bool Equals(object obj)
         {
             FlightSchedule fs = obj as FlightSchedule;
-            if (string.Equals(this.Distination, fs.Distination, StringComparison.OrdinalIgnoreCase)
+            if (string.Equals(this.Destination, fs.Destination, StringComparison.OrdinalIgnoreCase)
                 && int.Equals(this.GateNum, fs.GateNum)
                 && DateTime.Equals(this.Arrival, fs.Arrival)
                 && DateTime.Equals(this.Departure, fs.Departure))   

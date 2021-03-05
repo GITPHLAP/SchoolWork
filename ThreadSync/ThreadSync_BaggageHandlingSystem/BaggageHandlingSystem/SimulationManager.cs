@@ -23,7 +23,7 @@ namespace BaggageHandlingSystem
         public static object CentralLock = new object();
 
         //Destination string list
-        public static List<string> Destinations = new List<string>();
+        //public static List<string> Destinations = new List<string>();
 
         //List of gates 
         public static List<Gate> Gates = new List<Gate>();
@@ -70,9 +70,9 @@ namespace BaggageHandlingSystem
             Flightplans.Add(new FlightSchedule("STO", 2, DateTime.Now, DateTime.Now.AddMinutes(1)));
             Flightplans.Add(new FlightSchedule("CPH", 3, DateTime.Now, DateTime.Now.AddMinutes(2)));
 
-            Flightplans.Add(new FlightSchedule("LON", 3, DateTime.Now.AddMinutes(5), DateTime.Now.AddMinutes(7)));
-            Flightplans.Add(new FlightSchedule("STO", 1, DateTime.Now.AddMinutes(5), DateTime.Now.AddMinutes(8)));
-            Flightplans.Add(new FlightSchedule("CPH", 2, DateTime.Now.AddMinutes(5), DateTime.Now.AddMinutes(7)));
+            Flightplans.Add(new FlightSchedule("LON", 3, DateTime.Now.AddMinutes(3), DateTime.Now.AddMinutes(6)));
+            Flightplans.Add(new FlightSchedule("STO", 1, DateTime.Now.AddMinutes(3), DateTime.Now.AddMinutes(7)));
+            Flightplans.Add(new FlightSchedule("CPH", 2, DateTime.Now.AddMinutes(3), DateTime.Now.AddMinutes(8)));
 
 
 
@@ -97,11 +97,13 @@ namespace BaggageHandlingSystem
             desks[1].StartDesk();
 
             Thread.Sleep(500);
-            //start all gate threads
+
             foreach (var item in Gates)
             {
                 item.StartGate();
             }
+            Thread.Sleep(1000);
+            //start all gate threads
 
             sortT.Start();
         }
@@ -255,7 +257,7 @@ namespace BaggageHandlingSystem
         {
             foreach (var item in Flightplans)
             {
-                Console.WriteLine("{0} Done? status: {1}", item.Distination, item.IsDone);
+                Console.WriteLine("{0} Done? status: {1}", item.Destination, item.IsDone);
             }
         }
 

@@ -18,7 +18,7 @@ namespace BaggageHandlingSystem
         //encapsulate properties
         public int PassengerNumber { get => passengerNumber; set => passengerNumber = value; }
         public string Name { get => name; set => name = value; }
-        public string Destination { get => schedule.Distination;}
+        public string Destination { get => schedule.Destination;}
 
         //Constructer
         public Reservation(int passengerNumber, string name, FlightSchedule schedule)

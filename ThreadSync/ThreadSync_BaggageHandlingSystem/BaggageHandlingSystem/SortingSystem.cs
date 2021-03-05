@@ -14,16 +14,26 @@ namespace BaggageHandlingSystem
 
         public static List<Luggage> LostLuggages = new List<Luggage>();
 
-        public static List<BufferQueue<Luggage>> BusinessClassList = new List<BufferQueue<Luggage>>();
-
-
-
         public void SplitterMethod()
         {
             while (true)
             {
+                //this wait for destinations
+                //stay in while if there is not a destination
+                if (SimulationManager.Gates.All(g => g.Destination == null))
+                {
+                    Logging.WriteToLog($"{Thread.CurrentThread.Name} wait for destinations");
 
-                ConsumeBottles();
+                    lock (SimulationManager.CentralLock)
+                    {
+                        Monitor.Wait(SimulationManager.CentralLock);
+                    }
+                }
+                else
+                {
+
+                    ConsumeBottles();
+                }
             }
         }
 
@@ -32,10 +42,10 @@ namespace BaggageHandlingSystem
             //This should never happend
             if (gate.LuggagesBuffer.IsLimitReached())
             {
-                //wait for a push
-                //Console.BackgroundColor = ConsoleColor.Yellow;
-                Logging.WriteToLog($"Consumer/Splitter has overload {gate.gateT.Name}...");
+                Logging.WriteToLog($"Consumer/Splitter has fill {gate.gateT.Name}...");
                 Monitor.Enter(gate.LuggagesBuffer);
+
+                Monitor.Pulse(gate.LuggagesBuffer);
 
                 Monitor.Wait(gate.LuggagesBuffer);
 
@@ -51,10 +61,7 @@ namespace BaggageHandlingSystem
                 gate.LuggagesBuffer.Enqueue(luggage);
 
                 //Console.BackgroundColor = ConsoleColor.Yellow;
-                Logging.WriteToLog($"Consumer/Splitter add luggage to {luggage.Departure} " );
-
-
-                Monitor.Pulse(gate.LuggagesBuffer);
+                Logging.WriteToLog($"Consumer/Splitter add luggage to {luggage.Departure}");
 
                 Monitor.Exit(gate.LuggagesBuffer);
 
@@ -64,30 +71,6 @@ namespace BaggageHandlingSystem
 
         public void ConsumeBottles()
         {
-            Thread.Sleep(500);
-
-            lock (BusinessClassList)
-            {
-                while (BusinessClassList.Any(buf => buf.Count > 0))
-                {
-                    foreach (var item in BusinessClassList)
-                    {
-                        while (item.Count > 0)
-                        {
-                            if (SimulationManager.Gates.Any(g => g.Destination == item.Peek().Departure))
-                            {
-                                Split(SimulationManager.Gates.First(g => g.Destination == item.Peek().Departure), item.Dequeue());
-                            }
-
-                        }
-
-                    }
-                    //remove all because it had take all luggage
-                    BusinessClassList.RemoveRange(0, BusinessClassList.Count);
-
-                }
-            }
-
 
             //try to enter buffer
             Monitor.Enter(AllLuggages);
@@ -102,27 +85,49 @@ namespace BaggageHandlingSystem
                 Monitor.Wait(AllLuggages);
             }
 
-            //take one from queue and add it to temp bottle 
-            Luggage templuggage = AllLuggages.Dequeue();
 
-            //Console.BackgroundColor = ConsoleColor.Yellow;
-            Logging.WriteToLog($"{Thread.CurrentThread.Name} Consume luggage to: {templuggage.Departure}");
-            
-            
-            Thread.Sleep(100);
-
-            //TODO: Use FlightScheduler HERE!!
-            foreach (var item in SimulationManager.Gates)
-            {
-                if (item.Destination == templuggage.Departure)
+                if (SimulationManager.Gates.Any(g => g.Destination == AllLuggages.Peek().Departure))
                 {
-                    Split(item, templuggage);
+                    //Write to log file
+                    Logging.WriteToLog($"{Thread.CurrentThread.Name} Consume luggage to: {AllLuggages.Peek().Departure}");
+
+                    //method to Send luggage to gate 
+                    Split(SimulationManager.Gates.First(g => g.Destination == AllLuggages.Peek().Departure), AllLuggages.Dequeue());
                 }
                 else //add "Lost luggage" to a list
                 {
-                    LostLuggages.Add(templuggage);
+                    //Write to log file
+                    Logging.WriteToLog($"{Thread.CurrentThread.Name} Consume luggage to: {AllLuggages.Peek().Departure} and add it to lostluggage");
+
+                    LostLuggages.Add(AllLuggages.Dequeue());
                 }
-            }
+            
+
+
+
+
+
+
+
+            //TODO: Use FlightScheduler HERE!!
+            //foreach (var item in SimulationManager.Gates)
+            //{
+            //    if (item.Destination == AllLuggages.Peek().Departure)
+            //    {
+            //        //Write to log file
+            //        Logging.WriteToLog($"{Thread.CurrentThread.Name} Consume luggage to: {AllLuggages.Peek().Departure}");
+                    
+            //        //method to Send luggage to gate 
+            //        Split(item, AllLuggages.Dequeue());
+            //    }
+            //    else //add "Lost luggage" to a list
+            //    {
+            //        //Write to log file
+            //        Logging.WriteToLog($"{Thread.CurrentThread.Name} Consume luggage to: {AllLuggages.Peek().Departure} and add it to lostluggage");
+
+            //        LostLuggages.Add(AllLuggages.Dequeue());
+            //    }
+            //}
 
             Monitor.Exit(AllLuggages);
 

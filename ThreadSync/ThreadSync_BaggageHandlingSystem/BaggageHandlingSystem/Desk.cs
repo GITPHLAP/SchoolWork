@@ -74,8 +74,10 @@ namespace BaggageHandlingSystem
                     //wait for a push
                     Logging.WriteToLog($"{Thread.CurrentThread.Name} wait buffer is full");
 
-
                     Monitor.Enter(SortingSystem.AllLuggages);
+
+                    Monitor.PulseAll(SortingSystem.AllLuggages);
+
                     Monitor.Wait(SortingSystem.AllLuggages);
                     Monitor.Exit(SortingSystem.AllLuggages);
                     

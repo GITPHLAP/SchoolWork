@@ -53,6 +53,7 @@ namespace BaggageHandlingSystem
             }
         }
 
+        //TODO: Implement Method to add Flightschedule to program
         void NewFlightSchedule()
         {
 
@@ -60,9 +61,6 @@ namespace BaggageHandlingSystem
 
         public void StartSimulation()
         {
-            //Thread centralThread = new Thread(CentralServerMethod);
-            //centralThread.Name = "CentralThread";
-
 
 
 
@@ -220,7 +218,6 @@ namespace BaggageHandlingSystem
 
         void CloseDesk(string deskname)
         {
-            //Desk desk = GetDeskFromName(deskname);
 
             if (GetDeskFromName(deskname) != null)
             {
@@ -261,122 +258,5 @@ namespace BaggageHandlingSystem
             }
         }
 
-        //#region Controller Methods
-        //void ControllerMethod()
-        //{
-        //    while (true)
-        //    {
-        //        foreach (var item in Flightplans)
-        //        {
-        //            // and if its not already begin
-        //            if (item.From <= DateTime.Now && !item.IsDone)
-        //            {
-        //                CheckInControl(item);
-        //                item.IsDone = true;
-        //            }
-        //        }
-
-        //        //if there is any there should take off
-        //        if (Flightplans.Any(fp => fp.To >= DateTime.Now))
-        //        {
-        //            //temp to be sure is the same FlightPlan the mothod will touch
-        //            FlightSchedule plan = Flightplans.Where(fp => fp.To >= DateTime.Now).First();
-        //            //TODO: Could let user decide if gate should forced to close
-        //            TimeToTakeOff(plan);
-        //            Flightplans.Remove(plan);
-        //        }
-        //    }
-        //}
-
-        //void CheckInControl(FlightSchedule item)
-        //{
-        //    //we found the gate there match the flightplans gatenumber
-        //    Gate thisGate = Gates.Where(g => g.GateNumber == item.GateNum).FirstOrDefault();
-
-        //    //If gate is alive nothing happend
-        //    //while (thisGate.gateT == null ? false : true)
-        //    //{
-        //    //    Debug.WriteLine($"{thisGate.gateT} is Alive");
-        //    //}
-
-        //    //Update departures list
-        //    UpdateDepartures(thisGate.Destination, item.Departure);
-
-        //    //We set the departure on the gate
-        //    thisGate.Destination = item.Departure;
-
-
-        //    //start gate
-        //    thisGate.StartGate();
-        //    Logging.WriteToLog($"{thisGate.gateT.Name} is opened");
-
-
-        //    //if all desk is (null) not alive then wake them all
-        //    if (desks.All(d => d.deskT == null))
-        //    {
-        //        foreach (var desk in desks)
-        //        {
-        //            desk.StartDesk();
-        //            Logging.WriteToLog($"{desk.deskT.Name} is opened");
-        //        }
-        //    }
-
-        //    //all gates have 10 seconds from this step.
-        //    //add "to" date time which is from now and 10 sec
-        //    item.To = DateTime.Now.AddSeconds(10);
-        //}
-
-        //void TimeToTakeOff(FlightSchedule item)
-        //{
-        //    //we found the gate there match the flightplans gatenumber
-        //    Gate gateToClose = Gates.Where(g => g.GateNumber == item.GateNum).FirstOrDefault();
-
-
-        //    if (gateToClose.gateT.IsAlive)
-        //    {
-        //        //If gate still working give them a second
-        //        Thread.Sleep(1000);
-
-        //        Logging.WriteToLog($"{gateToClose.gateT.Name} forced to close");
-
-        //        //Update departures list
-        //        UpdateDepartures(gateToClose.Destination, "");
-
-        //        //We set the departure on the gate
-        //        gateToClose.Destination = "";
-
-        //        //close gate
-        //        gateToClose.CloseGate();
-        //        Logging.WriteToLog($"{gateToClose.gateT.Name} is closed");
-
-        //    }
-        //    else
-        //    {
-        //        //Update departures list
-        //        UpdateDepartures(gateToClose.Destination, "");
-
-        //        //We set the departure on the gate
-        //        gateToClose.Destination = "";
-        //    }
-
-        //    //if all gates is (null) not alive then close all desks
-        //    if (Gates.All(d => d.gateT == null))
-        //    {
-        //        foreach (var desk in desks)
-        //        {
-        //            desk.CloseDesk();
-        //            Logging.WriteToLog($"{desk.deskT.Name} is closed");
-
-        //        }
-        //    }
-        //}
-
-        //void UpdateDepartures(string olddep, string newdep)
-        //{
-        //    departures.Remove(olddep);
-
-        //    departures.Add(newdep);
-        //}
-        //#endregion
     }
 }

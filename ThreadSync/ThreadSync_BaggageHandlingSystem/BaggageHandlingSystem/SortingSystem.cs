@@ -61,7 +61,7 @@ namespace BaggageHandlingSystem
                 gate.LuggagesBuffer.Enqueue(luggage);
 
                 //Console.BackgroundColor = ConsoleColor.Yellow;
-                Logging.WriteToLog($"Consumer/Splitter add luggage to {luggage.Departure}");
+                Logging.WriteToLog($"Consumer/Splitter add luggage to {luggage.Destination}");
 
                 Monitor.Exit(gate.LuggagesBuffer);
 
@@ -79,55 +79,27 @@ namespace BaggageHandlingSystem
             while (AllLuggages.Count == 0)
             {
                 //invoke threads who waiting 
-                //TODO: Pulse or PulseAll
                 Monitor.PulseAll(AllLuggages);
 
                 Monitor.Wait(AllLuggages);
             }
 
-
-                if (SimulationManager.Gates.Any(g => g.Destination == AllLuggages.Peek().Departure))
+            //TODO: I could use Flightschedule instead of gates.
+                if (SimulationManager.Gates.Any(g => g.Destination == AllLuggages.Peek().Destination))
                 {
                     //Write to log file
-                    Logging.WriteToLog($"{Thread.CurrentThread.Name} Consume luggage to: {AllLuggages.Peek().Departure}");
+                    Logging.WriteToLog($"{Thread.CurrentThread.Name} Consume luggage to: {AllLuggages.Peek().Destination}");
 
                     //method to Send luggage to gate 
-                    Split(SimulationManager.Gates.First(g => g.Destination == AllLuggages.Peek().Departure), AllLuggages.Dequeue());
+                    Split(SimulationManager.Gates.First(g => g.Destination == AllLuggages.Peek().Destination), AllLuggages.Dequeue());
                 }
                 else //add "Lost luggage" to a list
                 {
                     //Write to log file
-                    Logging.WriteToLog($"{Thread.CurrentThread.Name} Consume luggage to: {AllLuggages.Peek().Departure} and add it to lostluggage");
+                    Logging.WriteToLog($"{Thread.CurrentThread.Name} Consume luggage to: {AllLuggages.Peek().Destination} and add it to lostluggage");
 
                     LostLuggages.Add(AllLuggages.Dequeue());
                 }
-            
-
-
-
-
-
-
-
-            //TODO: Use FlightScheduler HERE!!
-            //foreach (var item in SimulationManager.Gates)
-            //{
-            //    if (item.Destination == AllLuggages.Peek().Departure)
-            //    {
-            //        //Write to log file
-            //        Logging.WriteToLog($"{Thread.CurrentThread.Name} Consume luggage to: {AllLuggages.Peek().Departure}");
-                    
-            //        //method to Send luggage to gate 
-            //        Split(item, AllLuggages.Dequeue());
-            //    }
-            //    else //add "Lost luggage" to a list
-            //    {
-            //        //Write to log file
-            //        Logging.WriteToLog($"{Thread.CurrentThread.Name} Consume luggage to: {AllLuggages.Peek().Departure} and add it to lostluggage");
-
-            //        LostLuggages.Add(AllLuggages.Dequeue());
-            //    }
-            //}
 
             Monitor.Exit(AllLuggages);
 

@@ -38,14 +38,14 @@ namespace BaggageHandlingSystem
 
                 deskT.Start();
             }
-                
+
 
         }
 
         //Method to close Desk Thread
         public void CloseDesk()
         {
-            if(deskT is Thread)
+            if (deskT is Thread)
                 StopThread = true;
 
         }
@@ -80,7 +80,7 @@ namespace BaggageHandlingSystem
 
                     Monitor.Wait(SortingSystem.AllLuggages);
                     Monitor.Exit(SortingSystem.AllLuggages);
-                    
+
                 }
                 else if (Monitor.TryEnter(SortingSystem.AllLuggages) && !SortingSystem.AllLuggages.IsLimitReached())
                 {
@@ -92,19 +92,38 @@ namespace BaggageHandlingSystem
                     //bool testbool = SimulationManager.Gates.Any(g => g.Destination == null);
 
 
-                        //get a random number from 0 to 2 
+                    //get a random number from 0 to 2 
                     int tempindex = random.Next(SimulationManager.Gates.Where(g => g.Destination != null).Count());
 
-                        //take name from index of varians-list and add it to a new bottle 
-                        SortingSystem.AllLuggages.Enqueue(new Luggage(SimulationManager.Gates.Where(g => g.Destination != null).ToList()[tempindex].Destination));
+                    //take a reservation
+                    //var validreservation = ReservationSystem.Reservations.First();
 
-                        //Console.BackgroundColor = ConsoleColor.Red;
-                        Logging.WriteToLog($"{Thread.CurrentThread.Name} enqueue: {SimulationManager.Gates.Where(g => g.Destination != null).ToList()[tempindex].Destination}");
+                    //find valid a reservation with contains a flightplan equals to one of the gates
+                    var validreservation = (ReservationSystem.Reservations.Join(SimulationManager.Gates,
+                       r => r.schedule, g => g.GateSchedule,
+                       (r, g) => new
+                       {
+                           r.PassengerNumber,
+                           r.Name,
+                           r.schedule
+                       }
+                       ).FirstOrDefault());
 
-                        //increase counter
-                        //counter++;
+                    //Take the reservation which is equal to the valid reservation 
+                    // We need this so we can remove it later in program.
+                    Reservation reservation = ReservationSystem.Reservations.Where(r => r.schedule.Equals(validreservation.schedule)).FirstOrDefault();
 
-                        Monitor.PulseAll(SortingSystem.AllLuggages);
+                    ReservationSystem.Reservations.Remove(reservation);
+                    //take name from index of varians-list and add it to a new bottle 
+                    SortingSystem.AllLuggages.Enqueue(new Luggage(reservation));
+
+                    //Console.BackgroundColor = ConsoleColor.Red;
+                    Logging.WriteToLog($"{Thread.CurrentThread.Name} enqueue: {SimulationManager.Gates.Where(g => g.Destination != null).ToList()[tempindex].Destination}");
+
+                    //increase counter
+                    //counter++;
+
+                    Monitor.PulseAll(SortingSystem.AllLuggages);
                     Monitor.Exit(SortingSystem.AllLuggages);
 
                     Thread.Sleep(500);

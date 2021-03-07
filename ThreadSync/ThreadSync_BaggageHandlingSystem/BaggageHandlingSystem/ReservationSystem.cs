@@ -9,9 +9,9 @@ using System.Threading;
 
 namespace BaggageHandlingSystem
 {
-    public class ReservationSystem
+    class ReservationSystem
     {
-        static List<Reservation> Reservations = new List<Reservation>();
+        public static List<Reservation> Reservations = new List<Reservation>();
 
 
         //TODO: split this method... RememberSOLID

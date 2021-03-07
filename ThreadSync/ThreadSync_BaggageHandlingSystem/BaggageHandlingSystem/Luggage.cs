@@ -11,15 +11,15 @@ namespace BaggageHandlingSystem
         //to check luggage cant have the same number
         int lastluggageNum =0;
 
-
         int luggageNum;
-        string departure;
-        public int LuggageNum { get => luggageNum; set => luggageNum = value; }
-        public string Departure { get => departure; set => departure = value; }
 
-        public Luggage(string departure)
+        Reservation reservation;
+        public int LuggageNum { get => luggageNum; set => luggageNum = value; }
+        public string Destination { get => reservation.Destination;}
+
+        public Luggage(Reservation reservation)
         {
-            this.departure = departure;
+            this.reservation = reservation;
 
             this.luggageNum = lastluggageNum + 1;
 

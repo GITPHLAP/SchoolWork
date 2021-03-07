@@ -13,7 +13,7 @@ namespace BaggageHandlingSystem
         //properties 
         int passengerNumber;
         string name;
-        FlightSchedule schedule;
+        public FlightSchedule schedule;
 
         //encapsulate properties
         public int PassengerNumber { get => passengerNumber; set => passengerNumber = value; }

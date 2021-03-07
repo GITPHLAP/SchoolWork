@@ -7,14 +7,14 @@ using System.Threading;
 
 namespace BaggageHandlingSystem
 {
-    public class Gate
+    class Gate
     {
         bool StopThread;
 
         //TODO: GateThread - make method instead off public 
         public Thread gateT;
 
-        FlightSchedule gateSchedule = null;
+        public FlightSchedule GateSchedule = null;
 
         //GateNumber
         int gateNumber;
@@ -23,7 +23,7 @@ namespace BaggageHandlingSystem
         BufferQueue<Luggage> luggagesBuffer;
 
         public int GateNumber { get => gateNumber; private set => gateNumber = value; }
-        public string Destination { get => gateSchedule == null ? null : gateSchedule.Destination;}
+        public string Destination { get => GateSchedule == null ? null : GateSchedule.Destination;}
         internal BufferQueue<Luggage> LuggagesBuffer { get => luggagesBuffer; set => luggagesBuffer = value; }
 
 
@@ -73,7 +73,7 @@ namespace BaggageHandlingSystem
                     //Return all 
                     SendLuggageToLostLuggage();
 
-                    this.gateSchedule = NextFlightSchedule();
+                    this.GateSchedule = NextFlightSchedule();
 
                     //send signal to desk that they can begin to create luggage
                     lock (SimulationManager.CentralLock)
@@ -82,7 +82,7 @@ namespace BaggageHandlingSystem
                     }
 
                     //this part should run while there is a flightschedule 
-                    while (gateSchedule != null)
+                    while (GateSchedule != null)
                     {
                         lock (luggagesBuffer)
                         {
@@ -116,12 +116,12 @@ namespace BaggageHandlingSystem
 
 
                                 //set the flightplan to done 
-                                Logging.WriteToLog($"FlightPlan to{gateSchedule.Destination} between {gateSchedule.Arrival} to {gateSchedule.Departure} flight now :{DateTime.Now} ");
+                                Logging.WriteToLog($"FlightPlan to{GateSchedule.Destination} between {GateSchedule.Arrival} to {GateSchedule.Departure} flight now :{DateTime.Now} ");
 
-                                FlightplanToDone(gateSchedule);
+                                FlightplanToDone(GateSchedule);
 
                                 //remove flightschedule so sortingsystem not send package to this gate
-                                this.gateSchedule = null;
+                                this.GateSchedule = null;
 
                                 //Tell sortingSystem that Flight has take off 
                                 Monitor.PulseAll(luggagesBuffer);
@@ -144,6 +144,9 @@ namespace BaggageHandlingSystem
                         
                         lock (SimulationManager.CentralLock)
                         {
+                            //Write to console that gates do not have more Flight Schedules
+                            SimulationManager.NoMoreFlightSchedules = true;
+                            
                             Monitor.Wait(SimulationManager.CentralLock);
                         }
                     }

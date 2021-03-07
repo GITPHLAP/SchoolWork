@@ -92,7 +92,7 @@ namespace BaggageHandlingSystem
 
 
 
-            manager.GUI();
+            manager.CLI();
 
 
 

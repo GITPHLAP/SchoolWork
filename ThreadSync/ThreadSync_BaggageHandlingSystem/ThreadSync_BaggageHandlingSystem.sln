@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaggageHandlingSystem", "BaggageHandlingSystem\BaggageHandlingSystem.csproj", "{56B972C5-F5B8-4DF4-9CA9-EC274B53D28B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleBaggageHandlingSystem", "BaggageHandlingSystem\ConsoleBaggageHandlingSystem.csproj", "{56B972C5-F5B8-4DF4-9CA9-EC274B53D28B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

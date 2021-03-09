@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace BaggageHandlingSystem
+namespace ConsoleBaggageHandlingSystem
 {
-    class SimulationManager
+    public class SimulationManager
     {
         //TODO: Write Better Logging output and add Timestamps
 
+        //All those is static because its the same 
+        //TODO: There should only be initilaize one of SimulationManager
         //Central lock to Thread wait when No More Schedules
         public static object CentralLock = new object();
 
@@ -16,13 +18,17 @@ namespace BaggageHandlingSystem
         public static List<Gate> Gates = new List<Gate>();
 
         //list of desks 
-        List<Desk> desks = new List<Desk>();
+        public static List<Desk> Desks = new List<Desk>();
 
         //list with flightplans
         public static List<FlightSchedule> Flightplans = new List<FlightSchedule>();
 
         //Variable is used to show a message to console.
         public static bool NoMoreFlightSchedules;
+
+
+
+
 
         #region CLI related Methods
         public void CLI()
@@ -82,7 +88,7 @@ namespace BaggageHandlingSystem
                         desknameinput = Console.ReadLine();
 
                         //add the desk to the desks list
-                        desks.Add(new Desk(desknameinput));
+                        Desks.Add(new Desk(desknameinput));
 
                         //start the desk-Thread we just add to list
                         GetDeskFromName(desknameinput).StartDesk();
@@ -126,14 +132,14 @@ namespace BaggageHandlingSystem
 
         }
 
-        void ShowDeskStatus()
+        public void ShowDeskStatus()
         {
-            foreach (var item in desks)
+            foreach (var item in Desks)
             {
                 Console.WriteLine(item.deskT.ThreadState);
             }
         }
-        void ShowGateStatus()
+        public void ShowGateStatus()
         {
             foreach (var item in Gates)
             {
@@ -141,7 +147,7 @@ namespace BaggageHandlingSystem
             }
         }
 
-        void CloseDesk(string deskname)
+        public void CloseDesk(string deskname)
         {
 
             if (GetDeskFromName(deskname) != null)
@@ -153,7 +159,7 @@ namespace BaggageHandlingSystem
                 Console.WriteLine("Der var ingen desk med navnet");
         }
 
-        void ShowFlightPlan()
+        public void ShowFlightPlan()
         {
             foreach (var item in Flightplans)
             {
@@ -177,7 +183,7 @@ namespace BaggageHandlingSystem
 
         #endregion
 
-        void StartSimulation()
+        public void StartSimulation()
         {
             //This is to read Reservations and add it too a list 
             ReservationSystem testre = new ReservationSystem();
@@ -200,8 +206,8 @@ namespace BaggageHandlingSystem
             Gates.Add(new Gate(3, 20));
             
             //add desks to list
-            desks.Add(new Desk("Desk1"));
-            desks.Add(new Desk("Desk2"));
+            Desks.Add(new Desk("Desk1"));
+            Desks.Add(new Desk("Desk2"));
 
             //Create a sorting system 
             SortingSystem sortingSystem = new SortingSystem();
@@ -224,11 +230,11 @@ namespace BaggageHandlingSystem
             sortT.Start();
 
             //start desk Threads
-            desks[0].StartDesk();
-            desks[1].StartDesk();
+            Desks[0].StartDesk();
+            Desks[1].StartDesk();
         }
 
-        void OpenDesksAndGates()
+        public void OpenDesksAndGates()
         {
             lock (CentralLock)
             {
@@ -243,22 +249,22 @@ namespace BaggageHandlingSystem
             //NoMoreFlightSchedules = false;
         }
 
-        Desk GetDeskFromName(string deskname)
+        public Desk GetDeskFromName(string deskname)
         {
-            return desks.Where(d => d.DeskName == deskname).FirstOrDefault();
+            return Desks.Where(d => d.DeskName == deskname).FirstOrDefault();
         }
 
-        void ShowDesks()
+        public void ShowDesks()
         {
-            foreach (var item in desks)
+            foreach (var item in Desks)
             {
                 Console.WriteLine(item.DeskName);
             }
         }
 
-        void ShowOpenDesks()
+        public void ShowOpenDesks()
         {
-            foreach (var item in desks.Where(d => d.deskT.IsAlive))
+            foreach (var item in Desks.Where(d => d.deskT.IsAlive))
             {
                 Console.WriteLine(item.DeskName);
             }

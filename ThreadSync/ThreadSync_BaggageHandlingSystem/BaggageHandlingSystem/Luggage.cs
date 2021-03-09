@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaggageHandlingSystem
+namespace ConsoleBaggageHandlingSystem
 {
-    class Luggage
+    public class Luggage
     {
         //to check luggage cant have the same number
         int lastluggageNum =0;

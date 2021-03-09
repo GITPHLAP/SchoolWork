@@ -8,14 +8,14 @@ using System.Threading;
 using System.Diagnostics;
 
 
-namespace BaggageHandlingSystem
+namespace ConsoleBaggageHandlingSystem
 {
-    class Logging
+    public class Logging
     {
 
         static object locks = new object();
 
-public static void WriteToLog(string input)
+        public static void WriteToLog(string input)
         {
             Debug.WriteLine(input);
 
@@ -44,8 +44,8 @@ public static void WriteToLog(string input)
                 Console.WriteLine("We should never end up here, but sometimes we do.");
             }
 
-            
-            
+
+
         }
 
     }

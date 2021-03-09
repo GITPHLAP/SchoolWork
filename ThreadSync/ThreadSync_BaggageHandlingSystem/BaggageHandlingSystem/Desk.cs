@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace BaggageHandlingSystem
+namespace ConsoleBaggageHandlingSystem
 {
-    class Desk
+    public class Desk
     {
         //TODO: DeskThread - make method instead off public 
         public Thread deskT;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Threading;
 
 
-namespace BaggageHandlingSystem
+namespace ConsoleBaggageHandlingSystem
 {
     public class BufferQueue<T> : Queue<T>
     {

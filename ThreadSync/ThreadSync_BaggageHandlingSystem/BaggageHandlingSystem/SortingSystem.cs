@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace BaggageHandlingSystem
+namespace ConsoleBaggageHandlingSystem
 {
-    class SortingSystem
+    public class SortingSystem
     {
         //buffer to sorting system
         public static BufferQueue<Luggage> AllLuggages = new BufferQueue<Luggage>(20);

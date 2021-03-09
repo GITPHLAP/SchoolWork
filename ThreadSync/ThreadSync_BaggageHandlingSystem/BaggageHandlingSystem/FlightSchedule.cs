@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaggageHandlingSystem
+namespace ConsoleBaggageHandlingSystem
 {
-    class FlightSchedule
+    public class FlightSchedule
     {
 
         //TODO: Destination instead of departure

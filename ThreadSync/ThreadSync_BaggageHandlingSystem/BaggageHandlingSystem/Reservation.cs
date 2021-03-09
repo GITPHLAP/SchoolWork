@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Threading;
 
 
-namespace BaggageHandlingSystem
+namespace ConsoleBaggageHandlingSystem
 {
-    class Reservation
+    public class Reservation
     {
         //properties 
         int passengerNumber;

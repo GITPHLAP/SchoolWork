@@ -7,9 +7,9 @@ using System.IO;
 using System.Threading;
 
 
-namespace BaggageHandlingSystem
+namespace ConsoleBaggageHandlingSystem
 {
-    class ReservationSystem
+    public class ReservationSystem
     {
         public static List<Reservation> Reservations = new List<Reservation>();
 

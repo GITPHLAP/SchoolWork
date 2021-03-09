@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31019.35
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaggageHandlingSystem", "BaggageHandlingSystem\BaggageHandlingSystem.csproj", "{E1989643-99E9-4CDF-BA8D-A076F9FDBE6D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1989643-99E9-4CDF-BA8D-A076F9FDBE6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1989643-99E9-4CDF-BA8D-A076F9FDBE6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1989643-99E9-4CDF-BA8D-A076F9FDBE6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1989643-99E9-4CDF-BA8D-A076F9FDBE6D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6FDD3E75-6EF6-4C7C-9B8B-C7F8F25A942C}
+	EndGlobalSection
+EndGlobal

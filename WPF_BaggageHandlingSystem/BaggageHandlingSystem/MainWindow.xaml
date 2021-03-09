@@ -1,0 +1,84 @@
+﻿<Window x:Class="BaggageHandlingSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BaggageHandlingSystem"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:BoolToVisibillityConverter x:Key="boolToVisibillity" />
+    </Window.Resources>
+    <DockPanel LastChildFill="True">
+        
+        <!--User Input/Ouput panel-->
+        <StackPanel Background="Red" x:Name="UserInputPanel" DockPanel.Dock="Right" Width="200">
+            <TextBlock x:Name="OutputBlock" Background="White" Margin="2" Height="200" TextWrapping="Wrap"></TextBlock>
+
+            <Button x:Name="ShowSchedule_btn" Margin="2,2,2,5" Content="Show FlightSchedule" Click="ShowSchedule_btn_Click"/>
+
+        </StackPanel>
+        
+        <!--Animation layout-->
+        <StackPanel Background="DarkRed" x:Name="CenterPanel">
+            
+            <!--Desk, Splitter and Gate Panel-->
+            <StackPanel x:Name="TreeElementPanel" Orientation="Horizontal" Background="Green" Margin="2">
+                
+                <!--Desk panel-->
+                <StackPanel Background="Orange" x:Name="DesksPanel" Margin="2" MinWidth="184.142" VerticalAlignment="Center">
+                    <Rectangle x:Name="Desk1" Stroke="White" Width="50" Height="50" Fill="#FFFF9191" Margin="10"/>
+                    <Rectangle x:Name="Desk2" Stroke="White" Width="50" Height="50" Fill="#FFFF9191" Margin="10"/>
+
+                </StackPanel>
+
+                <!--Splitter panel-->
+                <StackPanel Background="OrangeRed" x:Name="SplitterPanel" Margin="2" MinWidth="208.714"  VerticalAlignment="Center">
+                    
+                    <Canvas x:Name="Splitter_Canvas" Width="100" MinWidth="100" MinHeight="100">
+
+                        <Rectangle x:Name="Splitter" Fill="White"
+                                   Width="100" 
+                                   Height="100" VerticalAlignment="Center"/>
+                        <!--Splitter Popup when mouse over-->
+                        <Canvas x:Name="SplitterPopup" Canvas.Bottom="0" Visibility="{Binding Path=IsMouseOver, ElementName=Splitter, Converter={StaticResource boolToVisibillity}}">
+                            <TextBlock x:Name="SplitterPopup_Tblock" Background="White" Width="110" TextWrapping="Wrap"> TEST</TextBlock>
+                        </Canvas>
+                        
+                    </Canvas>
+
+                </StackPanel>
+
+                <!--Gate panel-->
+                <StackPanel Background="Orange" x:Name="GatesPanel" Margin="2" MinWidth="184.142">
+                    
+                    <!--Gate1 Canvas-->
+                    <Canvas x:Name="Gate1_Canvas" Height="50" Width="50" Margin="10">
+
+                        <Rectangle x:Name="Gate1" Stroke="White" Width="50" Height="50" Fill="#FFFF9191"/>
+                        
+                        <!--Gate1 Popup when mouse over-->
+                        <Canvas x:Name="Gate1Popup" Canvas.Right="52" Width="110" 
+                                Visibility="{Binding Path=IsMouseOver, ElementName=Gate1, Converter={StaticResource boolToVisibillity}}">
+                            <TextBlock x:Name="Gate1Popup_Tblock" Width="110" Background="White" TextWrapping="Wrap"> TEST</TextBlock>
+                        </Canvas>
+                        
+                    </Canvas>
+
+                    <Canvas x:Name="Gate2_Canvas" Height="50" Width="50" Margin="10">
+
+                        <Rectangle x:Name="Gate2" Stroke="White" Width="50" Height="50" Fill="#FFFF9191"/>
+
+                        <Canvas x:Name="Gate2Popup" Canvas.Right="52" Width="110" 
+                                Visibility="{Binding Path=IsMouseOver, ElementName=Gate2, Converter={StaticResource boolToVisibillity}}" >
+                            <TextBlock x:Name="Gate2Popup_Tblock" Width="110" Background="White" TextWrapping="Wrap" > TEST hej med dig jeg kan godt lide kage</TextBlock>
+                        </Canvas>
+
+                    </Canvas>
+
+                </StackPanel>
+
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</Window>

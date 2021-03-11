@@ -14,6 +14,9 @@ namespace ConsoleBaggageHandlingSystem
 
         public static List<Luggage> LostLuggages = new List<Luggage>();
 
+        public event EventHandler UpdateGatesLuggage;
+
+
         public void SplitterMethod()
         {
             while (true)
@@ -59,6 +62,9 @@ namespace ConsoleBaggageHandlingSystem
 
                 //take name from index of varians-list and add it to a new bottle 
                 gate.LuggagesBuffer.Enqueue(luggage);
+                
+                //Send an event to all listeners that GatesLuggage should update
+                UpdateGatesLuggage?.Invoke(this, EventArgs.Empty);
 
                 //Console.BackgroundColor = ConsoleColor.Yellow;
                 Logging.WriteToLog($"Consumer/Splitter add luggage to {luggage.Destination}");

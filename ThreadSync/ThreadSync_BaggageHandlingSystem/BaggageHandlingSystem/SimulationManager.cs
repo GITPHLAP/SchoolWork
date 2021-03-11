@@ -26,8 +26,8 @@ namespace ConsoleBaggageHandlingSystem
         //Variable is used to show a message to console.
         public static bool NoMoreFlightSchedules;
 
-
-
+        //Event handler to Flight status Departure and arrival and Luggage count
+        public event EventHandler UpdateGates;
 
 
         #region CLI related Methods
@@ -204,14 +204,24 @@ namespace ConsoleBaggageHandlingSystem
             Gates.Add(new Gate(1, 20));
             Gates.Add(new Gate(2, 20));
             Gates.Add(new Gate(3, 20));
-            
+
+            //make a event on all gates.
+            foreach (var item in Gates)
+            {
+                item.GatesFlightStatus += Item_GateStatus;
+            }
+
             //add desks to list
             Desks.Add(new Desk("Desk1"));
             Desks.Add(new Desk("Desk2"));
 
             //Create a sorting system 
             SortingSystem sortingSystem = new SortingSystem();
-            
+
+            //make sortingsystem event
+            sortingSystem.UpdateGatesLuggage += SortingSystem_UpdateGatesLuggage;
+
+
             //Create a thread on SortingSystem
             Thread sortT = new Thread(sortingSystem.SplitterMethod);
             
@@ -232,6 +242,18 @@ namespace ConsoleBaggageHandlingSystem
             //start desk Threads
             Desks[0].StartDesk();
             Desks[1].StartDesk();
+        }
+
+        private void SortingSystem_UpdateGatesLuggage(object sender, EventArgs e)
+        {
+            Logging.WriteToLog("[Manager EVENT] Send GateStatusUpdate about luggage");
+            UpdateGates?.Invoke(sender, EventArgs.Empty);
+        }
+
+        private void Item_GateStatus(object sender, EventArgs e)
+        {
+            Logging.WriteToLog("[Manager EVENT] Manager Send GateStatusUpdate about departure and status");
+            UpdateGates?.Invoke(sender, EventArgs.Empty);
         }
 
         public void OpenDesksAndGates()

@@ -1,7 +1,6 @@
-C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync\ThreadSync_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\ConsoleBaggageHandlingSystem.csprojAssemblyReference.cache
-C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync\ThreadSync_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\ConsoleBaggageHandlingSystem.csproj.CoreCompileInputs.cache
 C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync\ThreadSync_BaggageHandlingSystem\BaggageHandlingSystem\bin\Debug\ConsoleBaggageHandlingSystem.exe.config
 C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync\ThreadSync_BaggageHandlingSystem\BaggageHandlingSystem\bin\Debug\ConsoleBaggageHandlingSystem.exe
 C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync\ThreadSync_BaggageHandlingSystem\BaggageHandlingSystem\bin\Debug\ConsoleBaggageHandlingSystem.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync\ThreadSync_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\ConsoleBaggageHandlingSystem.csproj.CoreCompileInputs.cache
 C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync\ThreadSync_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\ConsoleBaggageHandlingSystem.exe
 C:\Users\kjedt\source\repos_git\_SchoolWork\ThreadSync\ThreadSync_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\ConsoleBaggageHandlingSystem.pdb

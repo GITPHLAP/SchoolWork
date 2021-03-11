@@ -13,27 +13,121 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ConsoleBaggageHandlingSystem;
+using System.Diagnostics;
+using System.ComponentModel;
 
 
 
 namespace BaggageHandlingSystem
 {
+    public static class Helper
+    {
+
+        public static T FindChild<T>(this DependencyObject parent, string childName)
+       where T : DependencyObject
+        {
+            if (parent == null) return null;
+
+            T foundChild = null;
+
+            var childrenCount = VisualTreeHelper.GetChildrenCount(parent);
+            for (var i = 0; i < childrenCount; i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                var childType = child as T;
+                if (childType == null)
+                {
+                    foundChild = Helper.FindChild<T>(child, childName);
+                    if (foundChild != null) break;
+                }
+                else if (!string.IsNullOrEmpty(childName))
+                {
+                    var frameworkElement = child as FrameworkElement;
+                    if (frameworkElement != null && frameworkElement.Name == childName)
+                    {
+                        foundChild = (T)child;
+                        break;
+                    }
+                }
+                else
+                {
+                    foundChild = (T)child;
+                    break;
+                }
+            }
+
+            return foundChild;
+        }
+    }
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-         SimulationManager manager = new SimulationManager();
+        //TODO: Create PopupWindow
+        
+        SimulationManager manager = new SimulationManager();
         public MainWindow()
         {
             InitializeComponent();
 
-            //manager.StartSimulation();
+            manager.StartSimulation();
+
+            manager.UpdateGates += Manager_UpdateGates;
+
+        }
+        void ClosingApplication(object sender, CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
+            Environment.Exit(1);
+        }
+
+        private void Manager_UpdateGates(object sender, EventArgs e)
+        {
+            //Encapsulat so when UI have time then its do it
+            Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
+            {
+
+                GatesPanel.Items.Refresh();
+            }));
         }
 
         private void ShowSchedule_btn_Click(object sender, RoutedEventArgs e)
         {
+            DesksPanel.Width = CenterPanel.ActualWidth * (2 / 7);
 
+            GatesPanel.Width = CenterPanel.ActualWidth * (2 / 7);
+
+            SplitterPanel.Width = CenterPanel.ActualWidth * (2 / 7);
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        //    Method();
+        //    var test = Helper.FindChild<ListView>((DependencyObject)sender, "gateListView");
+        }
+
+        private void gateListView_MouseEnter(object sender, MouseEventArgs e)
+        {
+            //((ListView)sender).ItemsSource = SimulationManager.Flightplans;
+        }
+
+        
+        public static class VisualTreeHelperExtensions
+        {
+            
+
+            public static T FindAncestor<T>(DependencyObject dependencyObject)
+                where T : class
+            {
+                DependencyObject target = dependencyObject;
+                do
+                {
+                    target = VisualTreeHelper.GetParent(target);
+                }
+                while (target != null && !(target is T));
+                return target as T;
+            }
         }
     }
 }

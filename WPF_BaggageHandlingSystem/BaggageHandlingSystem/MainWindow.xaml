@@ -4,81 +4,137 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BaggageHandlingSystem"
+        xmlns:localconsole="clr-namespace:ConsoleBaggageHandlingSystem;assembly=ConsoleBaggageHandlingSystem" 
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Closing="ClosingApplication" MinWidth="800" MinHeight="450">
     <Window.Resources>
         <local:BoolToVisibillityConverter x:Key="boolToVisibillity" />
+        <local:boolToGateColorConverter x:Key="boolToGateColorConverter" />
+        <local:EnumToIMGSourceConverter x:Key="enumToIMGConverter" />
+        <local:GateNumToBufferConverter x:Key="gatenumToBuffer"/>
+        <local:GateNumToNextDepartureConverter x:Key="gateNumToNextDeparture"/>
+        <local:GateNumToScheduleConverter x:Key="scheduleConverter"/>
+        <localconsole:SimulationManager x:Key="manager" x:Name="Manager" />
     </Window.Resources>
+
     <DockPanel LastChildFill="True">
-        
+
         <!--User Input/Ouput panel-->
         <StackPanel Background="Red" x:Name="UserInputPanel" DockPanel.Dock="Right" Width="200">
-            <TextBlock x:Name="OutputBlock" Background="White" Margin="2" Height="200" TextWrapping="Wrap"></TextBlock>
+            <TabControl x:Name="GateTabControl"
+            TabStripPlacement="Top"
+            ItemsSource="{Binding Source={x:Static localconsole:SimulationManager.Gates}}" >
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run>Gate</Run>
+                            <Run Text="{Binding GateNumber, Mode=OneWay}"> </Run>
+                        </TextBlock>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate>
+                        <!--Converter is used to get flightplans for specific Gate-->
+                        <ListView Margin="1" x:Name="gateListView" ItemsSource="{Binding GateNumber,Converter={StaticResource scheduleConverter}}" >
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Des" Width="35" DisplayMemberBinding="{Binding Destination}" />
+                                    <GridViewColumn Header="Arrival" Width="75" DisplayMemberBinding="{Binding Arrival}" />
+                                    <GridViewColumn Header="Departure" Width="75" DisplayMemberBinding="{Binding Departure}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+
+            <TextBlock x:Name="OutputBlock" Background="White" Margin="2" Height="200" TextWrapping ="Wrap"></TextBlock>
 
             <Button x:Name="ShowSchedule_btn" Margin="2,2,2,5" Content="Show FlightSchedule" Click="ShowSchedule_btn_Click"/>
 
+            <Button x:Name="OpenDesk" Margin="2,2,2,5" Content="Show FlightSchedule" Click="ShowSchedule_btn_Click"/>
         </StackPanel>
-        
+
+
+        <!--Grid to size everting and to get more responsible-->
         <!--Animation layout-->
-        <StackPanel Background="DarkRed" x:Name="CenterPanel">
-            
-            <!--Desk, Splitter and Gate Panel-->
-            <StackPanel x:Name="TreeElementPanel" Orientation="Horizontal" Background="Green" Margin="2">
-                
-                <!--Desk panel-->
-                <StackPanel Background="Orange" x:Name="DesksPanel" Margin="2" MinWidth="184.142" VerticalAlignment="Center">
-                    <Rectangle x:Name="Desk1" Stroke="White" Width="50" Height="50" Fill="#FFFF9191" Margin="10"/>
-                    <Rectangle x:Name="Desk2" Stroke="White" Width="50" Height="50" Fill="#FFFF9191" Margin="10"/>
+        <!--Desk, Splitter and Gate Panel-->
+        <Grid ShowGridLines="True" Background="DarkRed" x:Name="CenterPanel">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
 
-                </StackPanel>
 
-                <!--Splitter panel-->
-                <StackPanel Background="OrangeRed" x:Name="SplitterPanel" Margin="2" MinWidth="208.714"  VerticalAlignment="Center">
-                    
-                    <Canvas x:Name="Splitter_Canvas" Width="100" MinWidth="100" MinHeight="100">
 
-                        <Rectangle x:Name="Splitter" Fill="White"
-                                   Width="100" 
-                                   Height="100" VerticalAlignment="Center"/>
-                        <!--Splitter Popup when mouse over-->
-                        <Canvas x:Name="SplitterPopup" Canvas.Bottom="0" Visibility="{Binding Path=IsMouseOver, ElementName=Splitter, Converter={StaticResource boolToVisibillity}}">
-                            <TextBlock x:Name="SplitterPopup_Tblock" Background="White" Width="110" TextWrapping="Wrap"> TEST</TextBlock>
-                        </Canvas>
-                        
-                    </Canvas>
 
-                </StackPanel>
-
-                <!--Gate panel-->
-                <StackPanel Background="Orange" x:Name="GatesPanel" Margin="2" MinWidth="184.142">
-                    
-                    <!--Gate1 Canvas-->
-                    <Canvas x:Name="Gate1_Canvas" Height="50" Width="50" Margin="10">
-
-                        <Rectangle x:Name="Gate1" Stroke="White" Width="50" Height="50" Fill="#FFFF9191"/>
-                        
-                        <!--Gate1 Popup when mouse over-->
-                        <Canvas x:Name="Gate1Popup" Canvas.Right="52" Width="110" 
-                                Visibility="{Binding Path=IsMouseOver, ElementName=Gate1, Converter={StaticResource boolToVisibillity}}">
-                            <TextBlock x:Name="Gate1Popup_Tblock" Width="110" Background="White" TextWrapping="Wrap"> TEST</TextBlock>
-                        </Canvas>
-                        
-                    </Canvas>
-
-                    <Canvas x:Name="Gate2_Canvas" Height="50" Width="50" Margin="10">
-
-                        <Rectangle x:Name="Gate2" Stroke="White" Width="50" Height="50" Fill="#FFFF9191"/>
-
-                        <Canvas x:Name="Gate2Popup" Canvas.Right="52" Width="110" 
-                                Visibility="{Binding Path=IsMouseOver, ElementName=Gate2, Converter={StaticResource boolToVisibillity}}" >
-                            <TextBlock x:Name="Gate2Popup_Tblock" Width="110" Background="White" TextWrapping="Wrap" > TEST hej med dig jeg kan godt lide kage</TextBlock>
-                        </Canvas>
-
-                    </Canvas>
-
-                </StackPanel>
+            <!--Desk panel-->
+            <StackPanel Grid.Column="0" Background="Orange" x:Name="DesksPanel" VerticalAlignment="Center">
+                <Rectangle x:Name="Desk1" Stroke="White" Width="50" Height="50" Fill="#FFFF9191" Margin="10"/>
+                <Rectangle x:Name="Desk2" Stroke="White" Width="50" Height="50" Fill="#FF93FF93" Margin="10"/>
 
             </StackPanel>
-        </StackPanel>
+
+            <!--Splitter panel-->
+            <StackPanel Grid.Column="1" Background="OrangeRed" x:Name="SplitterPanel" VerticalAlignment="Center">
+
+                <Canvas x:Name="Splitter_Canvas" Width="100" MinWidth="100" MinHeight="100">
+
+                    <Rectangle x:Name="Splitter" Fill="White"
+                                   Width="100" 
+                                   Height="100"/>
+                    <!--Splitter Popup when mouse over-->
+                    <Canvas x:Name="SplitterPopup" Canvas.Bottom="0" Visibility="{Binding Path=IsMouseOver, ElementName=Splitter, Converter={StaticResource boolToVisibillity}}">
+                        <TextBlock x:Name="SplitterPopup_Tblock" Background="White" Width="110" TextWrapping="Wrap"> TEST</TextBlock>
+                    </Canvas>
+
+                </Canvas>
+
+            </StackPanel>
+
+            <!--Gate list view-->
+            <ListView Grid.Column="2" Background="Orange" x:Name="GatesPanel" HorizontalContentAlignment="Center" 
+                ItemsSource="{Binding Source={x:Static localconsole:SimulationManager.Gates}}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <!--StackPanel so each element in Gates will be add vertical (under the other one)-->
+                        <StackPanel x:Name="GateStackPanel">
+                            <!--The main canvas for each gate-->
+                            <Canvas x:Name="Gate_Canvas" Height="50" Width="50" Margin="10" >
+                                <!--Rectangle is a symbolic for a gate-->
+                                <Rectangle x:Name="Gate_Rangle" Stroke="White" Width="50" Height="50" 
+                                               Fill="{Binding NoMoreSchedules, Converter={StaticResource boolToGateColorConverter}}"
+                                               HorizontalAlignment="Center" Panel.ZIndex="0"/>
+                                <!--Image to see status -->
+                                <Image x:Name="ImgTest" Source="{Binding Status, Converter={StaticResource enumToIMGConverter}}"
+                                           Width="25" Canvas.Left="12" Canvas.Top="12" />
+
+                                <!--Canvas for popup its vissible when mouse is over the main canvas-->
+                                <Canvas x:Name="GateTestPopup" Canvas.Left="0" Canvas.Top="-7" Width="100" 
+                                                Visibility="{Binding IsMouseOver, ElementName=GateTest_Canvas, Converter={StaticResource boolToVisibillity}}" Panel.ZIndex="1">
+                                    <TextBlock x:Name="GateTestPopup_Tblock" Width="110" Background="White" TextWrapping="Wrap" >
+                                            <Run Text="{Binding GateNumber, Converter={StaticResource gateNumToNextDeparture}, Mode=OneWay}"></Run>
+                                            <LineBreak/>
+                                            <Run>Luggage</Run>
+                                            <Run Text="{Binding LuggagesBuffer.Count, Mode=OneWay}"></Run>
+
+                                    </TextBlock>
+                                </Canvas>
+
+                            </Canvas>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+
     </DockPanel>
 </Window>

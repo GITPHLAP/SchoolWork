@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaggageHandlingSystem", "BaggageHandlingSystem\BaggageHandlingSystem.csproj", "{E1989643-99E9-4CDF-BA8D-A076F9FDBE6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleBaggageHandlingSystem", "..\ThreadSync\ThreadSync_BaggageHandlingSystem\BaggageHandlingSystem\ConsoleBaggageHandlingSystem.csproj", "{56B972C5-F5B8-4DF4-9CA9-EC274B53D28B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,11 +17,15 @@ Global
 		{E1989643-99E9-4CDF-BA8D-A076F9FDBE6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1989643-99E9-4CDF-BA8D-A076F9FDBE6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1989643-99E9-4CDF-BA8D-A076F9FDBE6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56B972C5-F5B8-4DF4-9CA9-EC274B53D28B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56B972C5-F5B8-4DF4-9CA9-EC274B53D28B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56B972C5-F5B8-4DF4-9CA9-EC274B53D28B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56B972C5-F5B8-4DF4-9CA9-EC274B53D28B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6FDD3E75-6EF6-4C7C-9B8B-C7F8F25A942C}
+		SolutionGuid = {229B7906-5FE3-4F3A-9F0A-83AD615E7275}
 	EndGlobalSection
 EndGlobal

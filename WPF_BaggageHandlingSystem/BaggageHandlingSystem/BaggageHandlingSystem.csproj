@@ -112,6 +112,10 @@
       <Project>{56b972c5-f5b8-4df4-9ca9-ec274b53d28b}</Project>
       <Name>ConsoleBaggageHandlingSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BaggageHandlingSystem_CreateFlightScheduleAndReservations\CreateFlightScheduleAndReservations\CreateFlightScheduleAndReservations.csproj">
+      <Project>{20e12fec-c9b7-4c68-9e55-be4b14a68f51}</Project>
+      <Name>CreateFlightScheduleAndReservations</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

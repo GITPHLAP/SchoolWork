@@ -1,7 +1,6 @@
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\BaggageHandlingSystem.csprojAssemblyReference.cache
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\MainWindow.g.cs
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\App.g.cs
-C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\BaggageHandlingSystem_MarkupCompile.cache
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\BaggageHandlingSystem_MarkupCompile.lref
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\bin\Debug\BaggageHandlingSystem.exe.config
@@ -10,6 +9,7 @@ C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHan
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\bin\Debug\ConsoleBaggageHandlingSystem.exe
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\bin\Debug\ConsoleBaggageHandlingSystem.pdb
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\bin\Debug\ConsoleBaggageHandlingSystem.exe.config
+C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\MainWindow.baml
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\BaggageHandlingSystem.g.resources
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\BaggageHandlingSystem.Properties.Resources.resources
@@ -18,3 +18,6 @@ C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHan
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\BaggageHandlingSystem.csproj.CopyComplete
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\BaggageHandlingSystem.exe
 C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\obj\Debug\BaggageHandlingSystem.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\bin\Debug\CreateFlightScheduleAndReservations.exe
+C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\bin\Debug\CreateFlightScheduleAndReservations.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\WPF_BaggageHandlingSystem\BaggageHandlingSystem\bin\Debug\CreateFlightScheduleAndReservations.exe.config

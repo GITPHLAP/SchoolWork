@@ -15,8 +15,8 @@ using System.Windows.Shapes;
 using ConsoleBaggageHandlingSystem;
 using System.Diagnostics;
 using System.ComponentModel;
-
-
+using System.Collections.ObjectModel;
+using CreateFlightScheduleAndReservations;
 
 namespace BaggageHandlingSystem
 {
@@ -59,21 +59,34 @@ namespace BaggageHandlingSystem
             return foundChild;
         }
     }
+
+    
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        //TODO: Try to make ObservableCollection
+
+
         //TODO: Create PopupWindow
-        
+
         SimulationManager manager = new SimulationManager();
         public MainWindow()
         {
             InitializeComponent();
 
+            // Create Reservation and FlightSchedules 
+            FileCreater.CreateBothFiles();
+
+
             manager.StartSimulation();
 
             manager.UpdateGates += Manager_UpdateGates;
+
+            SplitterluggageListView.ItemsSource = new List<SortingSystem>() { manager.SortingSystem };
+
 
         }
         void ClosingApplication(object sender, CancelEventArgs e)
@@ -87,18 +100,21 @@ namespace BaggageHandlingSystem
             //Encapsulat so when UI have time then its do it
             Application.Current.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Normal, new Action(() =>
             {
-
+                SplitterluggageListView.Items.Refresh();
                 GatesPanel.Items.Refresh();
+                GateTabControl.Items.Refresh();
+
             }));
         }
 
         private void ShowSchedule_btn_Click(object sender, RoutedEventArgs e)
         {
-            DesksPanel.Width = CenterPanel.ActualWidth * (2 / 7);
+            SimulationManager.Desks[0].MyList.Add(new Desk.BoxViewModel
+                {
+                    Brush = "Pink"
+                });
 
-            GatesPanel.Width = CenterPanel.ActualWidth * (2 / 7);
 
-            SplitterPanel.Width = CenterPanel.ActualWidth * (2 / 7);
         }
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)

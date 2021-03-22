@@ -17,52 +17,23 @@
         <local:GateNumToBufferConverter x:Key="gatenumToBuffer"/>
         <local:GateNumToNextDepartureConverter x:Key="gateNumToNextDeparture"/>
         <local:GateNumToScheduleConverter x:Key="scheduleConverter"/>
-        <localconsole:SimulationManager x:Key="manager" x:Name="Manager" />
+        <local:ThreadToColorConverter x:Key="threadToColor"/>
+        <localconsole:SimulationManager x:Key="manager"/>
     </Window.Resources>
 
-    <DockPanel LastChildFill="True">
-
-        <!--User Input/Ouput panel-->
-        <StackPanel Background="Red" x:Name="UserInputPanel" DockPanel.Dock="Right" Width="200">
-            <TabControl x:Name="GateTabControl"
-            TabStripPlacement="Top"
-            ItemsSource="{Binding Source={x:Static localconsole:SimulationManager.Gates}}" >
-                <TabControl.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock>
-                            <Run>Gate</Run>
-                            <Run Text="{Binding GateNumber, Mode=OneWay}"> </Run>
-                        </TextBlock>
-                    </DataTemplate>
-                </TabControl.ItemTemplate>
-                <TabControl.ContentTemplate>
-                    <DataTemplate>
-                        <!--Converter is used to get flightplans for specific Gate-->
-                        <ListView Margin="1" x:Name="gateListView" ItemsSource="{Binding GateNumber,Converter={StaticResource scheduleConverter}}" >
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Des" Width="35" DisplayMemberBinding="{Binding Destination}" />
-                                    <GridViewColumn Header="Arrival" Width="75" DisplayMemberBinding="{Binding Arrival}" />
-                                    <GridViewColumn Header="Departure" Width="75" DisplayMemberBinding="{Binding Departure}" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </DataTemplate>
-                </TabControl.ContentTemplate>
-            </TabControl>
-
-            <TextBlock x:Name="OutputBlock" Background="White" Margin="2" Height="200" TextWrapping ="Wrap"></TextBlock>
-
-            <Button x:Name="ShowSchedule_btn" Margin="2,2,2,5" Content="Show FlightSchedule" Click="ShowSchedule_btn_Click"/>
-
-            <Button x:Name="OpenDesk" Margin="2,2,2,5" Content="Show FlightSchedule" Click="ShowSchedule_btn_Click"/>
-        </StackPanel>
-
+    <Grid x:Name="MainGrid" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition MinWidth="250" Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
 
         <!--Grid to size everting and to get more responsible-->
         <!--Animation layout-->
         <!--Desk, Splitter and Gate Panel-->
-        <Grid ShowGridLines="True" Background="DarkRed" x:Name="CenterPanel">
+        <Grid Background="DarkRed" x:Name="CenterPanel" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"></ColumnDefinition>
                 <ColumnDefinition Width="4*"></ColumnDefinition>
@@ -72,15 +43,55 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-
-
-
             <!--Desk panel-->
             <StackPanel Grid.Column="0" Background="Orange" x:Name="DesksPanel" VerticalAlignment="Center">
-                <Rectangle x:Name="Desk1" Stroke="White" Width="50" Height="50" Fill="#FFFF9191" Margin="10"/>
-                <Rectangle x:Name="Desk2" Stroke="White" Width="50" Height="50" Fill="#FF93FF93" Margin="10"/>
+                <ItemsControl x:Name="tStack" ItemsSource="{Binding Source={x:Static localconsole:SimulationManager.Desks}}">
+                    <ItemsControl.ItemContainerStyle>
+                        <Style TargetType="ContentPresenter">
+                            <Style.Resources>
+                                <Style TargetType="Image">
+                                    <Setter Property="Opacity" Value="0.25" />
+
+                                    <Style.Triggers>
+                                        <EventTrigger RoutedEvent="Loaded">
+
+                                            <EventTrigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                  To="1" Duration="0:0:1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger.EnterActions>
+                                            <EventTrigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                  To="0.25" Duration="0:0:1" />
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger.ExitActions>
+                                        </EventTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Style.Resources>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Canvas Width="75" Height="50" Margin="10" >
+                                    <Rectangle  x:Name="desk_Rangle" Stroke="White" Width="50" Height="50" Fill="{Binding DeskT, Converter={StaticResource threadToColor}}" />
+                                </Canvas>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
             </StackPanel>
+
+
+
 
             <!--Splitter panel-->
             <StackPanel Grid.Column="1" Background="OrangeRed" x:Name="SplitterPanel" VerticalAlignment="Center">
@@ -92,7 +103,14 @@
                                    Height="100"/>
                     <!--Splitter Popup when mouse over-->
                     <Canvas x:Name="SplitterPopup" Canvas.Bottom="0" Visibility="{Binding Path=IsMouseOver, ElementName=Splitter, Converter={StaticResource boolToVisibillity}}">
-                        <TextBlock x:Name="SplitterPopup_Tblock" Background="White" Width="110" TextWrapping="Wrap"> TEST</TextBlock>
+                        <ListView Margin="1" x:Name="SplitterluggageListView"   >
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Des" Width="35" DisplayMemberBinding="{Binding AllLuggages.Count}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
                     </Canvas>
 
                 </Canvas>
@@ -101,7 +119,7 @@
 
             <!--Gate list view-->
             <ListView Grid.Column="2" Background="Orange" x:Name="GatesPanel" HorizontalContentAlignment="Center" 
-                ItemsSource="{Binding Source={x:Static localconsole:SimulationManager.Gates}}" >
+                ItemsSource="{Binding Source={x:Static localconsole:SimulationManager.Gates}}" IsTextSearchEnabled="False" IsManipulationEnabled="True" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <!--StackPanel so each element in Gates will be add vertical (under the other one)-->
@@ -113,13 +131,13 @@
                                                Fill="{Binding NoMoreSchedules, Converter={StaticResource boolToGateColorConverter}}"
                                                HorizontalAlignment="Center" Panel.ZIndex="0"/>
                                 <!--Image to see status -->
-                                <Image x:Name="ImgTest" Source="{Binding Status, Converter={StaticResource enumToIMGConverter}}"
+                                <Image x:Name="FlightStatus" Source="{Binding Status, Converter={StaticResource enumToIMGConverter}}"
                                            Width="25" Canvas.Left="12" Canvas.Top="12" />
 
                                 <!--Canvas for popup its vissible when mouse is over the main canvas-->
-                                <Canvas x:Name="GateTestPopup" Canvas.Left="0" Canvas.Top="-7" Width="100" 
-                                                Visibility="{Binding IsMouseOver, ElementName=GateTest_Canvas, Converter={StaticResource boolToVisibillity}}" Panel.ZIndex="1">
-                                    <TextBlock x:Name="GateTestPopup_Tblock" Width="110" Background="White" TextWrapping="Wrap" >
+                                <Canvas x:Name="GatePopup" Canvas.Left="0" Canvas.Top="-7" Width="100" 
+                                                Visibility="{Binding IsMouseOver, ElementName=Gate_Canvas, Converter={StaticResource boolToVisibillity}}" Panel.ZIndex="1">
+                                    <TextBlock x:Name="GatePopup_Tblock" Width="110" Background="White" TextWrapping="Wrap" >
                                             <Run Text="{Binding GateNumber, Converter={StaticResource gateNumToNextDeparture}, Mode=OneWay}"></Run>
                                             <LineBreak/>
                                             <Run>Luggage</Run>
@@ -136,5 +154,54 @@
 
         </Grid>
 
-    </DockPanel>
+        <GridSplitter Background="LightGray" Width="6" ResizeBehavior="CurrentAndNext"/>
+
+        <!--User Input/Ouput panel-->
+        <StackPanel Background="Red" x:Name="UserInputPanel" Grid.Column="1">
+            <TabControl x:Name="GateTabControl"
+            ItemsSource="{Binding Source={x:Static localconsole:SimulationManager.Gates}}" >
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run>Gate</Run>
+                            <Run Text="{Binding GateNumber, Mode=OneWay}"> </Run>
+                        </TextBlock>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+                <TabControl.ContentTemplate>
+                    <DataTemplate DataType="{x:Type localconsole:Gate}">
+                        <!--Converter is used to get flightplans for specific Gate   -->
+                        <ListView Margin="1" x:Name="gateListView" ItemsSource="{Binding GateNumber, Converter={StaticResource scheduleConverter}, Mode=OneWay}" >
+                            <ListView.Resources>
+                                <local:boolToGateColorConverter x:Key="boolToRowColorConverter" />
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Background" Value="{Binding IsDone, Converter={StaticResource boolToRowColorConverter}}">
+                                    </Setter>
+                                </Style>
+                            </ListView.Resources>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Des" Width="35" DisplayMemberBinding="{Binding Destination}" />
+                                    <GridViewColumn Header="Arrival" Width="75" DisplayMemberBinding="{Binding Arrival, StringFormat={}{0:HH:mm:ss dd/MM}}" />
+                                    <GridViewColumn Header="Departure" Width="75" DisplayMemberBinding="{Binding Departure, StringFormat={}{0:HH:mm:ss dd/MM}}" />
+                                    <GridViewColumn Header="Passengers" Width="25" DisplayMemberBinding="{Binding PassengerAmount}" />
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </DataTemplate>
+                </TabControl.ContentTemplate>
+            </TabControl>
+
+            <TextBlock x:Name="OutputBlock" Background="White" Margin="2" Height="200" TextWrapping ="Wrap"></TextBlock>
+
+            <Button x:Name="ShowSchedule_btn" Margin="2,2,2,5" Content="Show FlightSchedule" Click="ShowSchedule_btn_Click"/>
+
+            <Button x:Name="OpenDesk" Margin="2,2,2,5" Content="Show FlightSchedule" Click="ShowSchedule_btn_Click"/>
+        </StackPanel>
+
+
+
+
+    </Grid>
 </Window>

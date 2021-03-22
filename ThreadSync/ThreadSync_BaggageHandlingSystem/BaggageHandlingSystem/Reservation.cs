@@ -13,19 +13,19 @@ namespace ConsoleBaggageHandlingSystem
         //properties 
         int passengerNumber;
         string name;
-        public FlightSchedule schedule;
 
         //encapsulate properties
         public int PassengerNumber { get => passengerNumber; set => passengerNumber = value; }
         public string Name { get => name; set => name = value; }
-        public string Destination { get => schedule.Destination;}
+        public string Destination { get => Schedule.Destination;}
+        public FlightSchedule Schedule { get; }
 
         //Constructer
         public Reservation(int passengerNumber, string name, FlightSchedule schedule)
         {
             this.passengerNumber = passengerNumber;
             this.name = name;
-            this.schedule = schedule;
+            this.Schedule = schedule;
 
         }
 

@@ -28,13 +28,19 @@ namespace ConsoleBaggageHandlingSystem
 
         public bool NoMoreSchedules { get => status == FlightStatus.NoMoreFlight ? true : false; }
         public int GateNumber { get => gateNumber; private set => gateNumber = value; }
-        public string Destination { get => gateSchedule == null ? null : gateSchedule.Destination;}
+        public string Destination { get => gateSchedule == null ? null : gateSchedule.Destination; }
         public BufferQueue<Luggage> LuggagesBuffer { get => luggagesBuffer; set => luggagesBuffer = value; }
         public FlightStatus Status { get => status; }
+
+        //TODO: It should be a list where foreach element in list should run
         public FlightSchedule GateSchedule { get => gateSchedule; }
+
 
         //handler which someone can listen on
         public event EventHandler GatesFlightStatus;
+
+        //handler which someone can listen on
+        public event EventHandler DepartureFlight;
 
 
         //constructor to create a max size on gate and give it a number
@@ -68,13 +74,11 @@ namespace ConsoleBaggageHandlingSystem
 
         }
 
-
-
         void Consume()
         {
             while (!StopThread)
             {
-                
+
                 if (IsThereAnyDestinationsNow())
                 {
                     //Set status on gate that we got a flight in the gate
@@ -92,7 +96,7 @@ namespace ConsoleBaggageHandlingSystem
                     }
 
                     //this part should run while there is a flightschedule 
-                    while (GateSchedule != null)
+                    while (!GateSchedule.IsDone)
                     {
                         lock (luggagesBuffer)
                         {
@@ -101,6 +105,9 @@ namespace ConsoleBaggageHandlingSystem
                             {
                                 //invoke threads who waiting 
                                 Monitor.PulseAll(luggagesBuffer);
+
+                                //Event to tell GUI they working 
+                                InvokeFlightStatus(FlightStatus.Working);
 
                                 Monitor.Wait(luggagesBuffer);
                             }
@@ -111,8 +118,8 @@ namespace ConsoleBaggageHandlingSystem
                             //try to enter buffer
                             if (luggagesBuffer.IsLimitReached() || TimeToTakeOf())
                             {
-                                //They begin putting luggage to the flight 
-                                InvokeFlightStatus(FlightStatus.Working);
+                                //Count passengers onboard
+                                int passengersOnboard = 0;
 
                                 //send them all at once (Simulate flight)
                                 for (int i = luggagesBuffer.Count; i > 0; i--)
@@ -120,20 +127,21 @@ namespace ConsoleBaggageHandlingSystem
                                     //take one from queue
                                     luggagesBuffer.Dequeue();
 
-                                    Logging.WriteToLog($"GateNumber {gateNumber} deque");
-                                }
+                                    Logging.WriteToLog($"GateNumber {gateNumber} deque luggagenumber");
 
+                                    passengersOnboard++;
+                                }
 
                                 //set the flightplan to done 
                                 Logging.WriteToLog($"FlightPlan to{GateSchedule.Destination} between {GateSchedule.Arrival} to {GateSchedule.Departure} flight now :{DateTime.Now} ");
 
                                 //Its time to take off 
-                                InvokeFlightStatus(FlightStatus.TakeOff);
+                                FlightTakeOff(passengersOnboard, this.gateSchedule);
 
                                 FlightplanToDone(GateSchedule);
 
-                                //remove flightschedule so sortingsystem not send package to this gate
-                                this.gateSchedule = null;
+                                ////remove flightschedule so sortingsystem not send package to this gate
+                                //this.gateSchedule = null;
 
                                 //Tell sortingSystem that Flight has take off 
                                 Monitor.PulseAll(luggagesBuffer);
@@ -149,18 +157,21 @@ namespace ConsoleBaggageHandlingSystem
                 {
                     if (!IsThereAnyDestinations())
                     {
+                        //remove flightschedule so sortingsystem not send package to this gate
+                        this.gateSchedule = null;
+
                         InvokeFlightStatus(FlightStatus.NoMoreFlight);
 
                         //Return the luggage
                         SendLuggageToLostLuggage();
 
                         Logging.WriteToLog($"Gate {gateNumber} wait for destinations");
-                        
+
                         lock (SimulationManager.CentralLock)
                         {
                             //Write to console that gates do not have more Flight Schedules
                             SimulationManager.NoMoreFlightSchedules = true;
-                            
+
                             Monitor.Wait(SimulationManager.CentralLock);
                         }
                     }
@@ -170,8 +181,6 @@ namespace ConsoleBaggageHandlingSystem
                     }
 
                 }
-
-                
 
             }
         }
@@ -183,6 +192,15 @@ namespace ConsoleBaggageHandlingSystem
 
             //invoker, say it to all listeners.
             GatesFlightStatus?.Invoke(this, EventArgs.Empty);
+        }
+
+        //Like InvokeFlightStatus but its only use for take off
+        void FlightTakeOff(int passengersOnBoard, FlightSchedule scheduleFromGate)
+        {
+            //Set Gate FlightStatus
+            status = FlightStatus.TakeOff;
+
+            DepartureFlight?.Invoke(this, new FlightEventArgs(scheduleFromGate, passengersOnBoard));
         }
 
 
@@ -200,7 +218,7 @@ namespace ConsoleBaggageHandlingSystem
             }
         }
 
-        bool TimeToTakeOf()
+        public bool TimeToTakeOf()
         {
             return DateTime.Now >= SimulationManager.Flightplans.Where(f => f.GateNum == this.gateNumber && !f.IsDone).First().Departure;
         }
@@ -212,7 +230,7 @@ namespace ConsoleBaggageHandlingSystem
 
         FlightSchedule NextFlightSchedule()
         {
-            return SimulationManager.Flightplans.Where(f => f.GateNum == this.gateNumber && !f.IsDone && DateTime.Now >= f.Arrival ).FirstOrDefault();
+            return SimulationManager.Flightplans.Where(f => f.GateNum == this.gateNumber && !f.IsDone && DateTime.Now >= f.Arrival).FirstOrDefault();
         }
 
         bool IsThereAnyDestinations()

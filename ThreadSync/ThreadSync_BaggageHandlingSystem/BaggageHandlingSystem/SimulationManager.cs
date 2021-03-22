@@ -15,16 +15,22 @@ namespace ConsoleBaggageHandlingSystem
         public static object CentralLock = new object();
 
         //List of gates 
-        public static List<Gate> Gates = new List<Gate>();
+        static List<Gate> gates = new List<Gate>();
 
         //list of desks 
         public static List<Desk> Desks = new List<Desk>();
+
+        //Create a sorting system 
+        SortingSystem sortingSystem = new SortingSystem();
 
         //list with flightplans
         public static List<FlightSchedule> Flightplans = new List<FlightSchedule>();
 
         //Variable is used to show a message to console.
         public static bool NoMoreFlightSchedules;
+
+        public SortingSystem SortingSystem { get => sortingSystem; set => sortingSystem = value; }
+        public static  List<Gate> Gates { get => gates; set => gates = value; }
 
         //Event handler to Flight status Departure and arrival and Luggage count
         public event EventHandler UpdateGates;
@@ -136,7 +142,7 @@ namespace ConsoleBaggageHandlingSystem
         {
             foreach (var item in Desks)
             {
-                Console.WriteLine(item.deskT.ThreadState);
+                Console.WriteLine(item.DeskT.ThreadState);
             }
         }
         public void ShowGateStatus()
@@ -185,10 +191,16 @@ namespace ConsoleBaggageHandlingSystem
 
         public void StartSimulation()
         {
-            //This is to read Reservations and add it too a list 
-            ReservationSystem testre = new ReservationSystem();
+            //This is to read Reservations and Flightschedules and add it too a list 
+            FlightScheduleImporter importFS = new FlightScheduleImporter();
 
-            testre.ReadCSVFileAndAddToList(@"Reservation.csv");
+            importFS.ReadCSVFileAndAddToList(@"FlightSchedules.csv");
+
+            ReservationSystem importreservation = new ReservationSystem();
+
+            importreservation.ReadCSVFileAndAddToList(@"Reservation.csv");
+
+
 
             #region Add FlightSchedules
             //Flightplans.Add(new FlightSchedule("LON", 1, DateTime.Now, DateTime.Now.AddMinutes(2)));
@@ -208,15 +220,16 @@ namespace ConsoleBaggageHandlingSystem
             //make a event on all gates.
             foreach (var item in Gates)
             {
-                item.GatesFlightStatus += Item_GateStatus;
+                item.GatesFlightStatus += Gate_GateStatus;
+
+                item.DepartureFlight += Gate_DepartureFlight;
             }
 
             //add desks to list
             Desks.Add(new Desk("Desk1"));
             Desks.Add(new Desk("Desk2"));
 
-            //Create a sorting system 
-            SortingSystem sortingSystem = new SortingSystem();
+
 
             //make sortingsystem event
             sortingSystem.UpdateGatesLuggage += SortingSystem_UpdateGatesLuggage;
@@ -224,7 +237,7 @@ namespace ConsoleBaggageHandlingSystem
 
             //Create a thread on SortingSystem
             Thread sortT = new Thread(sortingSystem.SplitterMethod);
-            
+
             //Give the thread a name and priority
             sortT.Name = "SortingThread";
             sortT.Priority = ThreadPriority.Highest;
@@ -244,15 +257,31 @@ namespace ConsoleBaggageHandlingSystem
             Desks[1].StartDesk();
         }
 
+        private void Gate_DepartureFlight(object sender, EventArgs e)
+        {
+            //casting event
+            FlightEventArgs flightevent = (FlightEventArgs)e;
+
+            //check the cast passed fine
+            if (flightevent != null)
+            {
+                Logging.WriteToLog($"[Manager EVENT] Flight from " +
+                $"{flightevent.Schedule.Destination} " +
+                $"kl. {flightevent.Schedule.Departure.ToString("dd-MM-yyyy HH:mm:ss")} " +
+                $"has departured with {flightevent.Schedule.PassengerAmount}");
+            }
+
+        }
+
         private void SortingSystem_UpdateGatesLuggage(object sender, EventArgs e)
         {
             Logging.WriteToLog("[Manager EVENT] Send GateStatusUpdate about luggage");
             UpdateGates?.Invoke(sender, EventArgs.Empty);
         }
 
-        private void Item_GateStatus(object sender, EventArgs e)
+        private void Gate_GateStatus(object sender, EventArgs e)
         {
-            Logging.WriteToLog("[Manager EVENT] Manager Send GateStatusUpdate about departure and status");
+            Logging.WriteToLog("[Manager EVENT] Manager Send GateStatusUpdate about all status ");
             UpdateGates?.Invoke(sender, EventArgs.Empty);
         }
 
@@ -286,7 +315,7 @@ namespace ConsoleBaggageHandlingSystem
 
         public void ShowOpenDesks()
         {
-            foreach (var item in Desks.Where(d => d.deskT.IsAlive))
+            foreach (var item in Desks.Where(d => d.DeskT.IsAlive))
             {
                 Console.WriteLine(item.DeskName);
             }

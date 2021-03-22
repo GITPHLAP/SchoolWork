@@ -45,7 +45,9 @@
   <ItemGroup>
     <Compile Include="BufferQueue.cs" />
     <Compile Include="Desk.cs" />
+    <Compile Include="FlightEventArgs.cs" />
     <Compile Include="FlightSchedule.cs" />
+    <Compile Include="FlightScheduleImporter.cs" />
     <Compile Include="Gate.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Luggage.cs" />

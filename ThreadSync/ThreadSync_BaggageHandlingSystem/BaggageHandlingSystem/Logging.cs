@@ -39,7 +39,7 @@ namespace ConsoleBaggageHandlingSystem
                     streamwrite.Close();
                 }
             }
-            catch (Exception e)
+            catch
             {
                 Console.WriteLine("We should never end up here, but sometimes we do.");
             }

@@ -9,22 +9,22 @@ namespace ConsoleBaggageHandlingSystem
     public class Luggage
     {
         //to check luggage cant have the same number
-        int lastluggageNum =0;
+        static int lastluggageNum =0;
 
         int luggageNum;
 
-        Reservation reservation;
         public int LuggageNum { get => luggageNum; set => luggageNum = value; }
-        public string Destination { get => reservation.Destination;}
+        public string Destination { get => Reservation.Destination;}
+        public Reservation Reservation { get; }
 
         public Luggage(Reservation reservation)
         {
-            this.reservation = reservation;
+            this.Reservation = reservation;
 
             this.luggageNum = lastluggageNum + 1;
 
             //add luggge num to last luggagenum
-            this.lastluggageNum = luggageNum;
+            Luggage.lastluggageNum = luggageNum;
         }
 
     }

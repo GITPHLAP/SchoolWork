@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -10,20 +11,21 @@ namespace ConsoleBaggageHandlingSystem
     public class Desk
     {
         //TODO: DeskThread - make method instead off public 
-        public Thread deskT;
+        //TODO: Logic to close threads
+
+        Thread deskT;
 
         public bool StopThread;
 
         string deskName;
 
         public string DeskName { get => deskName; set => deskName = value; }
+        public Thread DeskT { get => deskT; }
 
         public Desk(string deskName)
         {
             this.deskName = deskName;
         }
-
-
 
 
         //Method to start Desk thread
@@ -82,7 +84,7 @@ namespace ConsoleBaggageHandlingSystem
                     Monitor.Exit(SortingSystem.AllLuggages);
 
                 }
-                else if (Monitor.TryEnter(SortingSystem.AllLuggages) && !SortingSystem.AllLuggages.IsLimitReached())
+                else if (Monitor.TryEnter(SortingSystem.AllLuggages) && !SortingSystem.AllLuggages.IsLimitReached() && ReservationSystem.Reservations.Count>0)
                 {
 
                     //int counter = 1;
@@ -99,23 +101,25 @@ namespace ConsoleBaggageHandlingSystem
                     //var validreservation = ReservationSystem.Reservations.First();
 
                     //find valid a reservation with contains a flightplan equals to one of the gates
-                    var validreservation = (ReservationSystem.Reservations.Join(SimulationManager.Gates,
-                       r => r.schedule, g => g.GateSchedule,
-                       (r, g) => new
+                    var validreservation = (ReservationSystem.Reservations.Join(SimulationManager.Flightplans,
+                       r => r.Schedule, fp => fp,
+                       (r, fp) => new
                        {
                            r.PassengerNumber,
                            r.Name,
-                           r.schedule
+                           r.Schedule
                        }
                        ).FirstOrDefault());
 
                     //Take the reservation which is equal to the valid reservation 
                     // We need this so we can remove it later in program.
-                    Reservation reservation = ReservationSystem.Reservations.Where(r => r.schedule.Equals(validreservation.schedule)).FirstOrDefault();
+                    Reservation reservation = ReservationSystem.Reservations.Where(r => r.Schedule.Equals(validreservation.Schedule)).FirstOrDefault();
 
-                    ReservationSystem.Reservations.Remove(reservation);
                     //take name from index of varians-list and add it to a new bottle 
                     SortingSystem.AllLuggages.Enqueue(new Luggage(reservation));
+
+                    //remove reservation
+                    ReservationSystem.Reservations.Remove(reservation);
 
                     //Console.BackgroundColor = ConsoleColor.Red;
                     Logging.WriteToLog($"{Thread.CurrentThread.Name} enqueue: {SimulationManager.Gates.Where(g => g.Destination != null).ToList()[tempindex].Destination}");
@@ -133,5 +137,29 @@ namespace ConsoleBaggageHandlingSystem
 
             }
         }
+
+        //Try something with animation
+        public class BoxViewModel
+        {
+            public string Brush { get; set; }
+        }
+
+        private ObservableCollection<BoxViewModel> _viewModelMyList;
+        public ObservableCollection<BoxViewModel> MyList
+        {
+            get
+            {
+                if (_viewModelMyList == null)
+                {
+                    _viewModelMyList = new ObservableCollection<BoxViewModel>();
+                }
+                return _viewModelMyList;
+            }
+        }
+
+
+
+
+
     }
 }

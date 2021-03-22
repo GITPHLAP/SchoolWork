@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaggageHandlingSystem", "Ba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleBaggageHandlingSystem", "..\ThreadSync\ThreadSync_BaggageHandlingSystem\BaggageHandlingSystem\ConsoleBaggageHandlingSystem.csproj", "{56B972C5-F5B8-4DF4-9CA9-EC274B53D28B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateFlightScheduleAndReservations", "..\..\BaggageHandlingSystem_CreateFlightScheduleAndReservations\CreateFlightScheduleAndReservations\CreateFlightScheduleAndReservations.csproj", "{20E12FEC-C9B7-4C68-9E55-BE4B14A68F51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreateFlightScheduleAndReservations", "BaggageHandlingSystem_CreateFlightScheduleAndReservations\CreateFlightScheduleAndReservations\CreateFlightScheduleAndReservations.csproj", "{20E12FEC-C9B7-4C68-9E55-BE4B14A68F51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

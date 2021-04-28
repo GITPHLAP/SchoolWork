@@ -38,9 +38,8 @@ bool isGripOpen = true;
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("Initializing... Please Wait");//Start of initialization, see note below regarding begin method.
-
-  //Update these lines with the calibration code outputted by the calibration program.
+  Serial.println("Initializing...");//Start of initialization
+  
   /***** Begin BASE_ROT Configuration *****/
   arm.setJointCenter(BASE_ROT, 90);
   arm.setJointMin(BASE_ROT, 0);
@@ -78,20 +77,9 @@ void setup() {
   /***** End GRIPPER Configuration *****/
   //There are two ways to start the arm:
   //1. Start to default position.
-  arm.begin(true);// Start to default vertical position.
-  //This method moves the arm to the values specified by setJointCenter
-  //and by default will make the arm be roughly straight up.
+  arm.begin(true);// Start to default center position
 
-  //2. Start to custom position.
-  //arm.begin(false);
-  //arm.setAllNow(base_rot_val, shoulder_val, elbow_val, wrist_val, wrist_rot_val, gripper_val);
-  //This method allows a custom start position to be set, but the setAllNow method MUST be run
-  //immediately after the begin method and before any other movement commands are issued.
-
-
-  //NOTE: The begin method takes approximately 8 seconds to start, due to the time required
-  //to initialize the power circuitry.
-  Serial.println("Initialization Complete");
+  Serial.println("Ready");
   pinMode(joy_1_switch_pin, INPUT_PULLUP);
   pinMode(joy_2_switch_pin, INPUT_PULLUP);
   pinMode(led, OUTPUT);

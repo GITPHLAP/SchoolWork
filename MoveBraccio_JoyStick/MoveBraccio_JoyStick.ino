@@ -1,3 +1,5 @@
+#include <Arduino_FreeRTOS.h>
+
 #include "BraccioV2.h"
 Braccio arm;
 
@@ -30,6 +32,13 @@ int servo_1_Y = 0; //variable to set the position for the servo from joystick 1 
 int servo_2_X = 0; //variable to set the position for the servo from joystick 2 X value
 int servo_2_Y = 0; //variable to set the position for the servo from joystick 2 Y value
 
+int servo_0_value = 0;
+int servo_1_value = 0;
+int servo_2_value = 0;
+int servo_3_value = 0;
+int servo_4_value = 0;
+int servo_5_value = 0;
+
 bool firstservosToControl = true;
 bool isGripOpen = true;
 
@@ -39,7 +48,7 @@ bool isGripOpen = true;
 void setup() {
   Serial.begin(9600);
   Serial.println("Initializing...");//Start of initialization
-  
+
   /***** Begin BASE_ROT Configuration *****/
   arm.setJointCenter(BASE_ROT, 90);
   arm.setJointMin(BASE_ROT, 0);
@@ -93,15 +102,15 @@ void loop() {
   val_1_X = analogRead(joy_1_X_pin); //reads X value from joystick 1
   val_1_Y = analogRead(joy_1_Y_pin); //reads Y value from joystick 1
   val_2_X = analogRead(joy_2_X_pin); //reads X value from joystick 2
-  val_2_Y = analogRead(joy_2_Y_pin); //reads Y value from joystick 2 
-  Serial.print("Joystick1 - X: ");
-  Serial.print(val_1_X);
-  Serial.print(" Y: ");
-  Serial.print(val_1_Y);
-  Serial.print("  Joystick2 - X: ");
-  Serial.print(val_2_X);
-  Serial.print(" Y: ");
-  Serial.println(val_2_Y);
+  val_2_Y = analogRead(joy_2_Y_pin); //reads Y value from joystick 2
+  //Serial.print("Joystick1 - X: ");
+  //Serial.print(val_1_X);
+  //Serial.print(" Y: ");
+  //Serial.print(val_1_Y);
+  //Serial.print("  Joystick2 - X: ");
+  //Serial.print(val_2_X);
+  //Serial.print(" Y: ");
+  //Serial.println(val_2_Y);
   changeServoToControl(joy1_buttonState); //method to change servos to control
 
   openAndCloseGrip(joy2_buttonState);
@@ -110,21 +119,30 @@ void loop() {
   //delay(10);
   setpositionforservo(val_1_Y, findServoNr(firstservosToControl, false));
   //delay(10);
-  setpositionforservo(val_2_X, 0); //Set position for base 
+  setpositionforservo(val_2_X, 0); //Set position for base
   //delay(10);
-  setpositionforservo(val_2_Y, 1); //Set position for shoulder 
+  setpositionforservo(val_2_Y, 1); //Set position for shoulder
   //Serial.println(joy2_buttonState);
 
   char c = Serial.read();
-  if (c != -1) { //if c is not empty 
+  if (c != -1) { //if c is not empty
     if (c == 'c') { //if c (input) is equal 'c'
       Serial.println("Center");
-      arm.setAllAbsolute(arm.getCenter(0), arm.getCenter(1),
-                         arm.getCenter(2), arm.getCenter(3),
-                         arm.getCenter(4), arm.getCenter(5));
+      servo_0_value = arm.getCenter(0);
+      servo_1_value = arm.getCenter(1);
+      servo_2_value = arm.getCenter(2);
+      servo_3_value = arm.getCenter(3);
+      servo_4_value = arm.getCenter(4);
+      servo_5_value = arm.getCenter(5);
+
+      arm.setAllAbsolute(servo_0_value, servo_1_value,
+                         servo_2_value, servo_3_value,
+                         servo_4_value, servo_5_value);
       arm.safeDelay(3000);
+
+
     }
-    else if (c == 'p') { // if c equal 'p' then pause 
+    else if (c == 'p') { // if c equal 'p' then pause
       bool stay = true;
       digitalWrite(pauseLed, HIGH);
       while (stay) {
@@ -134,6 +152,68 @@ void loop() {
           digitalWrite(pauseLed, LOW);
         }
       }
+    }
+    else if (c == 's') {
+      arm.setDelta(1, 1);
+      arm.setDelta(2, 1);
+      arm.setDelta(3, 1);
+      arm.setDelta(4, 1);
+      arm.setDelta(5, 1);
+      arm.setAllAbsolute(66, 149, 120, 170, 90, 40);
+      arm.safeDelay(3000);
+      arm.setOneAbsolute(5, 88);
+      arm.safeDelay(3000);
+      Serial.println("Ready");
+
+    }
+    else if (c == 'd') {
+      arm.setDelta(1, 3);
+      arm.setDelta(2, 3);
+      arm.setDelta(3, 3);
+      arm.setDelta(4, 3);
+      arm.setDelta(5, 1);
+      arm.setAllAbsolute(66, 58, 90, 70, 90, 40);
+      //Below is an example of running some other code while waiting for the arm to move.
+      //Exit the while loop after 3000ms has passed
+      unsigned long endTime = 0;
+      endTime = millis() + 2000;
+      while (millis() < endTime) {
+        //Run some code
+        Serial.print("Working while waiting for movement... ");
+        Serial.print("millis: ");
+        Serial.print(millis());
+        Serial.print(" ");
+        Serial.println(endTime);
+
+        //Update the arm
+        arm.update();
+        arm.setOneAbsolute(5, 40);
+        //Delay a short time to prevent the updates from happening too close together.
+        delay(1);
+      }
+
+    }
+    else if (c == 'f') {
+      arm.setDelta(1, 6);
+      arm.setDelta(2, 6);
+      arm.setDelta(3, 6);
+      arm.setDelta(4, 6);
+      arm.setDelta(5, 1);
+      arm.setAllAbsolute(66, 58, 90, 70, 90, 40);
+      unsigned long endTime = millis() + 2000;
+      while (millis() < endTime) {
+        arm.update();
+        arm.setOneAbsolute(5, 20);
+        delay(9);
+      }
+    }
+    else if (c == 'g') {
+      arm.setAllAbsolute(66, 149, 120, 170, 90, 40);
+      delay(10);
+      arm.update();
+      //arm.safeDelay(300, 20);
+      //arm.setOneAbsolute(5, 85);
+      //arm.safeDelay(300);
     }
   }
 
@@ -201,6 +281,38 @@ void openAndCloseGrip(int button)
 
 }
 void moveServo(int joint, int value) {
+  int _servovalue = 0;
+  switch (joint) {
+    case 0:
+      servo_0_value += value;
+      _servovalue = servo_0_value;
+      break;
+    case 1:
+      servo_1_value += value;
+      _servovalue = servo_1_value;
+      break;
+    case 2:
+      servo_2_value += value;
+      _servovalue = servo_2_value;
+      break;
+    case 3:
+      servo_3_value += value;
+      _servovalue = servo_3_value;
+      break;
+    case 4:
+      servo_4_value += value;
+      _servovalue = servo_4_value;
+      break;
+    case 5:
+      servo_5_value += value;
+      _servovalue = servo_5_value;
+      break;
+  }
+
+  Serial.print("Servo: ");
+  Serial.print(joint);
+  Serial.print(" Value: ");
+  Serial.println(_servovalue);
   arm.setOneRelative(joint, value); //Validate the value and set value to target position
   arm.update(); //move servors to target position
   //arm.safeDelay(100);

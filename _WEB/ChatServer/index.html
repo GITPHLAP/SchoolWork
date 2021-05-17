@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="login-container" class="center">
+        <h1 style="text-align: center;">Login</h1>
+        <div id="login-form">
+            <label>Skriv dit navn.</label><br>
+            <input type="text" id="username" required maxlength="50"><br> <!-- maxlength help me avoid to many chars -->
+            <button id="submit_btn">Chat</button>
+        </div>
+    </div>
+    <div id="chat-container" class="center">
+        <div id="chat-room">
+            <header style="text-align: center;">
+                <h1 id="chat-name"></h1>
+            </header>
+            <div id="relative-output-container">
+                <div id="text-output-container" class="center">
+                </div>
+            </div>
+            <div id="inputSendContainer">
+                <input type="text" id="chat-input">
+                <button id="sendTxtBtn">Send</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function bmiCalculator() {
+             var _height_var  = document.getElementById("height").value;
+            var _weight_var = document.getElementById("weight").value;
+            var bmi = (_weight_var/(_height_var*_height_var));
+            document.getElementById("result").innerHTML = bmi;
+            
+            switch (true) {
+                case (18.5>bmi && bmi>16):
+                    document.getElementById("divresult").style.backgroundColor = "skyblue";
+
+                    break;
+                case (24>bmi && bmi>18.5):
+                    document.getElementById("divresult").style.backgroundColor = "green";
+
+                    break;
+                case (30>bmi && bmi>24):
+                    document.getElementById("divresult").style.backgroundColor = "greenyellow";
+
+                    break;
+                case (35>bmi && bmi>30):
+                    document.getElementById("divresult").style.backgroundColor = "orange";
+
+                    break;
+                case (40>bmi && bmi>35):
+                    document.getElementById("divresult").style.backgroundColor = "orangered";
+
+                    break;
+                case (40<bmi):
+                    document.getElementById("divresult").style.backgroundColor = "red";
+                    break;
+                default:
+                    alert("Det virkede ikke")
+                    break;
+            }
+
+            document.getElementById("divresult").style.display = "block";
+            // alert("TEST" + bmi);
+        }
+    </script>
+    <style>
+        .alert {
+          padding: 20px;
+          background-color: #f44336;
+          color: white;
+        }
+        </style>
+</head>
+<body>
+        Vægt: <input type="text" id="weight">
+        Højde: <input type="text" id="height">
+        <input type="button" onclick="bmiCalculator()" value="Udregn">
+    <div id="divresult" class="alert" style="display: none;">
+        <strong id="result"></strong>
+      </div>
+</body>
+</html>

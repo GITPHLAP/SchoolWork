@@ -1,0 +1,91 @@
+body{
+    background-color: lightgrey;
+}
+.center{
+        /* Center div vertical and horizontal */
+        top: 50%;
+        left: 50%;
+        position:absolute;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+}
+
+/* Login style */
+#login-container{
+    width: 30%;
+    background-color: rgba(128, 128, 128, 0.342);
+    border: 2px solid orangered;
+    padding: 10px;
+}
+#login-form{
+    margin: auto;
+    width:fit-content;
+    padding: 10px;
+}
+#username{
+    font-size: 27px;
+
+}
+#submit_btn {
+    margin-top: 5px;
+    font-size: 20px;
+    background-color: rgba(60, 196, 60, 0.63);
+}
+
+/* Chat style */
+#chat-container{
+    display: none;
+    background-color: rgba(128, 128, 128, 0.342);
+    border: 2px solid black;
+    width: 50%;
+    padding: 10px;
+    height: 90%;
+
+}
+#chat-room {
+    height: 95%;
+}
+#relative-output-container {
+    position: relative;
+}
+#text-output-container{
+    background-color: black;
+    border: 1px solid orangered;
+    padding: 10px;
+    height: 95%;
+    width: 90%;
+    text-align: justify;
+    overflow: auto;
+}
+#inputSendContainer {
+    width: 90%;
+    left: 50%;
+    position:absolute;
+    transform: translate(-50%);
+}
+#chat-input {
+    width: 80%;
+    font-size: 20px;
+}
+#sendTxtBtn {
+    font-size: 20px;
+    background-color: rgba(60, 196, 60, 0.63);
+}
+.messagewrapper{
+    position: inline-block;
+}
+.messagetext {
+    color: white;
+    margin-left: 10px;
+    margin-right: 10px;
+    overflow-wrap: break-word;
+
+}
+
+.messageUsername {
+    color: yellow;
+}
+
+.myownmessage {
+    text-align: end;
+}

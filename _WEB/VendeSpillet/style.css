@@ -1,0 +1,13 @@
+.card {
+    height:10vh;
+    background-color: lightgray;
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+}
+.board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+}
+

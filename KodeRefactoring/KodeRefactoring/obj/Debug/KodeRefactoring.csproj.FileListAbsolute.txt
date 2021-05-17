@@ -1,0 +1,7 @@
+C:\Users\kjedt\source\repos_git\_SchoolWork\KodeRefactoring\KodeRefactoring\bin\Debug\KodeRefactoring.exe.config
+C:\Users\kjedt\source\repos_git\_SchoolWork\KodeRefactoring\KodeRefactoring\bin\Debug\KodeRefactoring.exe
+C:\Users\kjedt\source\repos_git\_SchoolWork\KodeRefactoring\KodeRefactoring\bin\Debug\KodeRefactoring.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\KodeRefactoring\KodeRefactoring\obj\Debug\KodeRefactoring.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\KodeRefactoring\KodeRefactoring\obj\Debug\KodeRefactoring.exe
+C:\Users\kjedt\source\repos_git\_SchoolWork\KodeRefactoring\KodeRefactoring\obj\Debug\KodeRefactoring.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\KodeRefactoring\KodeRefactoring\obj\Debug\KodeRefactoring.csprojAssemblyReference.cache

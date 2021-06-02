@@ -1,0 +1,8 @@
+02-06-2021 10:28:54: Window service started
+02-06-2021 10:29:24: Timer ticked and something has happend
+02-06-2021 10:29:54: Timer ticked and something has happend
+02-06-2021 10:30:24: Timer ticked and something has happend
+02-06-2021 10:30:54: Timer ticked and something has happend
+02-06-2021 10:31:24: Timer ticked and something has happend
+02-06-2021 10:31:54: Timer ticked and something has happend
+02-06-2021 10:32:24: My window service stopped

@@ -1,0 +1,13 @@
+﻿Installing assembly 'C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.InstallLog
+   assemblypath = C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.exe
+Installing service PhilipWindowsService...
+Service PhilipWindowsService has been successfully installed.
+Creating EventLog source PhilipWindowsService in log Application...
+Committing assembly 'C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.InstallLog
+   assemblypath = C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.exe

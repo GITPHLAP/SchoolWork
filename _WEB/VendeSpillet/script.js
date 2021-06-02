@@ -34,7 +34,7 @@ function startNewGame() {
         cards.push(new card(index, color));
     }
 
-    // shuffleCards();
+    shuffleCards();
     cards.forEach(function (card) {
         card.addCardToBoard();
 

@@ -1,0 +1,8 @@
+C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.exe.config
+C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.exe
+C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\obj\Debug\TestWindowsService.ProjectInstaller.resources
+C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\obj\Debug\TestWindowsService.csproj.GenerateResource.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\obj\Debug\TestWindowsService.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\obj\Debug\TestWindowsService.exe
+C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\obj\Debug\TestWindowsService.pdb

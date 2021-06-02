@@ -126,7 +126,9 @@ namespace KodeRefactoring
                             #region Display hostname ipaddress and aliases option this computer
 
                             //string hostName = "LAPTOP-DELL-PKL";
-                            string hostName = "ZBC-RG01203MKC";
+                            //string hostName = "ZBC-RG01203MKC";
+
+                            string hostName = Environment.MachineName.ToString();
 
 
 

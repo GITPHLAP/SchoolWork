@@ -12,3 +12,10 @@ The file is located at C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsSe
 The Commit phase completed successfully.
 
 The transacted install has completed.
+
+
+The uninstall is beginning.
+See the contents of the log file for the C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.exe assembly's progress.
+The file is located at C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.InstallLog.
+
+The uninstall has completed.

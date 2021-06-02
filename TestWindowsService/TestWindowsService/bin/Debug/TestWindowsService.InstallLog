@@ -11,3 +11,11 @@ Affected parameters are:
    logtoconsole = 
    logfile = C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.InstallLog
    assemblypath = C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.exe
+Uninstalling assembly 'C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.InstallLog
+   assemblypath = C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\TestWindowsService.exe
+Removing EventLog source PhilipWindowsService.
+Service PhilipWindowsService is being removed from the system...
+Service PhilipWindowsService was successfully removed from the system.

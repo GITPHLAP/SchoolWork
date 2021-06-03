@@ -31,6 +31,11 @@ namespace TestWindowsService
         private void timer_Tick(object sender, ElapsedEventArgs e)
         {
             Library.WriteErrorLog("Timer ticked and something has happend");
+
+            for (int i = 0; i <= 5; i++)//5 because there are 6 options from 0 to 5
+            {
+                KodeRefactoring.GUI.MakeOutputToStrArray(i);
+            }
         }
 
         protected override void OnStop()

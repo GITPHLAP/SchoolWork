@@ -6,3 +6,8 @@ C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsServic
 C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\obj\Debug\TestWindowsService.csproj.CoreCompileInputs.cache
 C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\obj\Debug\TestWindowsService.exe
 C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\obj\Debug\TestWindowsService.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\KodeRefactoring.exe
+C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\KodeRefactoring.pdb
+C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\bin\Debug\KodeRefactoring.exe.config
+C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\obj\Debug\TestWindowsService.csproj.AssemblyReference.cache
+C:\Users\kjedt\source\repos_git\_SchoolWork\TestWindowsService\TestWindowsService\obj\Debug\TestWindowsService.csproj.CopyComplete

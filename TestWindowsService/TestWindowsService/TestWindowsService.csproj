@@ -70,5 +70,11 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\KodeRefactoring\KodeRefactoring\KodeRefactoring.csproj">
+      <Project>{72196ffa-adc8-41fa-abf3-dac02a573df1}</Project>
+      <Name>KodeRefactoring</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

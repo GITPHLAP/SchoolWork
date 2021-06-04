@@ -18,6 +18,7 @@ namespace KodeRefactoring
             //return all IP address from hostname
             return Dns.GetHostAddresses(hostname);
         }
+        
         public PingReply LocalPing()
         {
             // Ping's the local machine.
@@ -31,10 +32,11 @@ namespace KodeRefactoring
 
         public string GetHostnameFromIp(string Ip)
         {
-            string hostname = "";
+            string hostname; //create hostname so I can use it in try catch
+
             try
             {
-                IPHostEntry ipHostEntry = Dns.GetHostByAddress(Ip);
+                IPHostEntry ipHostEntry = Dns.GetHostByAddress(Ip); //get DNS from ipaddress
                 hostname = ipHostEntry.HostName;
             }
             catch (FormatException)
@@ -109,7 +111,8 @@ namespace KodeRefactoring
                     if (pingReply.Status == IPStatus.Success)
                     {
                         traceResults.AppendLine();
-                        traceResults.AppendLine("Trace complete."); break;
+                        traceResults.AppendLine("Trace complete.");
+                        break;
                     }
 
                     pingOptions.Ttl++;
@@ -119,11 +122,12 @@ namespace KodeRefactoring
             return traceResults.ToString();
         }
 
-        public NetworkInterface[] GetNetworkAdapters()
+        public NetworkInterface[] GetThisComputersAdapters()
         {
             //return all network adapters from this computer
             return NetworkInterface.GetAllNetworkInterfaces();
         }
+        
         public IPAddressCollection GetDHCPServerAddresses(NetworkInterface adapter)
         {
             //Get adapter properties
@@ -140,20 +144,16 @@ namespace KodeRefactoring
             return addresses;
         }
 
-        public void GetThisComputersHostInfo()
-        {
-            NetworkInterface.GetAllNetworkInterfaces();
-        }
         public IPHostEntry GetHostInfoFromHostname(string hostName, out bool exception)
         {
             IPHostEntry hostEntry = null;
             try
             {
-                hostEntry = Dns.GetHostByName(hostName);
+                hostEntry = Dns.GetHostByName(hostName); //get DNS information from hostname
                 exception = false;
 
             }
-            catch (SocketException)
+            catch (SocketException) //error handling 
             {
                 Console.WriteLine("Fangede fejlen");
                 exception = true;

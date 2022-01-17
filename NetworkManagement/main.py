@@ -15,13 +15,27 @@ cisco_device = {
 # create connection to cisco device
 net_connect = ConnectHandler(**cisco_device)
 
-
 #send command
 output = net_connect.send_command("show ip int br")
 
-output2 = net_connect.send_config_set("int g0/1")
-# output2 += net_connect.send_config_set("ip address 1.1.1.1 255.0.0.0")
-output2 += net_connect.save_config()
-
 print(output)
-print(output2)
+
+
+
+# New interface details 
+gigabit = {"name": "g0/1",
+           "description": "gigabit interface description",
+           "ip": "172.16.8.2",
+           "netmask": "255.255.0.0"}
+
+# CLI configuration
+interface_config = [
+    "interface {}".format(gigabit["name"]),
+    "description {}".format(gigabit["description"]),
+    "ip address {} {}".format(gigabit["ip"], gigabit["netmask"]),
+    "no shut"
+]
+
+confOutput = net_connect.send_config_set(interface_config)
+
+print(confOutput)

@@ -1,0 +1,61 @@
+
+R1>terminal width 511
+R1>
+R1>terminal length 0
+R1>
+R1>
+R1>
+R1>
+R1>
+R1>show ip int br
+Interface                  IP-Address      OK? Method Status                Protocol
+Embedded-Service-Engine0/0 unassigned      YES NVRAM  administratively down down    
+GigabitEthernet0/0         172.16.4.2      YES NVRAM  up                    up      
+GigabitEthernet0/1         unassigned      YES NVRAM  administratively down down    
+Serial0/0/0                unassigned      YES NVRAM  administratively down down    
+Serial0/0/1                unassigned      YES NVRAM  administratively down down    
+Loopback0                  172.16.0.4      YES NVRAM  up                    up      
+Loopback1                  unassigned      YES unset  administratively down down    
+R1>
+R1>
+R1>
+R1>enable
+Password: 
+Password: 
+R1#
+R1#
+R1#
+R1#
+R1#
+R1#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#
+R1(config)#
+R1(config)#
+R1(config)#interface GigabitEthernet0/1
+R1(config-if)#
+R1(config-if)#description gigabit interface description
+R1(config-if)#
+R1(config-if)#ip address 192.168.8.1 255.255.255.0
+R1(config-if)#
+R1(config-if)#no shut
+R1(config-if)#
+R1(config-if)#
+R1(config-if)#
+R1(config-if)#end
+R1#
+R1#
+R1#
+R1#
+R1#
+R1#show ip int br
+Interface                  IP-Address      OK? Method Status                Protocol
+Embedded-Service-Engine0/0 unassigned      YES NVRAM  administratively down down    
+GigabitEthernet0/0         172.16.4.2      YES NVRAM  up                    up      
+GigabitEthernet0/1         192.168.8.1     YES manual reset                 down    
+Serial0/0/0                unassigned      YES NVRAM  administratively down down    
+Serial0/0/1                unassigned      YES NVRAM  administratively down down    
+Loopback0                  172.16.0.4      YES NVRAM  up                    up      
+Loopback1                  unassigned      YES unset  administratively down down    
+R1#
+R1#

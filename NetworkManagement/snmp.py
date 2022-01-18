@@ -8,7 +8,7 @@ from pysnmp import hlapi
 
 
 def get(target, oids, credentials, port=161, engine=hlapi.SnmpEngine(), context=hlapi.ContextData()):
-    handler = hlapi.getCmd(
+    handler = hlapi.cmd(
         engine,
         credentials,
         hlapi.UdpTransportTarget((target, port)),
@@ -54,4 +54,4 @@ def cast(value):
     return value
 
 
-print(get('172.16.4.2', ['1.3.6.1.2.1.1.5.0'], hlapi.CommunityData('ciscolab')))
+# print(get('172.16.4.2', ['1.3.6.1.2.1.1.5.0'], hlapi.CommunityData('ciscolab')))

@@ -1,0 +1,68 @@
+from netmiko import (
+    ConnectHandler,
+    NetmikoTimeoutException,
+    NetmikoAuthenticationException,
+)
+import logging
+logging.basicConfig(filename='test.log', level=logging.DEBUG)
+logger = logging.getLogger("netmiko")
+
+cisco_device = {
+    "device_type": "cisco_ios",
+    "host": "172.16.4.2",
+    "username": "admin",
+    "password": "Kode1234",
+    "secret": "Kode1234",
+    "port": 22,
+}
+
+# create connection to cisco device
+net_connect = ConnectHandler(**cisco_device)
+
+# #send command
+# output = net_connect.send_command("show ip int br")
+
+# print(output)
+
+def sendCommand(command, enable:bool = True):
+    return net_connect.send_command(command)
+
+# # New interface details 
+# gigabit = {"name": "GigabitEthernet0/1",
+#            "description": "gigabit interface description",
+#            "ip": "192.168.8.1",
+#            "netmask": "255.255.255.0"}
+
+# # CLI configuration
+# interface_config = [
+#     "interface {}".format(gigabit["name"]),
+#     "description {}".format(gigabit["description"]),
+#     "ip address {} {}".format(gigabit["ip"], gigabit["netmask"]),
+#     "no shut"
+# ]
+# net_connect.enable()
+# confOutput = net_connect.send_config_set(interface_config)
+
+# print(confOutput)
+
+def sendConfigSet(config, useEnable:bool = True, useConfig:bool = True):
+    """config should look like this
+    interface_config = [
+    "interface {}".format(gigabit["name"]),
+    "description {}".format(gigabit["description"]),
+    "ip address {} {}".format(gigabit["ip"], gigabit["netmask"]),
+    "no shut"]"""
+    if(useEnable):
+        net_connect.enable()
+    if(useConfig):
+        net_connect.config_mode()
+    confOutput = net_connect.send_config_set(config)
+    return confOutput
+
+# #send command
+# output3 = net_connect.send_command("show ip int br")
+# config = [
+#     "interface {}".format('FastEthernet0/13'),
+#     "no shut",
+# ]
+# print(sendConfigSet(config))

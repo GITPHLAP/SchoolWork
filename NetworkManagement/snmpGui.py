@@ -1,5 +1,18 @@
 from functools import partial
 import tkinter as tk
+from logging import root
+import tkinter as Tkinter
+from tkinter import messagebox
+import time
+import threading
+import random
+import queue
+from snmpTrapReceiver import runIt, MIBTask
+from functools import partial
+from pysnmp.entity import engine
+from cisco_connect import sendCommand, sendConfigSet
+from snmp import get
+from pysnmp import hlapi
 
 
 def portBtnCallBack(self):
@@ -49,13 +62,13 @@ portButtons = []
 
 window.geometry('1000x1000')
 
-portNr = 20
-PortLayoutBuilder(portNr)
+interfaces = get('172.16.4.2', ['1.3.6.1.2.1.1.5.0'], hlapi.CommunityData('ciscolab'))
+PortLayoutBuilder(interfaces)
 
 #add textbox to layout
 
 tb = tk.Text(window)
 tb.insert(tk.INSERT, "Hello")
-tb.grid(column=0, columnspan=int(portNr/2), row=5)
+tb.grid(column=0, columnspan=int(len(interfaces)/2), row=5)
 
 window.mainloop()

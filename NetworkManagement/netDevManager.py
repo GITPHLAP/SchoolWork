@@ -1,10 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor
-from ast import FormattedValue
-import asyncio
-from asyncio.windows_events import NULL
 # from logging import root
 import tkinter as Tkinter
-from tkinter import END, INSERT, messagebox
+from tkinter import END, INSERT
 import threading
 import queue
 from snmpTrapReceiver import runIt, MIBTask, MsgTask
@@ -22,21 +19,18 @@ class GuiPart:
         self.executor = executor
 
         # master.geometry('1000x800')
+        # TODO: get interface num from mib
         data = getBulk('172.16.4.2', ['1.3.6.1.2.1.2.2.1.2'], hlapi.CommunityData('ciscolab'), 25) #get first 25 interface descriptions
         interfaces = FormattedMibData(data)
         portNr = len(interfaces)
         self.PortLayoutBuilder(interfaces)
 
         #add textbox to layout
-        tb = ScollTextBox.ScrolledText(master)
-        tb.insert(INSERT, "Hello")
-        tb.grid(column=0, columnspan=int(portNr/2), row=5)
+        self.tb = ScollTextBox.ScrolledText(master)
+        self.tb.grid(column=0, columnspan=int(portNr/2), row=5)
         self.queue = queue
-        # Set up the GUI
-        console = Tkinter.Button(master, text='Done', command=endCommand)
-        console.grid(column=0, row=9)
-        # Add more GUI stuff here depending on your specific needs
         
+        #end command when clode window
         root.protocol("WM_DELETE_WINDOW", endCommand)
     
     # Get FastEthernet number
@@ -44,10 +38,10 @@ class GuiPart:
         for btn in self.portButtons:
             if(str(btn['text']) == str(interfaceName)):
                 return self.portButtons.index(btn)        
-        return NULL
+        return
 
     def translateIntUpValue(self, value):
-        print(f'translateIntUpValue:  {type(value)}:  {value}')
+        # print(f'translateIntUpValue:  {type(value)}:  {value}')
         if (value == "up"):
             return 1
         elif (value == "administratively down"):
@@ -56,14 +50,14 @@ class GuiPart:
             return 0
     
     def translateInterfaceColor(self, status):
-        print(f'translateInterfaceColor:  {type(status)}: {status}')
+        # print(f'translateInterfaceColor:  {type(status)}: {status}')
         if(status == 1):
             return "green"
         else:
             return "red"
     
     def getIntStatus(self, interface):
-        print(f'getIntStatus:  {type(interface)}:  {interface}')
+        # print(f'getIntStatus:  {type(interface)}:  {interface}')
         # split interface to get last nr
         arr = str(interface).split(".")
         intNr = arr[len(arr)-1]
@@ -87,11 +81,9 @@ class GuiPart:
                 msg = self.queue.get(0)
 
                 if(type(msg) is MIBTask):
-                    print("test")
                     if(str(msg.action) == "EthernetStatus"):
                         # change color on button
                         name = str(msg.name)
-                        print(f'Name:    {name}')
                         intIndex = int(self.getInterfaceIndex(name))
 
                         self.portButtons[intIndex]['bg'] = str(self.translateInterfaceColor(msg.value))
@@ -114,12 +106,10 @@ class GuiPart:
                 "interface {}".format(btn['text']),
                 "no shut"
             ]
-        # task1 = threading.Thread(target=sendConfigSet, args=(config)).start()
-        # task1 = asyncio.create_task(sendConfigSet(config))
         self.executor.submit(self.PrintSNMPCommand, (config))
     def PrintSNMPCommand(self, config):
         #TODO: select commands
-        result = self.sendConfigSet(config)
+        result = sendConfigSet(config)
         self.AddPrintTask(result)
 
     def AddPrintTask(self, msg):
@@ -166,17 +156,7 @@ class GuiPart:
 
 
 class ThreadedClient:
-    """
-    Launch the main part of the GUI and the worker thread. periodicCall and
-    endApplication could reside in the GUI part, but putting them here
-    means that you have all the thread controls in a single place.
-    """
     def __init__(self, master):
-        """
-        Start the GUI and the asynchronous threads. We are in the main
-        (original) thread of the application, which will later be used by
-        the GUI as well. We spawn a new thread for the worker (I/O).
-        """
 
         # Create thread pool to button tasks 
         self.executor = ThreadPoolExecutor(2)
@@ -192,7 +172,6 @@ class ThreadedClient:
         self.gui = GuiPart(master, self.queue, self.endApplication, self.executor)
 
         # Set up the thread to do asynchronous I/O
-        # More threads can also be created and used, if necessary
         self.running = 1
         self.thread1 = threading.Thread(target=self.workerThread1)
         self.thread1.start(  )
@@ -215,15 +194,7 @@ class ThreadedClient:
         self.master.after(200, self.periodicCall)
 
     def workerThread1(self):
-        """
-        This is where we handle the asynchronous I/O. For example, it may be
-        a 'select(  )'. One important thing to remember is that the thread has
-        to yield control pretty regularly, by select or otherwise.
-        """
         while self.running:
-            # To simulate asynchronous I/O, we create a random number at
-            # random intervals. Replace the following two lines with the real
-            # thing.
             self.gui.AddPrintTask(self.running)
             runIt(self.queue, self.snmpEngine)
 
@@ -237,18 +208,3 @@ root = Tkinter.Tk(  )
 
 client = ThreadedClient(root)
 root.mainloop()
-
-
-
-
-
-# if(int(msg.value) == 1):
-#                         value = "shutdown"
-#                     else:
-#                         value = "no shutdown"
-
-#                     # send action to cisco device
-#                     config = [
-#                         "interface {}".format(msg.name)
-#                     ]
-#                     sendConfigSet()

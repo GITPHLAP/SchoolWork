@@ -9,13 +9,12 @@ import inspect
 
 # this function prints all received message from trap
 def cb_fun(snmp_engine, state_reference, context_engine_id, context_name, var_binds, cb_ctx: queue):
-    print("Received new Trap message")
+    cb_ctx.put(MsgTask("Received new Trap message"))
     # print(cb_ctx)
     # cb_ctx.put("test")
     # print(type())
     traps = []
     for v in var_binds:
-        # print(v)
         name = v[0]._value
         value = v[1]._value
         tb = TrapValue(TrapVarsToReadable(name), TrapVarsToReadable(value))
@@ -32,15 +31,11 @@ def cb_fun(snmp_engine, state_reference, context_engine_id, context_name, var_bi
             findIntSpecificNr(traps)
             if(str(trap.value) =="1.3.6.1.6.3.1.1.5.3."): #"1.3.6.1.6.3.1.1.5.3" for traps where interface is set to down 
                 task = MIBTask(findElementValueInList(traps, '1.3.6.1.2.1.2.2.1.2.'), findElementValueInList(traps, '1.3.6.1.4.1.9.2.2.1.1.20.'), 'EthernetStatus')
-                print("PEEEEEEEEK")
-                # print(var_binds)
-                # var_binds['name']
                 cb_ctx.put(task)
             elif(str(trap.value) == "1.3.6.1.6.3.1.1.5.4."): #"1.3.6.1.6.3.1.1.5.4" for traps where interface is set to up
                 task = MIBTask(findElementValueInList(traps, '1.3.6.1.2.1.2.2.1.2.'), findElementValueInList(traps, '1.3.6.1.4.1.9.2.2.1.1.20.'), 'EthernetStatus')
-                print("UPPP")
                 cb_ctx.put(task)
-        print('%s = %s' % (trap.name, trap.value))  # "'%s = %s' %" text formatting
+        cb_ctx.put(MsgTask('%s = %s' % (trap.name, trap.value)))  # "'%s = %s' %" text formatting
 
 def findIntSpecificNr(traps):
     for trap in traps:
@@ -66,8 +61,8 @@ def runIt(cb_Ctx, snmpEngine: engine.SnmpEngine):
     # Configure community here
     config.addV1System(snmpEngine, ' ', 'ciscolab')  # (snmpEngine, '?', 'community string')
 
-    print("Agent is listening SNMP Trap on " + TrapAgentAddress + " , Port : " + str(Port))
-    print('--------------------------------------------------------------------------')
+    cb_Ctx.put(MsgTask("Agent is listening SNMP Trap on " + TrapAgentAddress + " , Port : " + str(Port)))
+    cb_Ctx.put(MsgTask('--------------------------------------------------------------------------'))
 
     ntfrcv.NotificationReceiver(snmpEngine, cb_fun, cbCtx=cb_Ctx)
     # makes a simulate never-ending job for input and output

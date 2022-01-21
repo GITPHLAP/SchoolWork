@@ -1,11 +1,7 @@
-from netmiko import (
-    ConnectHandler,
-    NetmikoTimeoutException,
-    NetmikoAuthenticationException,
-)
-import logging
-logging.basicConfig(filename='test.log', level=logging.DEBUG)
-logger = logging.getLogger("netmiko")
+from netmiko import ConnectHandler
+# import logging
+# logging.basicConfig(filename='netmiko.log', level=logging.DEBUG)
+# logger = logging.getLogger("netmiko")
 
 cisco_device = {
     "device_type": "cisco_ios",
@@ -18,11 +14,6 @@ cisco_device = {
 
 # create connection to cisco device
 net_connect = ConnectHandler(**cisco_device)
-
-# #send command
-# output = net_connect.send_command("show ip int br")
-
-# print(output)
 
 def sendCommand(command, enable:bool = True):
     return net_connect.send_command(command)
@@ -40,18 +31,15 @@ def sendCommand(command, enable:bool = True):
 #     "ip address {} {}".format(gigabit["ip"], gigabit["netmask"]),
 #     "no shut"
 # ]
-# net_connect.enable()
-# confOutput = net_connect.send_config_set(interface_config)
-
-# print(confOutput)
 
 def sendConfigSet(config, useEnable:bool = True, useConfig:bool = True):
     """config should look like this
     interface_config = [
-    "interface {}".format(gigabit["name"]),
-    "description {}".format(gigabit["description"]),
-    "ip address {} {}".format(gigabit["ip"], gigabit["netmask"]),
-    "no shut"]"""
+        "interface {}",
+        "description {}",
+        "ip address {} {}",
+        "no shut"
+    ]"""
     if(useEnable):
         net_connect.enable()
     if(useConfig):

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebAPIWithSwagger</name>
+    </assembly>
+    <members>
+        <member name="M:WebAPIWithSwagger.Controllers.WeatherForecastController.Get">
+            <summary>
+            Test Again
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPIWithSwagger.Controllers.WeatherForecastController.Get(System.Int32)">
+            <summary>
+            TestTest
+            </summary>
+            <remarks>
+            This is a test 
+                Hello Test!
+            </remarks>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

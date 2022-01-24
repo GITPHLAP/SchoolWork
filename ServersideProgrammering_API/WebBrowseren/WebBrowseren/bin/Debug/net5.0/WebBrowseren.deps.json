@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "WebBrowseren/1.0.0": {
+        "runtime": {
+          "WebBrowseren.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WebBrowseren/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

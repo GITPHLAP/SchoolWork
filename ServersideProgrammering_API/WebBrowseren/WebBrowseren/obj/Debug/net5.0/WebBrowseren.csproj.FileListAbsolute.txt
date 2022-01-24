@@ -1,0 +1,16 @@
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\obj\Debug\net5.0\WebBrowseren.csproj.AssemblyReference.cache
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\obj\Debug\net5.0\WebBrowseren.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\obj\Debug\net5.0\WebBrowseren.AssemblyInfoInputs.cache
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\obj\Debug\net5.0\WebBrowseren.AssemblyInfo.cs
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\obj\Debug\net5.0\WebBrowseren.csproj.CoreCompileInputs.cache
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\bin\Debug\net5.0\WebBrowseren.exe
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\bin\Debug\net5.0\WebBrowseren.deps.json
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\bin\Debug\net5.0\WebBrowseren.runtimeconfig.json
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\bin\Debug\net5.0\WebBrowseren.runtimeconfig.dev.json
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\bin\Debug\net5.0\WebBrowseren.dll
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\bin\Debug\net5.0\ref\WebBrowseren.dll
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\bin\Debug\net5.0\WebBrowseren.pdb
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\obj\Debug\net5.0\WebBrowseren.dll
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\obj\Debug\net5.0\ref\WebBrowseren.dll
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\obj\Debug\net5.0\WebBrowseren.pdb
+C:\Users\kjedt\source\SchoolWork\ServersideProgrammering_API\WebBrowseren\WebBrowseren\obj\Debug\net5.0\WebBrowseren.genruntimeconfig.cache

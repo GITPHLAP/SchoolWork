@@ -16,7 +16,9 @@ namespace MilkAndCookies.Controllers
         [HttpGet]
         public string Get(string favMilkshake)
         {
-
+            //Set a new cookie with input
+            Response.Cookies.Append("favoritMilkshake", favMilkshake);
+            return favMilkshake;
         }
     }
 }

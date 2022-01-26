@@ -12,7 +12,7 @@ namespace MilkAndCookies.Controllers
     public class CookieController : ControllerBase
     {
 
-
+        //Get: Cookie?favMilkshake=[input]
         [HttpGet]
         public string Get(string favMilkshake)
         {
@@ -20,5 +20,22 @@ namespace MilkAndCookies.Controllers
             Response.Cookies.Append("favoritMilkshake", favMilkshake);
             return favMilkshake;
         }
+
+        // GET: Cookie/MilkshakeFromCookie
+        [Route("[action]")]
+        [HttpGet]
+        public string GetMilkshakeFromCookie()
+        {
+            //Reguest cookie from client
+            string milkshake = Request.Cookies["favoritMilkshake"];
+
+            if (milkshake is null)
+            {
+                return "unknown";
+            }
+
+            return milkshake;
+        }
+
     }
 }

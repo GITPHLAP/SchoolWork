@@ -16,8 +16,13 @@ namespace MilkAndCookies.Controllers
         [HttpGet]
         public string Get(string favMilkshake)
         {
+            //Create cookie expires after 5 minutes option 
+            CookieOptions co = new CookieOptions();
+            co.Expires = DateTimeOffset.Now.AddMinutes(5); // using utc so its dosent care if program is travel in timezones
+
+
             //Set a new cookie with input
-            Response.Cookies.Append("favoritMilkshake", favMilkshake);
+            Response.Cookies.Append("favoritMilkshake", favMilkshake, co);
             return favMilkshake;
         }
 
@@ -28,7 +33,7 @@ namespace MilkAndCookies.Controllers
         {
             //Reguest cookie from client
             string milkshake = Request.Cookies["favoritMilkshake"];
-
+            
             if (milkshake is null)
             {
                 return "unknown";

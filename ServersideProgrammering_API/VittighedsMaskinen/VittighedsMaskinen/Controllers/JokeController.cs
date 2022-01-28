@@ -12,44 +12,33 @@ namespace VittighedsMaskinen.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     [Produces("application/json")]
     public class JokeController : ControllerBase
     {
 
-        private readonly IJwtAuth jwtAuth;
-
-        public JokeController(IJwtAuth jwtAuth)
-        {
-            this.jwtAuth = jwtAuth;
-        }
-
-        [AllowAnonymous]
-        [HttpPost]
-        public IActionResult Authenticate([FromBody] UserCrendential crendential)
-        {
-            var token = jwtAuth.Authentication(crendential.UserName, crendential.Password);
-            if (token is null)
-            {
-                return Unauthorized();
-            }
-            //Save token in session
-            HttpContext.Session.SetObjectAsJson("Token", token);
-
-            return Ok(token);
-        }
-
-
         [HttpGet]
-        //[Authorize(Policy = "Dads")]
+        [Authorize(Policy = "Dads")]
         [Route("DadJokes")]
         public IActionResult GetDadJoke()
         {
+
+            var test = HttpContext.User;
+
+            if (test.IsInRole("DadJokes"))
+            {
+                return Ok("Dads");
+            }
+            else if (test.HasClaim(c => c.Type == "Everything"))
+            {
+                return Ok("Okay");
+
+            }
             return NotFound("Not implemented");
         }
 
         [HttpGet]
-        //[Authorize(Policy = "Everyone")]
+        [Authorize(Policy = "Everyone")]
         public IActionResult GetJoke(string category)
         {
 

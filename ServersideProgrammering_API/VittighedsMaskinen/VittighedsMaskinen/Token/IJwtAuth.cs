@@ -7,6 +7,6 @@ namespace VittighedsMaskinen.Token
 {
     public interface IJwtAuth
     {
-        string Authentication(string username, string password);
+        string Authentication(Credentials user);
     }
 }

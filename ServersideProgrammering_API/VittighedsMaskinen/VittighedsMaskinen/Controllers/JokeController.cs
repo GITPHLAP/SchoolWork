@@ -12,13 +12,13 @@ namespace VittighedsMaskinen.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     [Produces("application/json")]
     public class JokeController : ControllerBase
     {
 
         [HttpGet]
-        [Authorize(Policy = "Dads")]
+        //[Authorize(Policy = "Dads")]
         [Route("DadJokes")]
         public IActionResult GetDadJoke()
         {
@@ -38,7 +38,7 @@ namespace VittighedsMaskinen.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = "Everyone")]
+        //[Authorize(Policy = "Everyone")]
         public IActionResult GetJoke(string category)
         {
 

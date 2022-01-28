@@ -35,40 +35,40 @@ namespace VittighedsMaskinen
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = ApiKeyAuthenticationOptions.DefaultScheme;
-                options.DefaultChallengeScheme = ApiKeyAuthenticationOptions.DefaultScheme;
-            })
-            .AddApiKeySupport(options => { });
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Dads", policy => policy.RequireRole("DadJokes"));
-                options.AddPolicy("Everyone", policy => policy.RequireRole("Everything"));
-            });
-            services.AddHttpContextAccessor();
-
-            services.AddSingleton<IGetAllApiKeysQuery, InMemoryGetApiKeyQuery>();
-
-            //services.AddAuthentication(x =>
+            //services.AddAuthentication(options =>
             //{
-            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //}).AddJwtBearer(x =>
+            //    options.DefaultAuthenticateScheme = ApiKeyAuthenticationOptions.DefaultScheme;
+            //    options.DefaultChallengeScheme = ApiKeyAuthenticationOptions.DefaultScheme;
+            //})
+            //.AddApiKeySupport(options => { });
+
+            //services.AddAuthorization(options =>
             //{
-            //    x.RequireHttpsMetadata = false;
-            //    x.SaveToken = true;
-            //    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-            //    {
-            //        ValidateIssuerSigningKey = true,
-            //        ValidateIssuer = false,
-            //        ValidateAudience = false,
-            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["jwtToken:Key"]))
-            //    };
+            //    options.AddPolicy("Dads", policy => policy.RequireRole("DadJokes"));
+            //    options.AddPolicy("Everyone", policy => policy.RequireRole("Everything"));
             //});
+            //services.AddHttpContextAccessor();
 
-            //services.AddSingleton<IJwtAuth>(new Auth(Configuration["jwtToken:Key"]));
+            //services.AddSingleton<IGetAllApiKeysQuery, InMemoryGetApiKeyQuery>();
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["jwtToken:Key"]))
+                };
+            });
+
+            services.AddSingleton<IJwtAuth>(new Auth(Configuration["jwtToken:Key"]));
 
             services.AddDistributedMemoryCache(); //Adds a default in memory implementation of IDistributedCache
             services.AddSession();
@@ -88,16 +88,16 @@ namespace VittighedsMaskinen
         {
             app.UseSession();
 
-            ////Set token from session to request headers
-            //app.Use(async (context, next) =>
-            //{
-            //    var token = context.Session.GetObjectFromJson<string>("Token");
-            //    if (!string.IsNullOrEmpty(token))
-            //    {
-            //        context.Request.Headers.Add("Authorization", "Bearer " + token);
-            //    }
-            //    await next();
-            //});
+            //Set token from session to request headers
+            app.Use(async (context, next) =>
+            {
+                var token = context.Session.GetObjectFromJson<string>("Token");
+                if (!string.IsNullOrEmpty(token))
+                {
+                    context.Request.Headers.Add("Authorization", "Bearer " + token);
+                }
+                await next();
+            });
 
             if (env.IsDevelopment())
             {

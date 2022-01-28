@@ -3,22 +3,23 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Security.Claims;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace VittighedsMaskinen.Token
 {
     public class Auth : IJwtAuth
     {
-
-        private readonly string _username = "test";
-        private readonly string _password = "test";
+        private InMemoryGetUsersQuery _inMemoryUsers = new InMemoryGetUsersQuery();
         private readonly string key;
         public Auth(string key)
         {
             this.key = key;
         }
-        public string Authentication(string username, string password)
+        public string Authentication(Credentials crendential)
         {
-            if (!(_username.Equals(username) || _password.Equals(password)))
+            User user = _inMemoryUsers.Validate(crendential.UserName, crendential.Password);
+            if (user == null)
             {
                 return null;
             }
@@ -29,14 +30,16 @@ namespace VittighedsMaskinen.Token
             // 2. Create Private Key to Encrypted
             var tokenKey = Encoding.ASCII.GetBytes(key);
 
+
+            //Create claims from user 
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.UserName) };
+
+            claims.AddRange(user.Roles.Select(role => new Claim(ClaimTypes.Role, role)));
+
             //3. Create JETdescriptor
             var tokenDescriptor = new SecurityTokenDescriptor()
             {
-                Subject = new ClaimsIdentity(
-                    new Claim[]
-                    {
-                        new Claim(ClaimTypes.Name, username)
-                    }),
+                Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)

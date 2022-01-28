@@ -11,6 +11,7 @@ namespace VittighedsMaskinen.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("application/json")]
     public class AuthenticateController : ControllerBase
     {
 

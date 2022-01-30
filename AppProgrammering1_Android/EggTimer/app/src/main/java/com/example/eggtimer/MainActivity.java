@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     private LocalTime getBoilTime(int eggId){
         switch (eggId) {
             case R.id.softBoiledBtn:
-                return LocalTime.of(0, 0, 10);
+                return LocalTime.of(0, 5, 0);
 
             case R.id.smiling:
                 return LocalTime.of(0, 7, 0);

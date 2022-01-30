@@ -5,6 +5,17 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
+    <color name="black">#FF1E1E1E</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    //custom colors
+    <color name="Pantone">#FFf7dc00</color>
+    <color name="ChineseSilver">#FFCCCCCC</color>
+    <color name="QuickSilver">#FFA5A5A5</color>
+    <color name="Flavescent">#FFF3ED93</color>
+    <color name="LightGoldenrodYellow">#FFF3F3CD</color>
+    <color name="darkBackground">#FF232325</color>
+
+
 </resources>

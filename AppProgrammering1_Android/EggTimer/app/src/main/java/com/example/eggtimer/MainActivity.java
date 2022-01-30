@@ -6,62 +6,47 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EggTimerListener {
 
-    private DateTimeFormatter dtf ;
+    private DateTimeFormatter dtf;
     private LocalTime time;
-
+    EggTimer eggTimer;
     private int selectedEggId;
-    private boolean startedTimer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dtf  = DateTimeFormatter.ofPattern("mm:ss");
+
     }
 
     public void onButtonStartClicked(final View view){
-        startedTimer = true;
-        //Change onClick method
-        view.setOnClickListener(this::onStop);
-
-        //Disable select egg buttons
-        findViewById(R.id.softBoiledBtn).setEnabled(false);
-        findViewById(R.id.smiling).setEnabled(false);
-        findViewById(R.id.hardBoiledBtn).setEnabled(false);
 
         ((Button)view).setText("Stop");
 
-        final Handler handler = new Handler();
-        handler.post(new Runnable() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void run() {
+        eggTimer = new EggTimer(time);
 
-                //count down time
-                time = time.minusSeconds(1);
+        if(!eggTimer.isTimerStarted()){
+            eggTimer.setTimerState(true);
+            changeEggButtons();
+            eggTimer.start();
+        }
+        else {
+            eggTimer.setTimerState(false);
 
+            ((Button)view).setText("Start");
+            changeEggButtons();
 
-                //change text on timerTxt
-                TextView timerView = findViewById(R.id.timerTxt);
-                timerView.setText(time.format(dtf));
-
-                if (time.equals(LocalTime.of(0,0,0)) || !startedTimer) {
-                    onStop(view);
-                } else {
-                    handler.postDelayed(this, 1000);
-                }
-            }
-        });
+        }
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -88,27 +73,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onStop(View v) {
-        startedTimer = false;
-
-        //Enable all select buttons
-        findViewById(R.id.softBoiledBtn).setEnabled(true);
-        findViewById(R.id.smiling).setEnabled(true);
-        findViewById(R.id.hardBoiledBtn).setEnabled(true);
-
-        //Reset timer
-        time = getBoilTime(selectedEggId);
-
-        //Set timertxt
-        TextView timer = findViewById(R.id.timerTxt);
-        timer.setText(time.format(dtf));
-
-        //change start button attributes
-        v.setEnabled(false);
-        ((Button)v).setText("Start");
-        v.setOnClickListener(this::onButtonStartClicked);
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void SelectEggMethod(int eggId, LocalTime time) {
         selectedEggId = eggId;
@@ -122,4 +86,30 @@ public class MainActivity extends AppCompatActivity {
         startbtn.setEnabled(true);
     }
 
+    private void changeEggButtons() {
+        ImageButton soft = findViewById(R.id.softBoiledBtn);
+        ImageButton smiling = findViewById(R.id.smiling);
+        ImageButton hard = findViewById(R.id.hardBoiledBtn);
+
+        if (hard.isEnabled()) {
+            hard.setEnabled(false);
+            smiling.setEnabled(false);
+            soft.setEnabled(false);
+        } else {
+            hard.setEnabled(false);
+            smiling.setEnabled(false);
+            soft.setEnabled(false);
+        }
+
+    }
+
+    @Override
+    public void onCountDown(long timeLeft) {
+
+    }
+
+    @Override
+    public void onEggTimerStopped() {
+
+    }
 }

@@ -4,28 +4,28 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.eggtimer.state.EggTimer;
+
 import java.time.LocalTime;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
 public class EggTimerPresenter implements EggTimerListener {
-    private View v;
+    private final View v;
     EggTimer eggTimer;
 
     //Constructor
-    public EggTimerPresenter(View v){
+    public EggTimerPresenter(final View v){
         this.v = v;
     }
     public void stop() {
-        eggTimer.onStop();
+        eggTimer.stopTimer();
     }
 
     public void start(LocalTime timeToCook) {
         eggTimer = new EggTimer();
         eggTimer.addListener(this);
-        eggTimer.setTime(timeToCook);
-        eggTimer.setStarted(true);
 
-        eggTimer.start();
+        eggTimer.startTimer(timeToCook);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class EggTimerPresenter implements EggTimerListener {
     }
 
     /**
-     * Interface to activity
+     * Interface to connect presenter to activity
      */
     public interface View {
         void onCountDown(String timeTxt);

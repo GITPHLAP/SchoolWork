@@ -16,40 +16,46 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 @RequiresApi(api = Build.VERSION_CODES.O)
-public class MainActivity extends AppCompatActivity implements EggTimerListener {
+public class MainActivity extends AppCompatActivity implements EggTimerPresenter.View {
+    private boolean timerStarted = false;
+
+    //Global buttons
     ImageButton softButton;
     ImageButton smilingButton;
     ImageButton hardButton;
+    TextView timerTxtView;
+    Button startButton;
+
     private DateTimeFormatter dtf;
     private LocalTime time;
-    EggTimer eggTimer;
-    private int selectedEggId;
+    EggTimerPresenter presenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dtf  = DateTimeFormatter.ofPattern("mm:ss");
-        eggTimer = new EggTimer();
+
+        //Instans of view buttons
         softButton = findViewById(R.id.softBoiledBtn);
         smilingButton = findViewById(R.id.smiling);
         hardButton = findViewById(R.id.hardBoiledBtn);
+        startButton = findViewById(R.id.startBtn);
+        timerTxtView = findViewById(R.id.timerTxt);
+
+        presenter = new EggTimerPresenter(this);
     }
 
     public void onButtonStartClicked(final View view){
 
+        if(!timerStarted){
+            timerStarted = true;
+            startButton.setText("Stop");
 
-        System.err.println(eggTimer.isAlive());
-        if(!eggTimer.getStarted()){
-
-            eggTimer.addListener(this);
-            eggTimer.setTime(time);
-            eggTimer.setStarted(true);
-            ((Button)view).setText("Stop");
-
-            eggTimer.start();
+            presenter.start(time);
         }
         else { // manual stop timer
-            eggTimer.onStop();
+            presenter.stop();
         }
         changeEggButtons();
     }
@@ -73,27 +79,22 @@ public class MainActivity extends AppCompatActivity implements EggTimerListener 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void onButtonEggSelectedClicked(View view) {
-        time = getBoilTime(view.getId());
-        SelectEggMethod(view.getId(), time);
-
+        SelectEggMethod(view.getId());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void SelectEggMethod(int eggId, LocalTime time) {
-        selectedEggId = eggId;
+    private void SelectEggMethod(int eggId) {
+        //set global boil time
+        time = getBoilTime(eggId);
 
         //Set boil time to timer
-        TextView timer = findViewById(R.id.timerTxt);
-        timer.setText(time.format(dtf));
+        timerTxtView.setText(time.format(dtf));
 
         //Enable startButton
-        Button startbtn = findViewById(R.id.startBtn);
-        startbtn.setEnabled(true);
+        startButton.setEnabled(true);
     }
 
     private void changeEggButtons() {
-
-
         if (hardButton.isEnabled()) {
             hardButton.setEnabled(false);
             hardButton.setAlpha(0.5f);
@@ -114,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements EggTimerListener 
             softButton.setEnabled(true);
             softButton.setAlpha(1.0f);
         }
-
     }
 
     /**
@@ -123,9 +123,7 @@ public class MainActivity extends AppCompatActivity implements EggTimerListener 
      */
     @Override
     public void onCountDown(String timeTxt) {
-        TextView timer = findViewById(R.id.timerTxt);
-
-        timer.setText(timeTxt);
+        timerTxtView.setText(timeTxt);
     }
 
     /**
@@ -135,16 +133,15 @@ public class MainActivity extends AppCompatActivity implements EggTimerListener 
      */
     @Override
     public void onEggTimerStopped() {
-        eggTimer.setStarted(false);
 
+        timerStarted = false;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Button startBtn = findViewById(R.id.startBtn);
-                startBtn.setText("Start");
+                startButton.setText("Start");
+                startButton.setEnabled(false);
 
-                TextView timer = findViewById(R.id.timerTxt);
-                timer.setText("00:00");
+                timerTxtView.setText("00:00");
 
                 //enable egg buttons again
                 changeEggButtons();
@@ -153,9 +150,6 @@ public class MainActivity extends AppCompatActivity implements EggTimerListener 
 
         //reset the time
         time = LocalTime.of(0, 0, 0);
-
-        eggTimer = new EggTimer();
-
 
     }
 }

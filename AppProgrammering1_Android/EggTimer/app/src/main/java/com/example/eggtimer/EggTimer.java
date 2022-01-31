@@ -1,68 +1,91 @@
 package com.example.eggtimer;
 
-import android.annotation.SuppressLint;
 import android.os.Build;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class EggTimer extends Thread {
 
-    private Boolean running = false;
-    private DateTimeFormatter dtf;
+    private List<EggTimerListener> listeners = new ArrayList<EggTimerListener>();
+    public EggTimer() {
+
+    }
+
+    private boolean started = false;
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("mm:ss");
     String timerTxt;
-    LocalTime time;
+    private LocalTime time;
 
-    public void setTimerState(Boolean state) {
-        running = state;
+    public void setStarted(boolean _started) {
+        started = _started;
     }
 
-
-    public Boolean isTimerStarted(){
-        return running;
+    public boolean getStarted(){
+        return started;
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public EggTimer(LocalTime _time) {
-        dtf  = DateTimeFormatter.ofPattern("mm:ss");
+    public void setTime(LocalTime _time){
         time = _time;
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void run() {
+        while (started) {
 
-        if (running) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             //count down time
             time = time.minusSeconds(1);
 
             //change text on timerTxt
             timerTxt = time.format(dtf);
             Log.d("TimerTxt", timerTxt);
+
+            //Send notify to all listeners
+            for (EggTimerListener l : listeners) {
+                l.onCountDown(timerTxt);
+            }
+
             if (time.equals(LocalTime.of(0,0,0))) {
                 onStop();
-            } else {
-
+                return;
             }
-        } else {
-            onStop();
         }
-
+        //Reset the timer
+        onStop();
     }
 
     public void onStop() {
-        running = false;
+        started = false;
 
         //Reset timer
-        timerTxt = "00:00";
+        time = LocalTime.of(0, 0, 0);
+        timerTxt = time.format(dtf);
+
+        //Send notify to all listeners
+        for (EggTimerListener l : listeners) {
+            l.onEggTimerStopped();
+        }
+}
+
+    public void addListener(EggTimerListener listener){
+        listeners.add(listener);
+    }
+
+    public void removeListener(EggTimerListener listener){
+        listeners.remove(listener);
     }
 
 }

@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/Pantone</item>
         <item name="colorPrimaryVariant">@color/Flavescent</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/black</item>
         <item name="colorAccent">?attr/colorPrimaryVariant</item>
 
         <!-- Secondary brand color. -->

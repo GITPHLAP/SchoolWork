@@ -40,6 +40,8 @@ public class EggTimerPresenter implements EggTimerListener {
 
     /**
      * Interface to connect presenter to activity
+     *
+     * @author kjedt
      */
     public interface View {
         void onCountDown(String timeTxt);

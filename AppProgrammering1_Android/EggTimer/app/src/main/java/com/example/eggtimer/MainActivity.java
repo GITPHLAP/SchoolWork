@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -82,6 +81,11 @@ public class MainActivity extends AppCompatActivity implements EggTimerPresenter
         SelectEggMethod(view.getId());
     }
 
+    /**
+     * Set the global time prop, enable startbutton
+     * and set the timerTextView with the new text
+     * @param eggId use to get the boil time
+     */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void SelectEggMethod(int eggId) {
         //set global boil time
@@ -94,6 +98,11 @@ public class MainActivity extends AppCompatActivity implements EggTimerPresenter
         startButton.setEnabled(true);
     }
 
+    /**
+     * Change state on eggButtons
+     * If the eggbuttons is enabled then disable them
+     * and vice versa
+     */
     private void changeEggButtons() {
         if (hardButton.isEnabled()) {
             hardButton.setEnabled(false);
@@ -130,6 +139,8 @@ public class MainActivity extends AppCompatActivity implements EggTimerPresenter
      * set global eggtimer prop "started" to false
      * Change the start/stop button text to start
      * Create new eggtimer object
+     *
+     *
      */
     @Override
     public void onEggTimerStopped() {

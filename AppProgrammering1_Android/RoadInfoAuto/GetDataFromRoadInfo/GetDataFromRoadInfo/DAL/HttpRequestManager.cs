@@ -38,12 +38,14 @@ namespace GetDataFromRoadInfo.DAL
 
         public HttpRequestManager()
         {
+            DotNetEnv.Env.Load();
+
             client = new HttpClient();
-            downloadUrl = ConfigurationManager.AppSettings["downloadUrl"];
-            tenantId = ConfigurationManager.AppSettings["tenantId"];
-            tokenUrl = ConfigurationManager.AppSettings["tokenUrl"];
-            serviceAccountId = ConfigurationManager.AppSettings["serviceAccountId"];
-            serviceAccountPass = ConfigurationManager.AppSettings["serviceAccountPass"];
+            downloadUrl = Environment.GetEnvironmentVariable("DOWNLOAD_URL");
+            tenantId = Environment.GetEnvironmentVariable("TENANT_ID");
+            tokenUrl = Environment.GetEnvironmentVariable("TOKEN_URL");
+            serviceAccountId = Environment.GetEnvironmentVariable("SERVICE_ACCOUNT_ID");
+            serviceAccountPass = Environment.GetEnvironmentVariable("SERVICE_ACCOUNTPASS");
         }
 
 

@@ -15,10 +15,13 @@ namespace GetDataFromRoadInfo.DAL
 
         public Postgres()
         {
-            connectionString = $"Host={ConfigurationManager.AppSettings["dbHost"]}; " +
-                $"Username={ConfigurationManager.AppSettings["dbUsername"]}; " +
-                $"Password={ConfigurationManager.AppSettings["dbPass"]}; " +
-                $"Database={ConfigurationManager.AppSettings["databaseName"]}; " +
+            DotNetEnv.Env.Load();
+
+
+            connectionString = $"Host={Environment.GetEnvironmentVariable("DB_HOST")}; " +
+                $"Username={Environment.GetEnvironmentVariable("DB_USERNAME")}; " +
+                $"Password={Environment.GetEnvironmentVariable("DB_PASS")}; " +
+                $"Database={Environment.GetEnvironmentVariable("DATABASE_NAME")}; " +
                 $"Port=5433";
         }
         /// <summary>

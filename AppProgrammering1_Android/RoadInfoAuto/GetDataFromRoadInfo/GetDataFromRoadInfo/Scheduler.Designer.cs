@@ -29,15 +29,18 @@ namespace GetDataFromRoadInfo
         /// </summary>
         private void InitializeComponent()
         {
+            this.eventLog = new System.Diagnostics.EventLog();
+            ((System.ComponentModel.ISupportInitialize)(this.eventLog)).BeginInit();
             // 
             // Scheduler
             // 
-            this.ServiceName = "Scheduler";
+            this.ServiceName = "GetRoadInfoService";
+            ((System.ComponentModel.ISupportInitialize)(this.eventLog)).EndInit();
 
         }
 
         #endregion
 
-        private static System.Diagnostics.EventLog eventLog;
+        private System.Diagnostics.EventLog eventLog;
     }
 }

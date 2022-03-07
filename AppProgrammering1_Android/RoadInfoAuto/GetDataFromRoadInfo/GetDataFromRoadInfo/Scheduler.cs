@@ -22,33 +22,37 @@ namespace GetDataFromRoadInfo
 
         private Timer timer;
 
-
+        static EventLog log;
         public Scheduler()
         {
             InitializeComponent();
-            eventLog = new EventLog();
+            this.AutoLog = false;
             if (!EventLog.SourceExists("GetRoadInfoService"))
             {
                 EventLog.CreateEventSource("GetRoadInfoService", "RoadInfoService");
             }
             eventLog.Source = "GetRoadInfoService";
             eventLog.Log = "RoadInfoService";
+            log = eventLog;
+
         }
 
         private void Timer_Tick(object sender, ElapsedEventArgs e)
         {
+            log.WriteEntry("Service is ticked");
+
             try
             {
                 Run();
             }
             catch (Exception ex)
             {
-                eventLog.WriteEntry(ex.ToString(), EventLogEntryType.Error);
+                log.WriteEntry(ex.ToString(), EventLogEntryType.Error);
             }
         }
         protected override void OnStart(string[] args)
         {
-            eventLog.WriteEntry("Service is started");
+            log.WriteEntry("Service is started");
 
             timer = new Timer();
             this.timer.Interval = 300000; // 5 minutes
@@ -58,26 +62,19 @@ namespace GetDataFromRoadInfo
 
         protected override void OnStop()
         {
-            eventLog.WriteEntry("Service is stopped");
+            log.WriteEntry("Service is stopped");
 
             timer.Enabled = false;
         }
 
         private async void Run()
         {
-            string xml = await requestManager.GetData();
-
-            if (!xml.Equals(lastxml))
-            {
-                lastxml = xml;
-                await postgre.InsertXmlToDb(xml);
-
-            }
+            await postgre.InsertXmlToDb(await requestManager.GetData());
         }
 
         public static void WriteToErrorLog(string msg, EventLogEntryType type)
         {
-            eventLog.WriteEntry(msg, type);
+            log.WriteEntry(msg, type);
         }
     }
 }

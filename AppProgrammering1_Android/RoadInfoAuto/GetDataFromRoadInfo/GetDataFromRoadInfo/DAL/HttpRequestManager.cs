@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
-using System.Linq;
-using System.Net.Http.Headers;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
-using Newtonsoft.Json;
 
 namespace GetDataFromRoadInfo.DAL
 {
@@ -104,7 +101,7 @@ namespace GetDataFromRoadInfo.DAL
                 Scheduler.WriteToErrorLog("[Token]" + e.ToString(), System.Diagnostics.EventLogEntryType.Error);
             }
 
-            
+
         }
 
         /// <summary>
@@ -113,8 +110,6 @@ namespace GetDataFromRoadInfo.DAL
         /// <returns></returns>
         public async Task<string> GetData()
         {
-            Scheduler.WriteToErrorLog("[TESTING]" + downloadUrl + "_" + tenantId + "_" + tokenUrl + "_" + serviceAccountId + "_" + serviceAccountPass, System.Diagnostics.EventLogEntryType.Information);
-
             //Get token if its expire -20 is a buffer
             if (token == null || tokenExpireTime.AddSeconds(-20) == DateTimeOffset.UtcNow)
             {

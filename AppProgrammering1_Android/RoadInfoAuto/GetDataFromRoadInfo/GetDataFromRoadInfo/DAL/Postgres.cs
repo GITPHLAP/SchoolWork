@@ -1,9 +1,5 @@
 ﻿using Npgsql;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GetDataFromRoadInfo.DAL
@@ -85,7 +81,7 @@ namespace GetDataFromRoadInfo.DAL
             }
             catch (Exception e)
             {
-                
+
                 Scheduler.WriteToErrorLog(e.ToString(), System.Diagnostics.EventLogEntryType.Error);
                 return true; //return true to just return null in next method
             }

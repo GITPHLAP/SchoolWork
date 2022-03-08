@@ -1,13 +1,7 @@
 ﻿using GetDataFromRoadInfo.DAL;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Linq;
 using System.ServiceProcess;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 
 namespace GetDataFromRoadInfo
@@ -15,7 +9,6 @@ namespace GetDataFromRoadInfo
     public partial class Scheduler : ServiceBase
     {
         //TODO: Add logging to eventlog
-        string lastxml;
         Postgres postgre = new Postgres();
 
         HttpRequestManager requestManager = new HttpRequestManager();
@@ -55,6 +48,7 @@ namespace GetDataFromRoadInfo
             log.WriteEntry("Service is started");
 
             timer = new Timer();
+            //this.timer.Interval = 20000;
             this.timer.Interval = 300000; // 5 minutes
             this.timer.Elapsed += new ElapsedEventHandler(this.Timer_Tick);
             timer.Enabled = true;

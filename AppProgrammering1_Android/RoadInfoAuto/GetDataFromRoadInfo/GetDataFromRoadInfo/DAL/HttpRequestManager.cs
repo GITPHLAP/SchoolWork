@@ -38,14 +38,13 @@ namespace GetDataFromRoadInfo.DAL
 
         public HttpRequestManager()
         {
-            DotNetEnv.Env.Load();
-
             client = new HttpClient();
-            downloadUrl = Environment.GetEnvironmentVariable("DOWNLOAD_URL");
-            tenantId = Environment.GetEnvironmentVariable("TENANT_ID");
-            tokenUrl = Environment.GetEnvironmentVariable("TOKEN_URL");
-            serviceAccountId = Environment.GetEnvironmentVariable("SERVICE_ACCOUNT_ID");
-            serviceAccountPass = Environment.GetEnvironmentVariable("SERVICE_ACCOUNTPASS");
+            downloadUrl = Env.download_url;
+            tenantId = Env.tenant_id;
+            tokenUrl = Env.token_url;
+            serviceAccountId = Env.service_account_id;
+            serviceAccountPass = Env.service_account_pass;
+
         }
 
 
@@ -64,41 +63,48 @@ namespace GetDataFromRoadInfo.DAL
             var body = new StringContent(data, Encoding.UTF8, "application/x-www-form-urlencoded");
 
             //TODO: Add error handling
-
-
-            using (var response = await client.PostAsync(tokenUrl, body))
+            try
             {
-
-                if (response.IsSuccessStatusCode)
+                using (var response = await client.PostAsync(tokenUrl, body))
                 {
-                    var contentStream = await response.Content.ReadAsStreamAsync();
 
-                    using (var streamReader = new StreamReader(contentStream))
+                    if (response.IsSuccessStatusCode)
                     {
-                        using (var jsonReader = new JsonTextReader(streamReader))
+                        var contentStream = await response.Content.ReadAsStreamAsync();
+
+                        using (var streamReader = new StreamReader(contentStream))
                         {
-                            JsonSerializer serializer = new JsonSerializer();
-
-                            try
+                            using (var jsonReader = new JsonTextReader(streamReader))
                             {
-                                TokenResponse test = serializer.Deserialize<TokenResponse>(jsonReader);
-                                token = test.Access_token;
-                                tokenExpireTime = DateTimeOffset.UtcNow.AddSeconds(test.Expires_in);
-                            }
-                            catch (JsonReaderException)
-                            {
-                                Scheduler.WriteToErrorLog("Invalid JSON.", System.Diagnostics.EventLogEntryType.Error);
+                                JsonSerializer serializer = new JsonSerializer();
 
+                                try
+                                {
+                                    TokenResponse test = serializer.Deserialize<TokenResponse>(jsonReader);
+                                    token = test.Access_token;
+                                    tokenExpireTime = DateTimeOffset.UtcNow.AddSeconds(test.Expires_in);
+                                }
+                                catch (JsonReaderException)
+                                {
+                                    Scheduler.WriteToErrorLog("Invalid JSON.", System.Diagnostics.EventLogEntryType.Error);
+
+                                }
                             }
                         }
                     }
-                }
-                else
-                {
-                    //Write something in errorlog
-                    Scheduler.WriteToErrorLog("[Token]" + response.StatusCode.ToString(), System.Diagnostics.EventLogEntryType.Warning);
+                    else
+                    {
+                        //Write something in errorlog
+                        Scheduler.WriteToErrorLog("[Token]" + response.StatusCode.ToString(), System.Diagnostics.EventLogEntryType.Warning);
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                Scheduler.WriteToErrorLog("[Token]" + e.ToString(), System.Diagnostics.EventLogEntryType.Error);
+            }
+
+            
         }
 
         /// <summary>
@@ -107,6 +113,8 @@ namespace GetDataFromRoadInfo.DAL
         /// <returns></returns>
         public async Task<string> GetData()
         {
+            Scheduler.WriteToErrorLog("[TESTING]" + downloadUrl + "_" + tenantId + "_" + tokenUrl + "_" + serviceAccountId + "_" + serviceAccountPass, System.Diagnostics.EventLogEntryType.Information);
+
             //Get token if its expire -20 is a buffer
             if (token == null || tokenExpireTime.AddSeconds(-20) == DateTimeOffset.UtcNow)
             {

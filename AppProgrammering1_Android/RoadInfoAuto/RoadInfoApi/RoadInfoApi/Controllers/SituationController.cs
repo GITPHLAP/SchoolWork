@@ -12,18 +12,12 @@ using System.Net.Http;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace RoadInfoApi.Controllers
 {
     [Route("api/SituationController")]
     [ApiController]
     public class SituationController : ControllerBase
     {
-
-
-        //TODO: Add logic to determ if new data is add since last request from the specific user
-
 
         // POST: api/SituationController
         [HttpPost]
@@ -48,8 +42,6 @@ namespace RoadInfoApi.Controllers
                 {
                     PropertyNamingPolicy = null
                 });
-
-
         }
 
         private List<Situation> GetSituations(double currentLongi, double currentLati, string username, bool forceGet = false)

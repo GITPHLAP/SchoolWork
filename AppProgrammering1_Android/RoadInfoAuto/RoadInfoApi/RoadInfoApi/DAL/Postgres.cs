@@ -29,7 +29,7 @@ namespace RoadInfoApi.DAL
 
 
 
-        public async Task<List<Situation>> GetSituations()
+        public async Task<List<Situation>> GetSituations(double currentLongi, double currentLati, string username, bool forceGet = false)
         {
             //TODO: Add limit (5)
             //TODO: long and lati inputs to calculate distance
@@ -39,8 +39,21 @@ namespace RoadInfoApi.DAL
                 await using var con = new NpgsqlConnection(connectionString);
                 await con.OpenAsync();
 
-                await using var cmd = new NpgsqlCommand("SELECT * FROM func_get_situations();", con);
 
+                if (!await CheckForNewData(con, username) && !forceGet)
+                {
+                    return situations;
+                }
+
+
+                await using var cmd = new NpgsqlCommand("SELECT * FROM func_get_closest_situations($1, $2);", con)
+                {
+                    Parameters =
+                        {
+                        new() { Value = currentLongi },
+                        new() { Value = currentLati }
+                        }
+                };
                 await using var reader = await cmd.ExecuteReaderAsync();
 
                 while (await reader.ReadAsync())
@@ -58,6 +71,8 @@ namespace RoadInfoApi.DAL
                         reader["s_status"].ToString())
                     );
                 }
+                reader.Close();
+                await CreateOrUpdateUserActivity(con, username);
             }
             catch (Exception e)
             {
@@ -71,6 +86,97 @@ namespace RoadInfoApi.DAL
             return situations;
         }
 
+        public async Task<bool> CheckForNewData(NpgsqlConnection con, string username)
+        {
+            try
+            {
+                await using var cmd = new NpgsqlCommand("SELECT func_any_new_data_since_lastactivity($1);", con)
+                {
+                    Parameters =
+                        {
+                        new() { Value = username }
+                        }
+                };
+                return Convert.ToBoolean(await cmd.ExecuteScalarAsync());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return false;
+            }
+
+        }
+
+        public async Task CreateOrUpdateUserActivity(NpgsqlConnection con, string username)
+        {
+            try
+            {
+                await using var cmd = new NpgsqlCommand("CALL proc_update_user_activity($1);", con)
+                {
+                    Parameters =
+                        {
+                        new() { Value = username }
+                        }
+                };
+                await cmd.ExecuteNonQueryAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+        }
+
+        public async Task<bool> CheckIfUsernameIsValid(NpgsqlConnection con, string username)
+        {
+            try
+            {
+                await using var cmd = new NpgsqlCommand("SELECT func_is_username_valid($1);", con)
+                {
+                    Parameters =
+                        {
+                        new() { Value = username }
+                        }
+                };
+
+                var test = await cmd.ExecuteScalarAsync();
+                return Convert.ToBoolean( test);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return false;
+            }
+
+        }
+
+        public NpgsqlConnection GetConnection()
+        {
+            try
+            {
+                var con = new NpgsqlConnection(connectionString);
+                con.Open();
+
+                return con;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return null;
+            }
+        }
+
+        public void CloseConnection(NpgsqlConnection con)
+        {
+            try
+            {
+                con.Close();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
 
         public async Task<List<Situation>> GetSituationRecords(List<Situation> situations)
         {
@@ -80,10 +186,9 @@ namespace RoadInfoApi.DAL
                 await con.OpenAsync();
 
 
-                List<SituationRecord> situationrecords = new List<SituationRecord>();
                 foreach (Situation s in situations)
                 {
-                    situationrecords.Clear(); //this is needed because I use the same object for each situation
+                    List<SituationRecord> situationrecords = new List<SituationRecord>();
 
                     await using var cmd = new NpgsqlCommand("SELECT * FROM func_get_situationrecords($1);", con)
                     {

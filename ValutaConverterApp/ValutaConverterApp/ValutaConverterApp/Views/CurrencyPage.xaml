@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ValutaConverterApp.Views.CurrencyPage"
+             xmlns:local="clr-namespace:ValutaConverterApp.ViewModels"  
+             xmlns:model="clr-namespace:ValutaConverterApp.Models"  
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar x:Name="searchBar"
+                       Placeholder="Search for corrency..."
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="Fill"
+                       SearchCommand="{Binding PerfromSearch}"
+                       TextChanged="searchBar_TextChanged"/>
+
+            <RefreshView x:DataType="local:CurrencyViewModel" Command="{Binding LoadCurrenciesCommand}" CommandParameter="{Binding Text, Source={x:Reference searchBar}}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <CollectionView x:Name="CurrencyListView"
+                ItemsSource="{Binding Currencies}"
+                SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Padding="10" x:DataType="model:Currency">
+                                <Label Text="{Binding Id}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="16" />
+                                <Label Text="{Binding CurrencyName}" 
+                            LineBreakMode="NoWrap"
+                            Style="{DynamicResource ListItemDetailTextStyle}"
+                            FontSize="13" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

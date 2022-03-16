@@ -14,8 +14,8 @@ namespace TennisBall.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            MainPage.Width = (int)Resources.DisplayMetrics.WidthPixels;
-            MainPage.Height = (int)Resources.DisplayMetrics.HeightPixels;
+            MainPage._Width = (int)Resources.DisplayMetrics.WidthPixels;
+            MainPage._Height = (int)Resources.DisplayMetrics.HeightPixels;
 
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);

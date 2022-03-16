@@ -11,8 +11,8 @@ namespace TennisBall
 {
     public partial class MainPage : ContentPage
     {
-        public static double Width;
-        public static double Height;
+        public static double _Width;
+        public static double _Height;
 
         //TODO: change image 
         //TODO: refactor some classes
@@ -21,7 +21,7 @@ namespace TennisBall
         public MainPage()
         {
             InitializeComponent();
-            AccelerometerTest accelerometer = new AccelerometerTest(ellipse);
+            AccelerometerTest accelerometer = new AccelerometerTest(ball);
             accelerometer.ToggleAccelerometer();
 
 
@@ -35,9 +35,8 @@ namespace TennisBall
 
             //await MyAnimation.BallAnimate(ellipse, 100, 100);
             var maindisplayinfo = DeviceDisplay.MainDisplayInfo;
-
             //MyAnimation.BallAnimate(ellipse, 0.9, 0);
-            
+
             //MyAnimation.BallAnimate(ellipse, -0.9, 0);
 
 
@@ -45,5 +44,7 @@ namespace TennisBall
             //await Animate.BallAnimate(this.logoImage, 50, 10, 5);
             // await logoImage.TranslateTo(logoImage.TranslationX, logoImage.TranslationY , 500, Easing.Linear);
         }
+
+
     }
 }

@@ -12,20 +12,45 @@ namespace TennisBall
         // Set speed delay for monitoring changes.
         SensorSpeed speed = SensorSpeed.UI;
         View view;
+        private double lastX;
+        private double lastY;
 
         public AccelerometerTest(View _view)
         {
-            // Register for reading changes, be sure to unsubscribe when finished
+            // Register for reading changes
+            Gyroscope.ReadingChanged += Gyroscope_ReadingChanged;
             Accelerometer.ReadingChanged += Accelerometer_ReadingChanged;
+
             view = _view;
+        }
+
+        private async void Gyroscope_ReadingChanged(object sender, GyroscopeChangedEventArgs e)
+        {
+            //Task.Run(async () =>
+            //{
+                var data = e.Reading;
+                await MyAnimation.BallRotationAnimation(view, data.AngularVelocity.Y);
+            //});
+
         }
 
         async void Accelerometer_ReadingChanged(object sender, AccelerometerChangedEventArgs e)
         {
-            var data = e.Reading;
-            await MyAnimation.BallAnimate(view, -1*data.Acceleration.X, data.Acceleration.Y);
-            Console.WriteLine($"Reading: X: {data.Acceleration.X}, Y: {data.Acceleration.Y}, Z: {data.Acceleration.Z}");
-            // Process Acceleration X, Y, and Z
+            //Task.Run(async () =>
+            //{
+                var data = e.Reading;
+                double newX = data.Acceleration.X;
+                double newY = data.Acceleration.Y;
+                if (newX != lastX || newY != lastY)
+                {
+                    await MyAnimation.BallAnimate(view, -1 * newX, newY);
+                    //Console.WriteLine($"Reading: X: {newX}, Y: {newY}, Z: {data.Acceleration.Z}");
+
+                    lastX = newX;
+                    lastY = newY;
+                }
+            //});
+            
         }
 
         public void ToggleAccelerometer()
@@ -36,21 +61,19 @@ namespace TennisBall
                     Accelerometer.Stop();
                 else
                     Accelerometer.Start(speed);
+
+                if (Gyroscope.IsMonitoring)
+                    Gyroscope.Stop();
+                else
+                    Gyroscope.Start(speed);
             }
-            catch (FeatureNotSupportedException fnsEx)
+            catch
             {
-                // Feature not supported on device
-            }
-            catch (Exception ex)
-            {
-                // Other error has occurred.
+                throw;
             }
         }
 
         #region Accelerometer value converter to absolutelayout 
-
-        double accelerometerMaxValue = 0.9999989;
-
 
         //Map accelerometer value to 
 

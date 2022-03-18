@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace _9Puzzle
 {
@@ -188,6 +192,9 @@ namespace _9Puzzle
             return inversions % 2 == 0;
         }
 
+        private double width;
+        private double height;
+
         /// <summary>
         /// This create the puzzleboard grid as a square
         /// </summary>
@@ -196,8 +203,62 @@ namespace _9Puzzle
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height);
-            puzzleGrid.WidthRequest = width;
-            puzzleGrid.HeightRequest = width;
+            if (width != this.width || height != this.height)
+            {
+                if (width > height) //Landscape
+                {
+
+                    this.width = width;
+                    this.height = height;
+                    mainGrid.ColumnDefinitions.Clear();
+                    mainGrid.RowDefinitions.Clear();
+
+                    mainGrid.ColumnDefinitions.Add(new ColumnDefinition
+                    {
+                        Width = new GridLength(.2, GridUnitType.Star)
+                    });
+                    mainGrid.ColumnDefinitions.Add(new ColumnDefinition
+                    {
+                        Width = new GridLength(1, GridUnitType.Star)
+                    });
+                    mainGrid.ColumnDefinitions.Add(new ColumnDefinition
+                    {
+                        Width = new GridLength(.2, GridUnitType.Star)
+                    });
+
+                    mainGrid.Children.Remove(boardFrame);
+                    mainGrid.Children.Add(boardFrame, 1, 0);
+                    boardFrame.WidthRequest = height;
+                    boardFrame.HeightRequest = height;
+
+                }
+                else //Potrait
+                {
+
+
+                    mainGrid.ColumnDefinitions.Clear();
+                    mainGrid.RowDefinitions.Clear();
+
+                    mainGrid.RowDefinitions.Add(new RowDefinition
+                    {
+                        Height = new GridLength(.2, GridUnitType.Star)
+                    });
+                    mainGrid.RowDefinitions.Add(new RowDefinition
+                    {
+                        Height = new GridLength(1, GridUnitType.Star)
+                    });
+                    mainGrid.RowDefinitions.Add(new RowDefinition
+                    {
+                        Height = new GridLength(.2, GridUnitType.Star)
+                    });
+
+                    mainGrid.Children.Remove(boardFrame);
+                    mainGrid.Children.Add(boardFrame, 0, 1);
+                    boardFrame.WidthRequest = width;
+                    boardFrame.HeightRequest = width;
+                }
+            }
+
         }
 
         /// <summary>
@@ -264,7 +325,8 @@ namespace _9Puzzle
         /// <returns></returns>
         private bool IsSolved()
         {
-            for (int i = 0; i < puzzleGrid.Children.Count; i++)
+            //It should not check the last image 
+            for (int i = 0; i < puzzleGrid.Children.Count -1 ; i++)
             {
                 if (((Image)puzzleGrid.Children[i]).Source.ToString() != $"File: {imageList[i]}")
                 {

@@ -2,42 +2,80 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="_9Puzzle.MainPage">
+    <ContentPage.Content>
+        <Grid x:Name="outerGrid">
+            <Grid x:Name="mainGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".2*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height=".2*" />
+            </Grid.RowDefinitions>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height=".2*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height=".2*" />
-        </Grid.RowDefinitions>
+            <Button Grid.Row="0"
+                    Text="Restart"
+                    Clicked="RestartBtn_Clicked"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    FontAttributes="Bold"
+                    FontSize="Large"/>
 
-        <Button Grid.Row="0"
-                Text="Restart"
-                Clicked="RestartBtn_Clicked"/>
+            <Frame x:Name="boardFrame"
+                   Grid.Row="1"
+                   BorderColor="Black"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   Padding="0">
+                <Grid  x:Name="puzzleGrid"
+                       HorizontalOptions="Center"
+                       ColumnSpacing="0"
+                       RowSpacing="0"
+                       VerticalOptions="Center">
 
-        <Frame  Grid.Row="1" BorderColor="Black">
-            <Grid x:Name="puzzleGrid"
-                  HorizontalOptions="Center"
-                  ColumnSpacing="0"
-                  RowSpacing="0"
-                  VerticalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <!--<Image Grid.Column="0"
+                           Grid.Row="0"
+                           Source="H1.png" />
+                    <Image Grid.Column="1"
+                           Grid.Row="0"
+                           Source="H2.png" />
+                    <Image Grid.Column="2"
+                           Grid.Row="0"
+                           Source="H3.png" />
+                    <Image Grid.Column="0"
+                           Grid.Row="1"
+                           Source="H4.png" />
+                    <Image Grid.Column="1"
+                           Grid.Row="1"
+                           Source="H5.png" />
+                    <Image Grid.Column="2"
+                           Grid.Row="1"
+                           Source="H6.png" />
+                    <Image Grid.Column="0"
+                           Grid.Row="2"
+                           Source="H7.png" />
+                    <Image Grid.Column="1"
+                           Grid.Row="2"
+                           Source="H8.png" />
+                    <Image Grid.Column="2"
+                           Grid.Row="2"
+                           Source="H9.png" />-->
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
 
-            </Grid>
-        </Frame>
+                </Grid>
+            </Frame>
 
 
-    </Grid>
-
-
-
+        </Grid>
+        </Grid>
+        
+    </ContentPage.Content>
 </ContentPage>

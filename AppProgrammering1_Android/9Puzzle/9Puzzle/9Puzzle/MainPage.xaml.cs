@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace _9Puzzle
 {
     public partial class MainPage : ContentPage
     {
+        //TODO: Create all this logic to a library 
         //Solver: https://alexyuisingwu.github.io/sliding-puzzle-solver/ OR https://github.com/YahyaAlaaMassoud/Sliding-Puzzle-A-Star-Solver
 
         private List<string> imageList = new List<string>();
@@ -84,7 +81,7 @@ namespace _9Puzzle
             e.AcceptedOperation = DataPackageOperation.None;
 
         }
-        
+
         /// <summary>
         /// Check if the move is valid 
         /// </summary>
@@ -102,7 +99,7 @@ namespace _9Puzzle
             int difColumns = nImgColumn - oImgColumn;
             int difRows = nImgRow - oImgRow;
 
-            if ((difColumns == 0 && difRows == 1 || difRows == - 1) || //if columns havent change and then rows have change with 1 or -1
+            if ((difColumns == 0 && difRows == 1 || difRows == -1) || //if columns havent change and then rows have change with 1 or -1
                 (difRows == 0 && difColumns == 1 || difColumns == -1)) //if rows havent change and then columns have change with 1 or -1
             {
                 return true;
@@ -151,7 +148,7 @@ namespace _9Puzzle
                     Image image = new Image
                     {
                         //if its the last index the image should be empty 
-                        Source = ImageSource.FromFile(randomImgIndexes[index] == 8 ? null : imageList[randomImgIndexes[index]]) 
+                        Source = ImageSource.FromFile(randomImgIndexes[index] == 8 ? null : imageList[randomImgIndexes[index]])
                     };
 
                     //Add the image to the puzzle grid
@@ -174,14 +171,14 @@ namespace _9Puzzle
         private bool IsSolveable(int[] arr)
         {
             //When puzzle is 3*3 its just needed to know if the inversions is even 
-            
+
             int inversions = 0;
 
-            for (int i = 0; i < rowsNColumns*rowsNColumns-1; i++)
+            for (int i = 0; i < rowsNColumns * rowsNColumns - 1; i++)
             {
-                for (int j = i+1; j < rowsNColumns * rowsNColumns; j++)
+                for (int j = i + 1; j < rowsNColumns * rowsNColumns; j++)
                 {
-                    if ( arr[i]>arr[j])
+                    if (arr[i] > arr[j])
                     {
                         inversions++;
                     }
@@ -221,7 +218,7 @@ namespace _9Puzzle
 
                 List<int> indexes = new List<int>(new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8 });
 
-                for (int i = 0; i < rowsNColumns* rowsNColumns; i++)
+                for (int i = 0; i < rowsNColumns * rowsNColumns; i++)
                 {
                     indexes.Remove(randomIndex = indexes[random.Next(indexes.Count)]);
                     randomIndexesArr.Add(randomIndex);

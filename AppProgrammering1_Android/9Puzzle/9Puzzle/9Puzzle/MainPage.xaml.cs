@@ -103,8 +103,8 @@ namespace _9Puzzle
             int difColumns = nImgColumn - oImgColumn;
             int difRows = nImgRow - oImgRow;
 
-            if ((difColumns == 0 && difRows == 1 || difRows == -1) || //if columns havent change and then rows have change with 1 or -1
-                (difRows == 0 && difColumns == 1 || difColumns == -1)) //if rows havent change and then columns have change with 1 or -1
+            if ((difColumns == 0 && (difRows == 1 || difRows == -1)) || //if columns havent change and then rows have change with 1 or -1
+                (difRows == 0 && (difColumns == 1 || difColumns == -1))) //if rows havent change and then columns have change with 1 or -1
             {
                 return true;
             }

@@ -6,6 +6,7 @@ namespace SecureLoginWebApp.Models.DAL
     {
         Task<bool> IsUserNameUnique(string username);
         void CreateUser(User user);
+        void CreateUser(ApplicationUser user);
         Task<string> ValidateUserCredentials(User user);
 
     }

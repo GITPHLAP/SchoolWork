@@ -19,6 +19,23 @@ namespace SecureLoginWebApp.Models.DAL
 
         }
 
+        public async void CreateUser(ApplicationUser user)
+        {
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+                $"api/user/new", user);
+            response.EnsureSuccessStatusCode();
+        }
+
+        public async Task<ApplicationUser> FindByName(string username)
+        {
+            HttpResponseMessage response = await httpClient.GetAsync(
+                $"api/user/FindByName?username={username}");
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<ApplicationUser>();
+
+        }
+
         public async void CreateUser(User user)
         {
             HttpResponseMessage response = await httpClient.PostAsJsonAsync(

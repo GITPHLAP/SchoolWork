@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureLoginWebAPI", "Secure
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SecureLoginWebApp", "SecureLoginWebApp\SecureLoginWebApp.csproj", "{D56A6C42-AFA0-428D-B18F-FEB01643EE5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppWithIdentity", "WebAppWithIdentity\WebAppWithIdentity.csproj", "{9BF04209-E126-40F9-986C-D72BCC264FD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAppWithIdentity", "WebAppWithIdentity\WebAppWithIdentity.csproj", "{565F87C4-918B-4E57-BFBF-1ED5FB73A347}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{D56A6C42-AFA0-428D-B18F-FEB01643EE5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D56A6C42-AFA0-428D-B18F-FEB01643EE5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D56A6C42-AFA0-428D-B18F-FEB01643EE5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9BF04209-E126-40F9-986C-D72BCC264FD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9BF04209-E126-40F9-986C-D72BCC264FD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9BF04209-E126-40F9-986C-D72BCC264FD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9BF04209-E126-40F9-986C-D72BCC264FD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{565F87C4-918B-4E57-BFBF-1ED5FB73A347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{565F87C4-918B-4E57-BFBF-1ED5FB73A347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{565F87C4-918B-4E57-BFBF-1ED5FB73A347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{565F87C4-918B-4E57-BFBF-1ED5FB73A347}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

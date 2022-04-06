@@ -8,7 +8,12 @@ namespace SecureLoginWebAPI
 {
     public class Postgres
     {
-        static string connectionString = "";
+
+        static string connectionString = $"Host={Environment.GetEnvironmentVariable("DB_HOST")};" +
+            $"Username={Environment.GetEnvironmentVariable("DB_USERNAME")};" +
+            $"Password={Environment.GetEnvironmentVariable("DB_PASSWORD")};" +
+            $"Database={Environment.GetEnvironmentVariable("DB_DATABASE")};" +
+            $"Port={Environment.GetEnvironmentVariable("DB_PORT")}";
 
         public static async void CreateUser(User user)
         {

@@ -10,4 +10,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="MyDotEnv">
+      <HintPath>..\..\MyDotEnv\MyDotEnv\bin\Release\net5.0\MyDotEnv.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

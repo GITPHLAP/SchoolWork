@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using SecureLoginWebAPI.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SecureLoginWebAPI
@@ -103,20 +104,28 @@ namespace SecureLoginWebAPI
             await using var conn = new NpgsqlConnection(connectionString);
             await conn.OpenAsync();
             
-            await using var cmd = new NpgsqlCommand("INSERT INTO applicationuser VALUES(@p1, @p2, @p3, @p4, @p5, CAST(@p6 AS BIT), @p7, @p8, CAST(@p9 AS BIT), CAST(@p10 AS BIT))", conn)
+            await using var cmd = new NpgsqlCommand("INSERT INTO applicationuser(username, normalizedusername, email, " +
+                "normalizedemail, emailconfirmed, passwordhash, securitystamp, concurrencystamp, phonenumber, " +
+                "phonenumberconfirmed, twofactorenabled, lockoutend, lockoutenable, accessfailedcount)" +
+                " VALUES(@p2, @p3, @p4, @p5, CAST(@p6 AS BIT), @p7," +
+                " @p8, @p9, @p10, CAST(@p11 AS BIT), CAST(@p12 AS BIT), @p13, CAST(@p14 AS BIT), @p15)", conn)
             {
                 Parameters =
                 {
-                    new("p1", user.Id),
                     new("p2", user.Username),
                     new("p3", user.Normalizedusername),
                     new("p4", user.Email),
                     new("p5", user.Normalizedemail),
                     new("p6", Convert.ToString(user.Emailconfirmed ? 1 : 0)),
                     new("p7", user.Passwordhash),
-                    new("p8", user.Phonenumber == null ? DBNull.Value : user.Phonenumber),
-                    new("p9", Convert.ToString(user.Phonenumberconfirmed ? 1 : 0)),
-                    new("p10", Convert.ToString(user.Twofactorenabled ? 1 : 0)),
+                    new("p8", user.SecurityStamp == null ? DBNull.Value : user.SecurityStamp),
+                    new("p9", user.ConcurrencyStamp == null ? DBNull.Value : user.ConcurrencyStamp),
+                    new("p10", user.Phonenumber == null ? DBNull.Value : user.Phonenumber),
+                    new("p11", Convert.ToString(user.Phonenumberconfirmed ? 1 : 0)),
+                    new("p12", Convert.ToString(user.Twofactorenabled ? 1 : 0)),
+                    new("p13", user.LockoutEnd == null ? DBNull.Value : user.LockoutEnd),
+                    new("p14", Convert.ToString(user.LockoutEnable ? 1 : 0)),
+                    new("p15", user.AccessFailedCount),
 
                 }
             };
@@ -143,6 +152,8 @@ namespace SecureLoginWebAPI
             ApplicationUser user = new ApplicationUser(); 
             while (await reader.ReadAsync())
             {
+                //var test = reader["lockoutend"] == DBNull.Value ? null : reader["lockoutend"];
+                //DateTimeOffset test2 = (DateTime)reader["lockoutend"];
                 user = new ApplicationUser(
                     (int)reader["id"],
                     (string)reader["username"],
@@ -151,9 +162,14 @@ namespace SecureLoginWebAPI
                     (string)reader["normalizedemail"],
                     (bool)reader["emailconfirmed"],
                     (string)reader["passwordhash"],
+                    reader["securitystamp"] == DBNull.Value ? null : (string)reader["securitystamp"],
+                    reader["concurrencystamp"] == DBNull.Value ? null : (string)reader["concurrencystamp"],
                     reader["phonenumber"] == DBNull.Value ? null : (string)reader["phonenumber"],
                     (bool)reader["phonenumberconfirmed"],
-                    (bool)reader["twofactorenabled"]
+                    (bool)reader["twofactorenabled"],
+                    reader["lockoutend"] == DBNull.Value ? null : (DateTime)reader["lockoutend"], //Needs to be converted to DateTime before converting to DateTimeOffset
+                    (bool)reader["lockoutenable"],
+                    (int)reader["accessfailedcount"]
                     );
             }
 
@@ -161,6 +177,40 @@ namespace SecureLoginWebAPI
             return user;
         }
 
+        public static async void UpdateUser(ApplicationUser user)
+        {
+            await using var conn = new NpgsqlConnection(connectionString);
+            await conn.OpenAsync();
+
+            await using var cmd = new NpgsqlCommand("UPDATE public.applicationuser " +
+                "SET username=@p2, normalizedusername=@p3, email=@p4, normalizedemail=@p5, emailconfirmed=CAST(@p6 AS BIT), passwordhash=@p7, " +
+                "securitystamp=@p8, concurrencystamp=@p9, phonenumber=@p10, phonenumberconfirmed=CAST(@p11 AS BIT), twofactorenabled=CAST(@p12 AS BIT), lockoutend=@p13, " +
+                "lockoutenable=CAST(@p14 AS BIT), accessfailedcount=@p15 WHERE id = @p1; ", conn)
+            {
+                
+                Parameters =
+                {
+                    new("p1", user.Id),
+                    new("p2", user.Username),
+                    new("p3", user.Normalizedusername),
+                    new("p4", user.Email),
+                    new("p5", user.Normalizedemail),
+                    new("p6", Convert.ToString(user.Emailconfirmed ? 1 : 0)),
+                    new("p7", user.Passwordhash),
+                    new("p8", user.SecurityStamp == null ? DBNull.Value : user.SecurityStamp),
+                    new("p9", user.ConcurrencyStamp == null ? DBNull.Value : user.ConcurrencyStamp),
+                    new("p10", user.Phonenumber == null ? DBNull.Value : user.Phonenumber),
+                    new("p11", Convert.ToString(user.Phonenumberconfirmed ? 1 : 0)),
+                    new("p12", Convert.ToString(user.Twofactorenabled ? 1 : 0)),
+                    new("p13", user.LockoutEnd == null ? DBNull.Value : user.LockoutEnd),
+                    new("p14", Convert.ToString(user.LockoutEnable ? 1 : 0)),
+                    new("p15", user.AccessFailedCount),
+
+                }
+            };
+
+            await cmd.ExecuteNonQueryAsync();
+        }
 
         #endregion
 

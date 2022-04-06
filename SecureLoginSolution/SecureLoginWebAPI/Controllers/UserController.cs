@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SecureLoginWebAPI.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace SecureLoginWebAPI.Controllers
 {
@@ -55,16 +56,26 @@ namespace SecureLoginWebAPI.Controllers
 
         [HttpGet]
         [Route("FindByName")]
-        public ApplicationUser FindByName(string username)
+        public async Task<ApplicationUser> FindByName(string username)
         {
-            return Postgres.FindByName(username).Result;
+            return await Postgres.FindByName(username);
         }
 
-
-        //public void UpdateUser(ApplicationUser user)
-        //{
-
-        //}
+        [HttpPost]
+        [Route("update")]
+        public IActionResult UpdateUser(ApplicationUser user)
+        {
+            try
+            {
+                Postgres.UpdateUser(user);
+                return Ok("updated user");
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return BadRequest();
+            }
+        }
 
 
         //public void FindByEmail(string email)

@@ -177,6 +177,92 @@ namespace SecureLoginWebAPI
             return user;
         }
 
+        public static async Task<ApplicationUser> FindByEmail(string email)
+        {
+            await using var conn = new NpgsqlConnection(connectionString);
+            await conn.OpenAsync();
+
+            await using var cmd = new NpgsqlCommand("SELECT * FROM applicationuser WHERE normalizedemail = @p1 LIMIT 1;", conn)
+            {
+                Parameters =
+                {
+                    new("p1", email)
+                }
+            };
+
+            var reader = await cmd.ExecuteReaderAsync();
+
+            ApplicationUser user = new ApplicationUser();
+            while (await reader.ReadAsync())
+            {
+                //var test = reader["lockoutend"] == DBNull.Value ? null : reader["lockoutend"];
+                //DateTimeOffset test2 = (DateTime)reader["lockoutend"];
+                user = new ApplicationUser(
+                    (int)reader["id"],
+                    (string)reader["username"],
+                    (string)reader["normalizedusername"],
+                    (string)reader["email"],
+                    (string)reader["normalizedemail"],
+                    (bool)reader["emailconfirmed"],
+                    (string)reader["passwordhash"],
+                    reader["securitystamp"] == DBNull.Value ? null : (string)reader["securitystamp"],
+                    reader["concurrencystamp"] == DBNull.Value ? null : (string)reader["concurrencystamp"],
+                    reader["phonenumber"] == DBNull.Value ? null : (string)reader["phonenumber"],
+                    (bool)reader["phonenumberconfirmed"],
+                    (bool)reader["twofactorenabled"],
+                    reader["lockoutend"] == DBNull.Value ? null : (DateTime)reader["lockoutend"], //Needs to be converted to DateTime before converting to DateTimeOffset
+                    (bool)reader["lockoutenable"],
+                    (int)reader["accessfailedcount"]
+                    );
+            }
+
+
+            return user;
+        }
+
+        public static async Task<ApplicationUser> FindById(string id)
+        {
+            await using var conn = new NpgsqlConnection(connectionString);
+            await conn.OpenAsync();
+
+            await using var cmd = new NpgsqlCommand("SELECT * FROM applicationuser WHERE id = @p1 LIMIT 1;", conn)
+            {
+                Parameters =
+                {
+                    new("p1", Convert.ToInt32(id))
+                }
+            };
+
+            var reader = await cmd.ExecuteReaderAsync();
+
+            ApplicationUser user = new ApplicationUser();
+            while (await reader.ReadAsync())
+            {
+                //var test = reader["lockoutend"] == DBNull.Value ? null : reader["lockoutend"];
+                //DateTimeOffset test2 = (DateTime)reader["lockoutend"];
+                user = new ApplicationUser(
+                    (int)reader["id"],
+                    (string)reader["username"],
+                    (string)reader["normalizedusername"],
+                    (string)reader["email"],
+                    (string)reader["normalizedemail"],
+                    (bool)reader["emailconfirmed"],
+                    (string)reader["passwordhash"],
+                    reader["securitystamp"] == DBNull.Value ? null : (string)reader["securitystamp"],
+                    reader["concurrencystamp"] == DBNull.Value ? null : (string)reader["concurrencystamp"],
+                    reader["phonenumber"] == DBNull.Value ? null : (string)reader["phonenumber"],
+                    (bool)reader["phonenumberconfirmed"],
+                    (bool)reader["twofactorenabled"],
+                    reader["lockoutend"] == DBNull.Value ? null : (DateTime)reader["lockoutend"], //Needs to be converted to DateTime before converting to DateTimeOffset
+                    (bool)reader["lockoutenable"],
+                    (int)reader["accessfailedcount"]
+                    );
+            }
+
+
+            return user;
+        }
+
         public static async void UpdateUser(ApplicationUser user)
         {
             await using var conn = new NpgsqlConnection(connectionString);

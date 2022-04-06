@@ -8,6 +8,8 @@ namespace SecureLoginWebApp.Models.DAL
         void CreateUser(User user);
         void CreateUser(ApplicationUser user);
         Task<string> ValidateUserCredentials(User user);
+        void UpdateUser(ApplicationUser user);
+
 
     }
 }

@@ -67,5 +67,12 @@ namespace SecureLoginWebApp.Models.DAL
 
             return await response.Content.ReadAsStringAsync();
         }
+
+        public async void UpdateUser(ApplicationUser user)
+        {
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+                $"api/user/update", user);
+            response.EnsureSuccessStatusCode();
+        }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace SecureLoginWebApp.Models
+﻿using Microsoft.AspNetCore.Identity;
+using System;
+
+namespace SecureLoginWebApp.Models
 {
     public class ApplicationUser
     {
@@ -16,10 +19,20 @@
 
         public string PasswordHash { get; set; }
 
+        public string SecurityStamp { get; set; }
+
+        public string ConcurrencyStamp { get; set; }
+
         public string PhoneNumber { get; set; }
 
         public bool PhoneNumberConfirmed { get; set; }
 
         public bool TwoFactorEnabled { get; set; }
+
+        public virtual DateTimeOffset? LockoutEnd { get; set; }
+
+        public virtual bool LockoutEnable { get; set; }
+
+        public virtual int AccessFailedCount { get; set; }
     }
 }

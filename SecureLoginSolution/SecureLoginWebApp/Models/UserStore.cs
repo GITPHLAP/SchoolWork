@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using SecureLoginWebApp.Models.DAL;
+using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,7 +12,7 @@ using System.Threading.Tasks;
 namespace SecureLoginWebApp.Models
 {
     public class UserStore : IUserStore<ApplicationUser>, IUserEmailStore<ApplicationUser>, IUserPhoneNumberStore<ApplicationUser>,
-    IUserTwoFactorStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>
+    IUserTwoFactorStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>, IUserLockoutStore<ApplicationUser>
     {
         UserRepository userRepository = new UserRepository();
 
@@ -16,23 +20,11 @@ namespace SecureLoginWebApp.Models
 
         public UserStore(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         public async Task<IdentityResult> CreateAsync(ApplicationUser user, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-
-            //using (var connection = new Np(_connectionString))
-            //{
-            //    await connection.OpenAsync(cancellationToken);
-            //    user.Id = await connection.QuerySingleAsync<int>($@"INSERT INTO [ApplicationUser] ([UserName], [NormalizedUserName], [Email],
-            //    [NormalizedEmail], [EmailConfirmed], [PasswordHash], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled])
-            //    VALUES (@{nameof(ApplicationUser.UserName)}, @{nameof(ApplicationUser.NormalizedUserName)}, @{nameof(ApplicationUser.Email)},
-            //    @{nameof(ApplicationUser.NormalizedEmail)}, @{nameof(ApplicationUser.EmailConfirmed)}, @{nameof(ApplicationUser.PasswordHash)},
-            //    @{nameof(ApplicationUser.PhoneNumber)}, @{nameof(ApplicationUser.PhoneNumberConfirmed)}, @{nameof(ApplicationUser.TwoFactorEnabled)});
-            //    SELECT CAST(SCOPE_IDENTITY() as int)", user);
-            //}
 
             userRepository.CreateUser(user);
 
@@ -43,11 +35,7 @@ namespace SecureLoginWebApp.Models
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            //using (var connection = new SqlConnection(_connectionString))
-            //{
-            //    await connection.OpenAsync(cancellationToken);
-            //    await connection.ExecuteAsync($"DELETE FROM [ApplicationUser] WHERE [Id] = @{nameof(ApplicationUser.Id)}", user);
-            //}
+            throw new System.Exception();
 
             return IdentityResult.Success;
         }
@@ -56,14 +44,8 @@ namespace SecureLoginWebApp.Models
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            //using (var connection = new SqlConnection(_connectionString))
-            //{
-            //    await connection.OpenAsync(cancellationToken);
-            //    return await connection.QuerySingleOrDefaultAsync<ApplicationUser>($@"SELECT * FROM [ApplicationUser]
-            //    WHERE [Id] = @{nameof(userId)}", new { userId });
-            //}
+            //TODO: Implement FindById
 
-            throw new System.Exception();
             return null;
         }
 
@@ -71,12 +53,6 @@ namespace SecureLoginWebApp.Models
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            //using (var connection = new SqlConnection(_connectionString))
-            //{
-            //    await connection.OpenAsync(cancellationToken);
-            //    return await connection.QuerySingleOrDefaultAsync<ApplicationUser>($@"SELECT * FROM [ApplicationUser]
-            //    WHERE [NormalizedUserName] = @{nameof(normalizedUserName)}", new { normalizedUserName });
-            //}
             return await userRepository.FindByName(normalizedUserName);
 
         }
@@ -112,22 +88,7 @@ namespace SecureLoginWebApp.Models
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            //using (var connection = new SqlConnection(_connectionString))
-            //{
-            //    await connection.OpenAsync(cancellationToken);
-            //    await connection.ExecuteAsync($@"UPDATE [ApplicationUser] SET
-            //    [UserName] = @{nameof(ApplicationUser.UserName)},
-            //    [NormalizedUserName] = @{nameof(ApplicationUser.NormalizedUserName)},
-            //    [Email] = @{nameof(ApplicationUser.Email)},
-            //    [NormalizedEmail] = @{nameof(ApplicationUser.NormalizedEmail)},
-            //    [EmailConfirmed] = @{nameof(ApplicationUser.EmailConfirmed)},
-            //    [PasswordHash] = @{nameof(ApplicationUser.PasswordHash)},
-            //    [PhoneNumber] = @{nameof(ApplicationUser.PhoneNumber)},
-            //    [PhoneNumberConfirmed] = @{nameof(ApplicationUser.PhoneNumberConfirmed)},
-            //    [TwoFactorEnabled] = @{nameof(ApplicationUser.TwoFactorEnabled)}
-            //    WHERE [Id] = @{nameof(ApplicationUser.Id)}", user);
-            //}
-            throw new System.Exception();
+            userRepository.UpdateUser(user);
 
             return IdentityResult.Success;
         }
@@ -158,15 +119,7 @@ namespace SecureLoginWebApp.Models
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            //using (var connection = new SqlConnection(_connectionString))
-            //{
-            //    await connection.OpenAsync(cancellationToken);
-            //    return await connection.QuerySingleOrDefaultAsync<ApplicationUser>($@"SELECT * FROM [ApplicationUser]
-            //    WHERE [NormalizedEmail] = @{nameof(normalizedEmail)}", new { normalizedEmail });
-            //}
-            throw new System.Exception();
-
-            return null;
+            return await userRepository.FindByName(normalizedEmail);
         }
 
         public Task<string> GetNormalizedEmailAsync(ApplicationUser user, CancellationToken cancellationToken)
@@ -231,7 +184,48 @@ namespace SecureLoginWebApp.Models
 
         public void Dispose()
         {
-            // Nothing to dispose.
+        }
+
+        public Task<DateTimeOffset?> GetLockoutEndDateAsync(ApplicationUser user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.LockoutEnd);
+        }
+
+        public Task SetLockoutEndDateAsync(ApplicationUser user, DateTimeOffset? lockoutEnd, CancellationToken cancellationToken)
+        {
+            user.LockoutEnd = lockoutEnd.Value.UtcDateTime;
+            return Task.FromResult(0);
+        }
+
+        public Task<int> IncrementAccessFailedCountAsync(ApplicationUser user, CancellationToken cancellationToken)
+        {
+            user.AccessFailedCount++;
+
+            return Task.FromResult(user.AccessFailedCount);
+        }
+
+        public Task ResetAccessFailedCountAsync(ApplicationUser user, CancellationToken cancellationToken)
+        {
+            user.AccessFailedCount = 0;
+            return Task.FromResult(0);
+        }
+
+        public Task<int> GetAccessFailedCountAsync(ApplicationUser user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.AccessFailedCount);
+
+        }
+
+        public Task<bool> GetLockoutEnabledAsync(ApplicationUser user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.LockoutEnable);
+        }
+
+        public Task SetLockoutEnabledAsync(ApplicationUser user, bool enabled, CancellationToken cancellationToken)
+        {
+            user.LockoutEnable = enabled;
+            return Task.FromResult(0);
+
         }
     }
 }

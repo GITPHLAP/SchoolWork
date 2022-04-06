@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using SecureLoginWebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -25,26 +26,32 @@ namespace SecureLoginWebApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IUserStore<ApplicationUser>,UserStore>();
-            services.AddTransient<IRoleStore<ApplicationRole>,RoleStore>();
+            services.AddTransient<IUserStore<ApplicationUser>, UserStore>();
+            services.AddTransient<IRoleStore<ApplicationRole>, RoleStore>();
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddDefaultTokenProviders();
 
-            services.AddControllersWithViews();
-            
-            services.AddSession();
-
             services.Configure<IdentityOptions>(options =>
             {
-                // Default Password settings.
+                // TODO: Set password options
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 0;
+
+                options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.DefaultLockoutTimeSpan = new TimeSpan(0, 10, 0);
+                options.Lockout.MaxFailedAccessAttempts = 3;
             });
+
+
+            services.AddControllersWithViews();
+            services.AddSession();
+
+
 
         }
 

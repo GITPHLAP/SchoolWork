@@ -12,7 +12,7 @@ namespace SecureLoginWebApp.Models.DAL
 
         public UserRepository()
         {
-            httpClient.BaseAddress = new Uri("http://localhost:5000/");
+            httpClient.BaseAddress = new Uri(Environment.GetEnvironmentVariable("API_URL"));
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));

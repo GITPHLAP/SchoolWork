@@ -22,4 +22,16 @@
     <Folder Include="Views\Account\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="MyDotEnv">
+      <HintPath>..\..\MyDotEnv\MyDotEnv\bin\Release\net5.0\MyDotEnv.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update=".env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

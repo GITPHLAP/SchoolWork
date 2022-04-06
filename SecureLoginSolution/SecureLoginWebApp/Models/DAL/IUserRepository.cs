@@ -10,6 +10,10 @@ namespace SecureLoginWebApp.Models.DAL
         Task<string> ValidateUserCredentials(User user);
         void UpdateUser(ApplicationUser user);
 
+        Task<ApplicationUser> FindUserByEmail(string email);
+        Task<ApplicationUser> FindUserById(string userId);
+        Task<ApplicationUser> FindUserByName(string name);
+
 
     }
 }

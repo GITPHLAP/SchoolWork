@@ -3,6 +3,7 @@ using System;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace SecureLoginWebApp.Models.DAL
 {
@@ -24,16 +25,6 @@ namespace SecureLoginWebApp.Models.DAL
             HttpResponseMessage response = await httpClient.PostAsJsonAsync(
                 $"api/user/new", user);
             response.EnsureSuccessStatusCode();
-        }
-
-        public async Task<ApplicationUser> FindByName(string username)
-        {
-            HttpResponseMessage response = await httpClient.GetAsync(
-                $"api/user/FindByName?username={username}");
-            response.EnsureSuccessStatusCode();
-
-            return await response.Content.ReadFromJsonAsync<ApplicationUser>();
-
         }
 
         public async void CreateUser(User user)
@@ -70,9 +61,39 @@ namespace SecureLoginWebApp.Models.DAL
 
         public async void UpdateUser(ApplicationUser user)
         {
-            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+            HttpResponseMessage response = await httpClient.PutAsJsonAsync(
                 $"api/user/update", user);
             response.EnsureSuccessStatusCode();
+        }
+
+        public async Task<ApplicationUser> FindUserByName(string name)
+        {
+            HttpResponseMessage response = await httpClient.GetAsync(
+                $"api/user/FindByName?username={name}");
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<ApplicationUser>();
+        }
+
+        public async Task<ApplicationUser> FindUserByEmail(string email)
+        {
+            //TODO: Find the right path for FindUserByEmail
+            HttpResponseMessage response = await httpClient.GetAsync(
+    $"api/user/FindByEmail?email={email}");
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<ApplicationUser>();
+        }
+
+        public async Task<ApplicationUser> FindUserById(string userId)
+        {
+            //TODO: Find the right path for FindUserById
+
+            HttpResponseMessage response = await httpClient.GetAsync(
+    $"api/user/FindById?id={userId}");
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadFromJsonAsync<ApplicationUser>();
         }
     }
 }

@@ -44,16 +44,14 @@ namespace SecureLoginWebApp.Models
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            //TODO: Implement FindById
-
-            return null;
+            return await userRepository.FindUserById(userId);
         }
 
         public async Task<ApplicationUser> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            return await userRepository.FindByName(normalizedUserName);
+            return await userRepository.FindUserByName(normalizedUserName);
 
         }
 
@@ -119,7 +117,7 @@ namespace SecureLoginWebApp.Models
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            return await userRepository.FindByName(normalizedEmail);
+            return await userRepository.FindUserByEmail(normalizedEmail);
         }
 
         public Task<string> GetNormalizedEmailAsync(ApplicationUser user, CancellationToken cancellationToken)

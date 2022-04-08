@@ -496,7 +496,7 @@ namespace SecureLoginWebApp.Controllers
         {
             return string.Format(
                 AuthenicatorUriFormat,
-                _urlEncoder.Encode("WebApp"),
+                _urlEncoder.Encode("SecureLogin"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

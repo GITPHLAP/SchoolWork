@@ -12,7 +12,8 @@ using System.Threading.Tasks;
 namespace SecureLoginWebApp.Models
 {
     public class UserStore : IUserStore<ApplicationUser>, IUserEmailStore<ApplicationUser>, IUserPhoneNumberStore<ApplicationUser>,
-    IUserTwoFactorStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>, IUserLockoutStore<ApplicationUser>
+    IUserTwoFactorStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>, IUserLockoutStore<ApplicationUser>, IUserAuthenticatorKeyStore<ApplicationUser>
+        , IUserTwoFactorRecoveryCodeStore<ApplicationUser>
     {
         UserRepository userRepository = new UserRepository();
 
@@ -225,5 +226,42 @@ namespace SecureLoginWebApp.Models
             return Task.FromResult(0);
 
         }
+
+        public Task SetAuthenticatorKeyAsync(ApplicationUser user, string key, CancellationToken cancellationToken)
+        {
+            user.AuthenticatorKey = key;
+            return Task.FromResult(0);
+        }
+        
+        public Task<string> GetAuthenticatorKeyAsync(ApplicationUser user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.AuthenticatorKey);
+        }
+
+
+        public Task ReplaceCodesAsync(ApplicationUser user, IEnumerable<string> recoveryCodes, CancellationToken cancellationToken)
+        {
+            user.RecoveryCodes = recoveryCodes.Select(c => new RecoveryCode { Code = c, Redeemed = false }).ToList();
+            return Task.FromResult(0);
+        }
+
+        public Task<bool> RedeemCodeAsync(ApplicationUser user, string code, CancellationToken cancellationToken)
+        {
+            RecoveryCode rcode = user.RecoveryCodes.FirstOrDefault(rc => rc.Code == code && !rc.Redeemed);
+
+            if (rcode != null)
+            {
+                user.RecoveryCodes.First().Redeemed = true; //this set the code to used
+
+                return Task.FromResult(true);
+            }
+            return Task.FromResult(false);
+        }
+
+        public Task<int> CountCodesAsync(ApplicationUser user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.RecoveryCodes?.Where(c => !c.Redeemed).Count() ?? 0);
+        }
+
     }
 }

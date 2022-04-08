@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 
 namespace SecureLoginWebApp.Models
 {
@@ -34,5 +35,10 @@ namespace SecureLoginWebApp.Models
         public virtual bool LockoutEnable { get; set; }
 
         public virtual int AccessFailedCount { get; set; }
+        public bool AuthenticatorEnabled { get; set; }
+        public string AuthenticatorKey { get; set; }
+
+        public IList<RecoveryCode> RecoveryCodes { get; set; }
+
     }
 }

@@ -13,14 +13,11 @@ using System.Threading.Tasks;
 namespace SecureLoginWebApp.Models
 {
     //TODO: Alt burde logges
-    //TODO: Kig på cookies ved login
     public class UserStore : IUserStore<ApplicationUser>, IUserEmailStore<ApplicationUser>, IUserPhoneNumberStore<ApplicationUser>,
     IUserTwoFactorStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>, IUserLockoutStore<ApplicationUser>, IUserAuthenticatorKeyStore<ApplicationUser>
         , IUserTwoFactorRecoveryCodeStore<ApplicationUser>
     {
         UserRepository userRepository = new UserRepository();
-
-        private readonly string _connectionString;
 
         public UserStore(IConfiguration configuration)
         {

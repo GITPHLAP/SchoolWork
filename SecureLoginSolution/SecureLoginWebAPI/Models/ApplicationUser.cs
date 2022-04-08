@@ -1,5 +1,6 @@
 ﻿using NpgsqlTypes;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SecureLoginWebAPI.Models
@@ -22,15 +23,18 @@ namespace SecureLoginWebAPI.Models
         private bool lockoutEnable;
         private int accessFailedCount;
         private bool deleted;
+        private string authenticatorKey;
+        private IList<RecoverCode> recoveryCodes;
+
 
         public ApplicationUser()
         {
         }
 
-        public ApplicationUser(int id, string username, string normalizedusername,
-            string email, string normalizedemail, bool emailconfirmed, string passwordhash,
-            string securityStamp, string concurrencyStamp, string phonenumber, bool phonenumberconfirmed,
-            bool twofactorenabled, DateTimeOffset? lockoutEnd, bool lockoutEnable, int accessFailedCount)
+        public ApplicationUser(int id, string username, string normalizedusername, string email,
+            string normalizedemail, bool emailconfirmed, string passwordhash, string securityStamp,
+            string concurrencyStamp, string phonenumber, bool phonenumberconfirmed, bool twofactorenabled,
+            DateTimeOffset? lockoutEnd, bool lockoutEnable, int accessFailedCount, bool deleted, string authenticatorKey)
         {
             this.id = id;
             this.username = username;
@@ -48,6 +52,8 @@ namespace SecureLoginWebAPI.Models
             this.lockoutEnable = lockoutEnable;
             this.accessFailedCount = accessFailedCount;
             this.deleted = deleted;
+            this.authenticatorKey = authenticatorKey;
+
         }
 
         public int Id { get => id; set => id = value; }
@@ -66,5 +72,7 @@ namespace SecureLoginWebAPI.Models
         public bool LockoutEnable { get => lockoutEnable; set => lockoutEnable = value; }
         public int AccessFailedCount { get => accessFailedCount; set => accessFailedCount = value; }
         public bool Deleted { get => deleted; set => deleted = value; }
+        public string AuthenticatorKey { get => authenticatorKey; set => authenticatorKey = value; }
+        public IList<RecoverCode> RecoveryCodes { get => recoveryCodes; set => recoveryCodes = value; }
     }
 }

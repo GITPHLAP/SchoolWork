@@ -78,7 +78,6 @@ namespace SecureLoginWebAPI
             return count == 1; //if count == 1 then its valid
         }
 
-
         private static async Task<string> GetUsersSalt(string username)
         {
             await using var conn = new NpgsqlConnection(connectionString);
@@ -101,19 +100,15 @@ namespace SecureLoginWebAPI
 
 
 
-
         #region User queries
 
         public static async void CreateUser2(ApplicationUser user)
         {
             await using var conn = new NpgsqlConnection(connectionString);
             await conn.OpenAsync();
-            
-            await using var cmd = new NpgsqlCommand("INSERT INTO applicationuser(username, normalizedusername, email, " +
-                "normalizedemail, emailconfirmed, passwordhash, securitystamp, concurrencystamp, phonenumber, " +
-                "phonenumberconfirmed, twofactorenabled, lockoutend, lockoutenable, accessfailedcount)" +
-                " VALUES(@p2, @p3, @p4, @p5, CAST(@p6 AS BIT), @p7," +
-                " @p8, @p9, @p10, CAST(@p11 AS BIT), CAST(@p12 AS BIT), @p13, CAST(@p14 AS BIT), @p15)", conn)
+
+            await using var cmd = new NpgsqlCommand("CALL public.proc_insert_applicationuser(@p2, @p3, @p4, @p5, CAST(@p6 AS BIT), @p7," +
+                " @p8, @p9, @p10, CAST(@p11 AS BIT), CAST(@p12 AS BIT), @p13, CAST(@p14 AS BIT), @p15, false, @p17);", conn)
             {
                 Parameters =
                 {
@@ -131,6 +126,7 @@ namespace SecureLoginWebAPI
                     new("p13", user.LockoutEnd == null ? DBNull.Value : user.LockoutEnd),
                     new("p14", Convert.ToString(user.LockoutEnable ? 1 : 0)),
                     new("p15", user.AccessFailedCount),
+                    new("p17", user.AuthenticatorKey == null ? DBNull.Value : user.AuthenticatorKey ),
 
                 }
             };
@@ -144,7 +140,7 @@ namespace SecureLoginWebAPI
             await using var conn = new NpgsqlConnection(connectionString);
             await conn.OpenAsync();
 
-            await using var cmd = new NpgsqlCommand("SELECT * FROM applicationuser WHERE normalizedUserName = @p1 LIMIT 1;", conn)
+            await using var cmd = new NpgsqlCommand("SELECT * FROM public.func_find_user_by_name(@p1);", conn)
             {
                 Parameters =
                 {
@@ -154,7 +150,7 @@ namespace SecureLoginWebAPI
 
             var reader = await cmd.ExecuteReaderAsync();
 
-            ApplicationUser user = new ApplicationUser(); 
+            ApplicationUser user = new ApplicationUser();
             while (await reader.ReadAsync())
             {
                 //var test = reader["lockoutend"] == DBNull.Value ? null : reader["lockoutend"];
@@ -176,9 +172,11 @@ namespace SecureLoginWebAPI
                     (bool)reader["_lockoutenable"],
                     (int)reader["_accessfailedcount"],
                     (bool)reader["_deleted"],
+                    reader["_authenticatorkey"] == DBNull.Value ? null : (string)reader["_authenticatorkey"]
                     );
             }
 
+            user.RecoveryCodes = await FindRecoveryCodesById(user.Id) ?? new List<RecoverCode>();
 
             return user;
         }
@@ -188,7 +186,7 @@ namespace SecureLoginWebAPI
             await using var conn = new NpgsqlConnection(connectionString);
             await conn.OpenAsync();
 
-            await using var cmd = new NpgsqlCommand("SELECT * FROM applicationuser WHERE normalizedemail = @p1 LIMIT 1;", conn)
+            await using var cmd = new NpgsqlCommand("SELECT * FROM public.func_find_user_by_email(@p1);", conn)
             {
                 Parameters =
                 {
@@ -220,8 +218,11 @@ namespace SecureLoginWebAPI
                     (bool)reader["_lockoutenable"],
                     (int)reader["_accessfailedcount"],
                     (bool)reader["_deleted"],
+                    reader["_authenticatorkey"] == DBNull.Value ? null : (string)reader["_authenticatorkey"]
                     );
             }
+
+            user.RecoveryCodes = await FindRecoveryCodesById(user.Id) ?? new List<RecoverCode>();
 
 
             return user;
@@ -232,7 +233,7 @@ namespace SecureLoginWebAPI
             await using var conn = new NpgsqlConnection(connectionString);
             await conn.OpenAsync();
 
-            await using var cmd = new NpgsqlCommand("SELECT * FROM applicationuser WHERE id = @p1 LIMIT 1;", conn)
+            await using var cmd = new NpgsqlCommand("SELECT * FROM public.func_find_user_by_id(@p1);", conn)
             {
                 Parameters =
                 {
@@ -242,7 +243,7 @@ namespace SecureLoginWebAPI
 
             var reader = await cmd.ExecuteReaderAsync();
 
-            ApplicationUser user = new ApplicationUser();
+            ApplicationUser user = null;
             while (await reader.ReadAsync())
             {
                 user = new ApplicationUser(
@@ -262,24 +263,52 @@ namespace SecureLoginWebAPI
                     (bool)reader["_lockoutenable"],
                     (int)reader["_accessfailedcount"],
                     (bool)reader["_deleted"],
+                    reader["_authenticatorkey"] == DBNull.Value ? null : (string)reader["_authenticatorkey"]
                     );
             }
 
+            //user.UserLogins = await FindUserLoginById(user.Id);
+            user.RecoveryCodes = await FindRecoveryCodesById(user.Id) ?? new List<RecoverCode>();
 
             return user;
         }
 
+        private static async Task<List<RecoverCode>> FindRecoveryCodesById(int id)
+        {
+            await using var conn = new NpgsqlConnection(connectionString);
+            await conn.OpenAsync();
+
+            await using var cmd = new NpgsqlCommand("SELECT * FROM public.func_get_recoverycodes(@p1);", conn)
+            {
+                Parameters =
+                {
+                    new("p1", id)
+                }
+            };
+
+            var reader = await cmd.ExecuteReaderAsync();
+
+            List<RecoverCode> codes = new();
+            while (await reader.ReadAsync())
+            {
+                codes.Add(new RecoverCode(
+                    (string)reader["_code"],
+                    (bool)reader["_redeemed"]
+                    ));
+            }
+
+
+            return codes;
+        }
         public static async void UpdateUser(ApplicationUser user)
         {
             await using var conn = new NpgsqlConnection(connectionString);
             await conn.OpenAsync();
 
-            await using var cmd = new NpgsqlCommand("UPDATE public.applicationuser " +
-                "SET username=@p2, normalizedusername=@p3, email=@p4, normalizedemail=@p5, emailconfirmed=CAST(@p6 AS BIT), passwordhash=@p7, " +
-                "securitystamp=@p8, concurrencystamp=@p9, phonenumber=@p10, phonenumberconfirmed=CAST(@p11 AS BIT), twofactorenabled=CAST(@p12 AS BIT), lockoutend=@p13, " +
-                "lockoutenable=CAST(@p14 AS BIT), accessfailedcount=@p15 WHERE id = @p1; ", conn)
+            await using var cmd = new NpgsqlCommand("CALL public.proc_update_applicationuser(@p1, @p2, @p3, @p4, @p5, CAST(@p6 AS BIT), @p7," +
+                " @p8, @p9, @p10, CAST(@p11 AS BIT), CAST(@p12 AS BIT), @p13, CAST(@p14 AS BIT), @p15, @p16, @p17);", conn)
             {
-                
+
                 Parameters =
                 {
                     new("p1", user.Id),
@@ -298,11 +327,58 @@ namespace SecureLoginWebAPI
                     new("p14", Convert.ToString(user.LockoutEnable ? 1 : 0)),
                     new("p15", user.AccessFailedCount),
                     new("p16", user.Deleted),
+                    new("p17", user.AuthenticatorKey == null ? DBNull.Value : user.AuthenticatorKey ),
 
                 }
             };
 
             await cmd.ExecuteNonQueryAsync();
+
+            if (user.RecoveryCodes != null)
+            {
+                UpdateRecCodes(user.RecoveryCodes, user.Id);
+            }
+        }
+
+        private static async void UpdateRecCodes(IList<RecoverCode> rc, int userid)
+        {
+            DeleteRecCodes(userid);
+
+            await using var conn = new NpgsqlConnection(connectionString);
+            await conn.OpenAsync();
+            foreach (RecoverCode item in rc)
+            {
+                await using var cmd = new NpgsqlCommand("CALL public.proc_update_recoverycodes(@p1, @p2, @p3);", conn)
+                {
+
+                    Parameters =
+                {
+                    new("p1", userid),
+                    new("p2", item.Code),
+                    new("p3", item.Redeemed),
+                }
+                };
+
+                await cmd.ExecuteNonQueryAsync();
+            }
+
+        }
+
+        private static async void DeleteRecCodes(int userid)
+        {
+            await using var conn = new NpgsqlConnection(connectionString);
+            await conn.OpenAsync();
+            await using var cmd = new NpgsqlCommand("DELETE FROM recoverycodes WHERE userid = @p1;", conn)
+            {
+
+                Parameters =
+                {
+                    new("p1", userid)
+                }
+            };
+
+            await cmd.ExecuteNonQueryAsync();
+
         }
 
         public static async void DeleteUser(int userid)

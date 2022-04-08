@@ -59,17 +59,28 @@ namespace SecureLoginWebAPI.Controllers
 
         [HttpGet]
         [Route("FindById")]
-        public async Task<ApplicationUser> FindUserById(string id)
+        public async Task<IActionResult> FindUserById(string id)
         {
-            return await Postgres.FindById(id);
+
+            if (await Postgres.FindById(id) is ApplicationUser user)
+            {
+                return Ok(user);
+            }
+
+            return NotFound();
 
         }
 
         [HttpGet]
         [Route("FindByName")]
-        public async Task<ApplicationUser> FindByName(string username)
+        public async Task<IActionResult> FindByName(string username)
         {
-            return await Postgres.FindByName(username);
+            if (await Postgres.FindByName(username) is ApplicationUser user)
+            {
+                return Ok(user);
+            }
+
+            return NotFound();
         }
 
         [HttpPut]
@@ -90,9 +101,14 @@ namespace SecureLoginWebAPI.Controllers
 
         [HttpGet]
         [Route("FindByEmail")]
-        public async Task<ApplicationUser> FindByEmail(string email)
+        public async Task<IActionResult> FindByEmail(string email)
         {
-            return await Postgres.FindByEmail(email);
+            if (await Postgres.FindByEmail(email) is ApplicationUser user)
+            {
+                return Ok(user);
+            }
+
+            return NotFound();
 
         }
 

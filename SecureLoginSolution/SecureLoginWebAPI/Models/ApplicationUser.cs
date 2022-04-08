@@ -21,6 +21,7 @@ namespace SecureLoginWebAPI.Models
         private DateTimeOffset? lockoutEnd;
         private bool lockoutEnable;
         private int accessFailedCount;
+        private bool deleted;
 
         public ApplicationUser()
         {
@@ -46,6 +47,7 @@ namespace SecureLoginWebAPI.Models
             this.lockoutEnd = lockoutEnd;
             this.lockoutEnable = lockoutEnable;
             this.accessFailedCount = accessFailedCount;
+            this.deleted = deleted;
         }
 
         public int Id { get => id; set => id = value; }
@@ -63,5 +65,6 @@ namespace SecureLoginWebAPI.Models
         public DateTimeOffset? LockoutEnd { get => lockoutEnd; set => lockoutEnd = value; }
         public bool LockoutEnable { get => lockoutEnable; set => lockoutEnable = value; }
         public int AccessFailedCount { get => accessFailedCount; set => accessFailedCount = value; }
+        public bool Deleted { get => deleted; set => deleted = value; }
     }
 }

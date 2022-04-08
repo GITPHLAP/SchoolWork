@@ -46,6 +46,51 @@ namespace SecureLoginWebApp.Controllers
         public string StatusMessage { get; set; }
 
         [HttpGet]
+        public async Task<IActionResult> DeleteProfile()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            var hasPassword = await _userManager.HasPasswordAsync(user);
+            if (!hasPassword)
+            {
+                return RedirectToAction(nameof(SetPassword));
+            }
+
+            var model = new DeleteProfileViewModel { StatusMessage = StatusMessage };
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteProfile(DeleteProfileViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            if (!await _userManager.CheckPasswordAsync(user, model.Password))
+            {
+                StatusMessage = "Error not correct password";
+                return RedirectToAction(nameof(DeleteProfile));
+            }
+            
+            await _userManager.DeleteAsync(user);
+            _logger.LogInformation("User has deleted the profile");
+
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);

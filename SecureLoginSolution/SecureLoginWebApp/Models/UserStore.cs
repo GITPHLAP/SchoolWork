@@ -5,12 +5,15 @@ using Microsoft.Extensions.Options;
 using SecureLoginWebApp.Models.DAL;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 
 namespace SecureLoginWebApp.Models
 {
+    //TODO: Alt burde logges
+    //TODO: Kig på cookies ved login
     public class UserStore : IUserStore<ApplicationUser>, IUserEmailStore<ApplicationUser>, IUserPhoneNumberStore<ApplicationUser>,
     IUserTwoFactorStore<ApplicationUser>, IUserPasswordStore<ApplicationUser>, IUserLockoutStore<ApplicationUser>, IUserAuthenticatorKeyStore<ApplicationUser>
         , IUserTwoFactorRecoveryCodeStore<ApplicationUser>
@@ -36,7 +39,7 @@ namespace SecureLoginWebApp.Models
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            throw new System.Exception();
+            userRepository.DeleteUser(user.Id);
 
             return IdentityResult.Success;
         }
@@ -192,6 +195,7 @@ namespace SecureLoginWebApp.Models
 
         public Task SetLockoutEndDateAsync(ApplicationUser user, DateTimeOffset? lockoutEnd, CancellationToken cancellationToken)
         {
+            //TODO: blacklist ip and inform user on email about lockouts
             user.LockoutEnd = lockoutEnd.Value.UtcDateTime;
             return Task.FromResult(0);
         }

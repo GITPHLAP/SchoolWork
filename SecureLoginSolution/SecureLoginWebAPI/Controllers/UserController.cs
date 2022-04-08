@@ -42,11 +42,20 @@ namespace SecureLoginWebAPI.Controllers
 
         }
 
-
-        //public void DeleteUser(ApplicationUser user)
-        //{
-
-        //}
+        [HttpDelete]
+        public IActionResult DeleteUser(int userid)
+        {
+            try
+            {
+                Postgres.DeleteUser(userid);
+                return Ok("Deleted user");
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return BadRequest();
+            }
+        }
 
         [HttpGet]
         [Route("FindById")]

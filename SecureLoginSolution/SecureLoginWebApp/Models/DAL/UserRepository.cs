@@ -70,9 +70,12 @@ namespace SecureLoginWebApp.Models.DAL
         {
             HttpResponseMessage response = await httpClient.GetAsync(
                 $"api/user/FindByName?username={name}");
-            response.EnsureSuccessStatusCode();
-
-            return await response.Content.ReadFromJsonAsync<ApplicationUser>();
+            if (response.IsSuccessStatusCode)
+            {
+                //var test = await response.Content.ReadFromJsonAsync<ApplicationUser>();
+                return await response.Content.ReadFromJsonAsync<ApplicationUser>();
+            }
+            return null;
         }
 
         public async Task<ApplicationUser> FindUserByEmail(string email)
@@ -80,9 +83,11 @@ namespace SecureLoginWebApp.Models.DAL
             //TODO: Find the right path for FindUserByEmail
             HttpResponseMessage response = await httpClient.GetAsync(
     $"api/user/FindByEmail?email={email}");
-            response.EnsureSuccessStatusCode();
-
-            return await response.Content.ReadFromJsonAsync<ApplicationUser>();
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<ApplicationUser>();
+            }
+            return null;
         }
 
         public async Task<ApplicationUser> FindUserById(string userId)
@@ -91,9 +96,25 @@ namespace SecureLoginWebApp.Models.DAL
 
             HttpResponseMessage response = await httpClient.GetAsync(
     $"api/user/FindById?id={userId}");
-            response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadFromJsonAsync<ApplicationUser>();
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadFromJsonAsync<ApplicationUser>();
+            }
+            return null;
+
+            
         }
+
+        public async void DeleteUser(int userId)
+        {
+            //TODO: Find the right path for FindUserById
+
+            HttpResponseMessage response = await httpClient.DeleteAsync(
+    $"api/user?userid={userId}");
+
+            response.EnsureSuccessStatusCode();
+        }
+        
     }
 }

@@ -160,21 +160,22 @@ namespace SecureLoginWebAPI
                 //var test = reader["lockoutend"] == DBNull.Value ? null : reader["lockoutend"];
                 //DateTimeOffset test2 = (DateTime)reader["lockoutend"];
                 user = new ApplicationUser(
-                    (int)reader["id"],
-                    (string)reader["username"],
-                    (string)reader["normalizedusername"],
-                    (string)reader["email"],
-                    (string)reader["normalizedemail"],
-                    (bool)reader["emailconfirmed"],
-                    (string)reader["passwordhash"],
-                    reader["securitystamp"] == DBNull.Value ? null : (string)reader["securitystamp"],
-                    reader["concurrencystamp"] == DBNull.Value ? null : (string)reader["concurrencystamp"],
-                    reader["phonenumber"] == DBNull.Value ? null : (string)reader["phonenumber"],
-                    (bool)reader["phonenumberconfirmed"],
-                    (bool)reader["twofactorenabled"],
-                    reader["lockoutend"] == DBNull.Value ? null : (DateTime)reader["lockoutend"], //Needs to be converted to DateTime before converting to DateTimeOffset
-                    (bool)reader["lockoutenable"],
-                    (int)reader["accessfailedcount"]
+                    (int)reader["_id"],
+                    (string)reader["_username"],
+                    (string)reader["_normalizedusername"],
+                    (string)reader["_email"],
+                    (string)reader["_normalizedemail"],
+                    (bool)reader["_emailconfirmed"],
+                    (string)reader["_passwordhash"],
+                    reader["_securitystamp"] == DBNull.Value ? null : (string)reader["_securitystamp"],
+                    reader["_concurrencystamp"] == DBNull.Value ? null : (string)reader["_concurrencystamp"],
+                    reader["_phonenumber"] == DBNull.Value ? null : (string)reader["_phonenumber"],
+                    (bool)reader["_phonenumberconfirmed"],
+                    (bool)reader["_twofactorenabled"],
+                    reader["_lockoutend"] == DBNull.Value ? null : (DateTime)reader["_lockoutend"], //Needs to be converted to DateTime before converting to DateTimeOffset
+                    (bool)reader["_lockoutenable"],
+                    (int)reader["_accessfailedcount"],
+                    (bool)reader["_deleted"],
                     );
             }
 
@@ -203,21 +204,22 @@ namespace SecureLoginWebAPI
                 //var test = reader["lockoutend"] == DBNull.Value ? null : reader["lockoutend"];
                 //DateTimeOffset test2 = (DateTime)reader["lockoutend"];
                 user = new ApplicationUser(
-                    (int)reader["id"],
-                    (string)reader["username"],
-                    (string)reader["normalizedusername"],
-                    (string)reader["email"],
-                    (string)reader["normalizedemail"],
-                    (bool)reader["emailconfirmed"],
-                    (string)reader["passwordhash"],
-                    reader["securitystamp"] == DBNull.Value ? null : (string)reader["securitystamp"],
-                    reader["concurrencystamp"] == DBNull.Value ? null : (string)reader["concurrencystamp"],
-                    reader["phonenumber"] == DBNull.Value ? null : (string)reader["phonenumber"],
-                    (bool)reader["phonenumberconfirmed"],
-                    (bool)reader["twofactorenabled"],
-                    reader["lockoutend"] == DBNull.Value ? null : (DateTime)reader["lockoutend"], //Needs to be converted to DateTime before converting to DateTimeOffset
-                    (bool)reader["lockoutenable"],
-                    (int)reader["accessfailedcount"]
+                    (int)reader["_id"],
+                    (string)reader["_username"],
+                    (string)reader["_normalizedusername"],
+                    (string)reader["_email"],
+                    (string)reader["_normalizedemail"],
+                    (bool)reader["_emailconfirmed"],
+                    (string)reader["_passwordhash"],
+                    reader["_securitystamp"] == DBNull.Value ? null : (string)reader["_securitystamp"],
+                    reader["_concurrencystamp"] == DBNull.Value ? null : (string)reader["_concurrencystamp"],
+                    reader["_phonenumber"] == DBNull.Value ? null : (string)reader["_phonenumber"],
+                    (bool)reader["_phonenumberconfirmed"],
+                    (bool)reader["_twofactorenabled"],
+                    reader["_lockoutend"] == DBNull.Value ? null : (DateTime)reader["_lockoutend"], //Needs to be converted to DateTime before converting to DateTimeOffset
+                    (bool)reader["_lockoutenable"],
+                    (int)reader["_accessfailedcount"],
+                    (bool)reader["_deleted"],
                     );
             }
 
@@ -243,24 +245,23 @@ namespace SecureLoginWebAPI
             ApplicationUser user = new ApplicationUser();
             while (await reader.ReadAsync())
             {
-                //var test = reader["lockoutend"] == DBNull.Value ? null : reader["lockoutend"];
-                //DateTimeOffset test2 = (DateTime)reader["lockoutend"];
                 user = new ApplicationUser(
-                    (int)reader["id"],
-                    (string)reader["username"],
-                    (string)reader["normalizedusername"],
-                    (string)reader["email"],
-                    (string)reader["normalizedemail"],
-                    (bool)reader["emailconfirmed"],
-                    (string)reader["passwordhash"],
-                    reader["securitystamp"] == DBNull.Value ? null : (string)reader["securitystamp"],
-                    reader["concurrencystamp"] == DBNull.Value ? null : (string)reader["concurrencystamp"],
-                    reader["phonenumber"] == DBNull.Value ? null : (string)reader["phonenumber"],
-                    (bool)reader["phonenumberconfirmed"],
-                    (bool)reader["twofactorenabled"],
-                    reader["lockoutend"] == DBNull.Value ? null : (DateTime)reader["lockoutend"], //Needs to be converted to DateTime before converting to DateTimeOffset
-                    (bool)reader["lockoutenable"],
-                    (int)reader["accessfailedcount"]
+                    (int)reader["_id"],
+                    (string)reader["_username"],
+                    (string)reader["_normalizedusername"],
+                    (string)reader["_email"],
+                    (string)reader["_normalizedemail"],
+                    (bool)reader["_emailconfirmed"],
+                    (string)reader["_passwordhash"],
+                    reader["_securitystamp"] == DBNull.Value ? null : (string)reader["_securitystamp"],
+                    reader["_concurrencystamp"] == DBNull.Value ? null : (string)reader["_concurrencystamp"],
+                    reader["_phonenumber"] == DBNull.Value ? null : (string)reader["_phonenumber"],
+                    (bool)reader["_phonenumberconfirmed"],
+                    (bool)reader["_twofactorenabled"],
+                    reader["_lockoutend"] == DBNull.Value ? null : (DateTime)reader["_lockoutend"], //Needs to be converted to DateTime before converting to DateTimeOffset
+                    (bool)reader["_lockoutenable"],
+                    (int)reader["_accessfailedcount"],
+                    (bool)reader["_deleted"],
                     );
             }
 
@@ -296,6 +297,7 @@ namespace SecureLoginWebAPI
                     new("p13", user.LockoutEnd == null ? DBNull.Value : user.LockoutEnd),
                     new("p14", Convert.ToString(user.LockoutEnable ? 1 : 0)),
                     new("p15", user.AccessFailedCount),
+                    new("p16", user.Deleted),
 
                 }
             };
@@ -303,6 +305,23 @@ namespace SecureLoginWebAPI
             await cmd.ExecuteNonQueryAsync();
         }
 
+        public static async void DeleteUser(int userid)
+        {
+            await using var conn = new NpgsqlConnection(connectionString);
+            await conn.OpenAsync();
+
+            await using var cmd = new NpgsqlCommand("CALL public.proc_delete_applicationuser(@p1);", conn)
+            {
+
+                Parameters =
+                {
+                    new("p1", userid)
+
+                }
+            };
+
+            await cmd.ExecuteNonQueryAsync();
+        }
         #endregion
 
         #region Role queries

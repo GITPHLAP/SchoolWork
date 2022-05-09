@@ -9,9 +9,6 @@ export class Rectangle extends Square implements ISquare{
         this.lengthC = length;
         this.lengthD = width;
     }
-    perimeter(): number {
-        return this.lengthA + this.lengthB + this.lengthC + this.lengthD;
-    }
     area(): number {
         return this.lengthA * this.lengthB;
     }

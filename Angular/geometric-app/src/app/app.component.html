@@ -1,3 +1,38 @@
+<div class="row">
+  <div class="col-sm-4">
+    <h1>Rektangel</h1>
+    <p>Længde:</p>
+    <input [(ngModel)]='rectLength' (ngModelChange)="calculateRect()">
+    <p>Bredde:</p>
+    <input [(ngModel)]='rectWidth' (ngModelChange)="calculateRect()">
+    <p>Areal:</p>
+    <p> {{rectArea}}</p>
+    <p>Omkreds:</p>
+    <p>{{rectPerimeter}}</p>
 
+  </div>
+  <div class="col-sm-4">
+    <h1>Parallelogram</h1>
+    <p>Længde:</p>
+    <input [(ngModel)]='paralLength' (ngModelChange)="calculateParal()">
+    <p>Bredde:</p>
+    <input [(ngModel)]='paralWidth' (ngModelChange)="calculateParal()">
+    <p>Højde:</p>
+    <input [(ngModel)]='paralHeight' (ngModelChange)="calculateParal()">
+    <p>Areal:</p>
+    <p> {{paralArea}}</p>
+    <p>Omkreds:</p>
+    <p>{{paralPerimeter}}</p>
+  </div>
+  <div class="col-sm-4">
+    <h1>Kvadrat</h1>
+    <p>Side:</p>
+    <input [(ngModel)]='squareSide' (ngModelChange)="calculateFourSquare()">
+    <p>Areal:</p>
+    <p> {{squareArea}}</p>
+    <p>Omkreds:</p>
+    <p>{{squarePerimeter}}</p>
+  </div>
+</div>
 
 <router-outlet></router-outlet>

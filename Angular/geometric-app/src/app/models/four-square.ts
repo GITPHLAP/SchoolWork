@@ -9,9 +9,7 @@ export class FourSquare extends Square implements ISquare {
         this.lengthC = length;
         this.lengthD = length;
     }
-    perimeter(): number {
-        return this.lengthA + this.lengthB + this.lengthC + this.lengthD;
-    }
+
     area(): number {
         return this.lengthA * this.lengthB;
     }

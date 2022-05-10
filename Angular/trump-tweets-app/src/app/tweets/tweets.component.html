@@ -1,0 +1,46 @@
+<!-- <div class="container">
+    <div class="table-responsive">
+        <table class="table ">
+            <thead>
+                <tr class="table-dark">
+                    <th scope="col" style="width: 10%;">Dato</th>
+                    <th scope="col">Likes</th>
+                    <th scope="col">Tweet</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tweet of tweets">
+                    <td>{{tweet.date | date}}</td>
+                    <td>{{tweet.likes | number}}</td>
+                    <td>{{tweet.text}}</td>
+                </tr>
+            </tbody>
+
+
+        </table>
+    </div>
+
+</div> -->
+
+<div class="container" *ngFor="let tweet of tweets">
+    <ng-template [ngIf]="filterTweets(tweet)">
+        <div>
+            <div class="card border-primary mb-5 tweet-div" style="width:80%;" >
+                <div [className]="containDemocrat(tweet.text) ? 'democratBody' : ''">
+                    <div class="card-body" >
+                        <p class="card-text">{{tweet.text}}</p>
+                      </div>
+                </div>
+        
+                  <div class="card-footer text-muted tweet-footer">
+                      <p style="display: inline-block;">{{tweet.date | date}}</p>
+                      <div class="likes">
+                          <img style="display: inline-block; width: 8%;" src="\assets\images\trump.png" alt="">
+                          <p style="display: inline-block;">{{tweet.likes}}</p>
+                      </div>
+                    </div>
+              </div>
+        </div>
+    </ng-template>
+    
+</div>

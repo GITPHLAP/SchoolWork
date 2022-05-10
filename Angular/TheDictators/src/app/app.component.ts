@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { InputDictatorComponent } from './input-dictator/input-dictator.component';
 
 @Component({
   selector: 'app-root',

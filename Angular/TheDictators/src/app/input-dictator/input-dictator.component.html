@@ -1,0 +1,47 @@
+<form [formGroup]="dictatorForm" (submit)="onSubmit()">
+    <div class="form-group">
+        <label>Fornavn:</label>
+        <input formControlName="firstName">
+    </div>
+    <div class="form-group">
+        <label>Efternavn:</label>
+        <input formControlName="lastName">
+    </div>
+    <div class="form-group">
+        <label>Fødsels år:</label>
+        <input formControlName="birthYear">
+    </div>
+    <div class="form-group">
+        <label>afgået år:</label>
+        <input formControlName="deadYear">
+    </div>
+    <div class="form-group">
+        <label>Beskrivelse:</label>
+        <input formControlName="shortDescription">
+    </div>
+    <button type="submit" >Opret</button>
+</form>
+
+
+<div>
+    <table>
+        <tr>
+            <th>Fornavn</th>
+            <th>Efternavn</th>
+            <th>Fødsels år</th>
+            <th>afgået år</th>
+            <th>Beskrivelse</th>
+            <th>Slet diktator</th>
+        </tr>
+        <tr *ngFor="let dictator of service.getDictators()">
+            <td>{{dictator.firstName}}</td>
+            <td>{{dictator.lastName}}</td>
+            <td>{{dictator.birthYear}}</td>
+            <td>{{dictator.deadYear}}</td>
+            <td>{{dictator.shortDescription}}</td>
+            <td>
+                <button (click)="deleteDictator(dictator)">Slet</button>
+            </td>
+        </tr>
+    </table>
+</div>

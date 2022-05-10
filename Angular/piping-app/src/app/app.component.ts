@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Md5} from 'ts-md5/dist/md5';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'piping-app';
+
+text = "";
+fromMorse = false;
+  
 }

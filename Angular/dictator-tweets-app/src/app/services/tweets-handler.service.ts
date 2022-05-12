@@ -9,6 +9,7 @@ import { TweetsWsService } from './tweets-ws.service';
   providedIn: 'root'
 })
 export class TweetsHandlerService {
+  // TODO: tweets is doubled in AllTweet
 
   constructor(private tweetWs: TweetsWsService,  private dicHandler: DictatorHandlerService) { 
     this.tweetWs.tweet$.subscribe((msg: Tweet) => {

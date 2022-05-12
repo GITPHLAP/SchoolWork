@@ -5,6 +5,11 @@ namespace MyDotEnv
 {
     public class DotEnv
     {
+        /// <summary>
+        /// Load all the variables into enviroment variables. <br>
+        /// Use variable: Environment.GetEnvironmentVariable("[VARIABLE_NAME]")
+        /// </summary>
+        /// <param name="filePath"> Path.Combine(Directory.GetCurrentDirectory(), ".env"</param>
         public static void Load(string filePath)
         {
             if (!File.Exists(filePath))

@@ -21,19 +21,9 @@ export class AlldictatorsComponent implements OnInit {
     this.dictatorHandler.dictators$.subscribe((data: Dictator[]) => {
       next: 
         this.dictators = data;
-      // complete: 
-      //   this.dictators.forEach(d => {
-      //     d.tweets$.next({} as Tweet);
-      //   })
     });
   }
-
-  // subToDictatorTweets(dictators: Dictator[]) {
-  //   dictators.forEach(d => {
-  //     d.tweets$.subscribe();
-  //   })
-  // }
-
+  
   onTestClick() {
     // let test: Dictator = {
     //   id: 0,

@@ -1,1 +1,88 @@
-<p>dictator-profile works!</p>
+
+<div class="center" *ngIf="dictator$ | async as dictator">
+        <mat-grid-list cols="2" rowHeight="fit" style="height: 100%;">
+            <div *ngIf="editMode; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+                <!-- <form> -->
+<!-- TODO: add bindings to edit page -->
+                    <mat-grid-tile [colspan]="2" [rowspan]="2">
+                        <!-- FirstName-->
+                        <mat-form-field class="dictator_name_field txtCenter" appearance="standard">
+                            <input matInput placeholder="Ex. Adolf"  class="dictator_name_input">
+                        </mat-form-field>
+
+                        <!-- LastName-->
+                        <mat-form-field class="dictator_name_field txtCenter" appearance="standard"> 
+                            <input matInput placeholder="Ex. Hitler" value="Hitler" class="dictator_name_input">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <p>
+                            <mat-form-field class="dictator_birth_dead_field" appearance="standard">
+                                <mat-label>Født</mat-label>
+                
+                                <input matInput placeholder="2020" value="2020" class="dictator_birth_dead_input txtCenter">
+                            </mat-form-field>
+                            -
+                            <mat-form-field class="dictator_birth_dead_field" appearance="standard">
+                                <mat-label>Død</mat-label>
+                
+                                <input matInput placeholder="2020" value="2020" class="dictator_birth_dead_input txtCenter">
+                            </mat-form-field>
+                        </p>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="2" [rowspan]="3">
+                        <mat-form-field id="dictator_desc_field" appearance="outline">
+                            <mat-label>Beskrivelse</mat-label>
+                            <textarea id="dictator_desc_txtarea" matInput
+                                placeholder="Ex. hvad kan han/hun lide..."></textarea>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="1" [rowspan]="1">
+                        <button mat-flat-button color="primary" (click)="onSaveClick()">Save</button>
+                    </mat-grid-tile>
+                <!-- </form> -->
+
+            </ng-template>
+            <ng-template #elseBlock>
+
+                <mat-grid-tile [colspan]="2" [rowspan]="2">
+                    <h1 id="dictator_name">{{dictator.firstName}} {{dictator.lastName}}</h1>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <p id="dictator_birth_dead">
+                        <span>{{dictator.birthYear}}</span> 
+                        -
+                        <span *ngIf="dictator.deadYear > 0"><span>{{dictator.deadYear}}</span></span>
+                    </p>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="3">
+                    <textarea id="dictator_readonly_desc_txtarea">{{dictator.shortDescription}}
+                    </textarea>
+                </mat-grid-tile>
+                <!-- TODO: fix styling of tweets -->
+                <mat-grid-tile [colspan]="2" [rowspan]="4" *ngIf="dictator.tweets$; else noTweets">
+                    <div id="dictator_tweets_container">
+                        <p id="dictator_tweets_header">Tweets</p>
+                        <div id="dictator_tweets" *ngFor="let tweets of dictator.tweets$ | async">
+                            {{tweets.Tweet}}
+                        </div>
+                    </div>                
+                </mat-grid-tile>
+                <ng-template #noTweets>
+                    <mat-grid-tile [colspan]="2" [rowspan]="1">
+                        <p>Ingen tweets...</p>
+                    </mat-grid-tile>
+                </ng-template>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <button mat-stroked-button color="primary" (click)="onEditClick()">Edit</button>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <button mat-stroked-button color="warn" (click)="onDeleteClick()" >Delete</button>
+                </mat-grid-tile>
+            </ng-template>
+
+          </mat-grid-list>
+</div>
+
+

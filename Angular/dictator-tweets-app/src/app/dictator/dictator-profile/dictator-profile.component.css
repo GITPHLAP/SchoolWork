@@ -1,0 +1,82 @@
+
+/* Profile read styles */
+#dictator_name{
+    font-size: 6em;
+    font-weight: 400;
+}
+#dictator_birth_dead {
+    font-weight: bold;
+}
+#dictator_readonly_desc_txtarea{
+    font-size: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+    width: 60%;
+    min-height:3em;
+    max-height: 7.6em;
+    resize: vertical;
+    background-color: transparent;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+}
+
+#dictator_tweets_container{
+    width: 60%;
+    max-height: 80%;
+    
+}
+
+#dictator_tweets{
+    padding: 5px 2px 5px 2px;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    overflow-y: auto;
+    width: 99.5%;
+    max-height: 82%;
+}
+
+#dictator_tweets_header {
+    padding: 0;
+    margin: 0 0 2px 0;
+}
+
+/* "Global" styles */
+.txtCenter {
+    text-align: center;
+}
+
+.center {
+
+    width: 65%;
+    height: 90%;
+    border: 1px solid #c4c4c4;
+    border-radius: 5px;
+    /* Center div */
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Profile editing styles */
+.dictator_name_field {
+    width: 36em;
+    margin: 5px;
+}
+.dictator_name_input {
+    font-size: 6em;
+}
+
+.dictator_birth_dead_field {
+    width: 3em;
+}
+
+#dictator_desc_field {
+    width:60%;
+}
+
+#dictator_desc_txtarea {
+    min-height:3em;
+    max-height: 10em;
+}

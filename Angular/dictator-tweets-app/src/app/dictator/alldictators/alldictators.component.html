@@ -1,7 +1,9 @@
 <div *ngFor="let _dictator of dictators">
     <mat-card>
-        <mat-card-subtitle>{{_dictator.firstName}}</mat-card-subtitle>
-        <mat-card-title>Shiba Inu</mat-card-title>
+        <mat-card-subtitle>{{_dictator.birthYear}} - {{_dictator.deadYear}}</mat-card-subtitle>
+        <mat-card-title>
+            <a [routerLink]="['/dictator',_dictator.id]">{{_dictator.firstName}} {{_dictator.lastName}}</a>
+        </mat-card-title>
         <mat-card-content *ngIf="_dictator.tweet$ | async as tweet">
             <div *ngIf="(tweet | json)!= '{}'">
 

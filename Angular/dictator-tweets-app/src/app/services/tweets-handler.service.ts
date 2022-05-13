@@ -9,7 +9,6 @@ import { TweetsWsService } from './tweets-ws.service';
   providedIn: 'root'
 })
 export class TweetsHandlerService {
-  // TODO: tweets is doubled in AllTweet
 
   constructor(private tweetWs: TweetsWsService,  private dicHandler: DictatorHandlerService) { 
     this.tweetWs.tweet$.subscribe((msg: Tweet) => {
@@ -24,12 +23,7 @@ export class TweetsHandlerService {
             if(dictator.tweet$ == undefined) {
               // Initilaize tweet subject 
               dictator.tweet$ = new BehaviorSubject<Tweet>(msg);
-
-              dictator.tweets$ = new BehaviorSubject<Tweet[]>(Array<Tweet>(msg));
-            } else {
-              dictator.tweet$.next(msg);
-
-              // Subscibe to tweet. When new tweet then it will automatically add to tweets list
+              // Subscibe to dictator tweet. When new tweet then it will automatically add to tweets list
               let newTweet;
               dictator.tweet$.subscribe((data: Tweet) => {
                 next:
@@ -40,6 +34,10 @@ export class TweetsHandlerService {
                     dictator?.tweets$.getValue().push(newTweet);
                   }
               });
+            } else {
+              dictator.tweet$.next(msg);
+
+
 
               console.log("Dictators last tweet: ");
               console.log(dictator.tweet$?.getValue());

@@ -1,5 +1,6 @@
 
-<div class="center" *ngIf="dictator$ | async as dictator">
+<!-- <div class="center" > -->
+    <div class="center" *ngIf="dictator$ | async as dictator">
         <mat-grid-list cols="2" rowHeight="fit" style="height: 100%;">
             <div *ngIf="editMode; then thenBlock else elseBlock"></div>
             <ng-template #thenBlock>
@@ -60,12 +61,13 @@
                     <textarea id="dictator_readonly_desc_txtarea">{{dictator.shortDescription}}
                     </textarea>
                 </mat-grid-tile>
-                <!-- TODO: fix styling of tweets -->
-                <mat-grid-tile [colspan]="2" [rowspan]="4" *ngIf="dictator.tweets$; else noTweets">
+                    <mat-grid-tile [colspan]="2" [rowspan]="4" *ngIf="(dictator.tweets$ | async)!.length > 0 ; else noTweets">
                     <div id="dictator_tweets_container">
                         <p id="dictator_tweets_header">Tweets</p>
-                        <div id="dictator_tweets" *ngFor="let tweets of dictator.tweets$ | async">
-                            {{tweets.Tweet}}
+                        <div id="dictator_tweets">
+                            <p *ngFor="let tweet of dictator.tweets$ | async">
+                                {{tweet.Tweet}}
+                            </p>
                         </div>
                     </div>                
                 </mat-grid-tile>

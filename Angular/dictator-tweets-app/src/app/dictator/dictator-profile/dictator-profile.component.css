@@ -32,7 +32,7 @@
     border-radius: 5px;
     overflow-y: auto;
     width: 99.5%;
-    max-height: 82%;
+    max-height: 8em;
 }
 
 #dictator_tweets_header {

@@ -1,20 +1,17 @@
-
-<!-- <div class="center" > -->
     <div class="center" *ngIf="dictator$ | async as dictator">
         <mat-grid-list cols="2" rowHeight="fit" style="height: 100%;">
             <div *ngIf="editMode; then thenBlock else elseBlock"></div>
             <ng-template #thenBlock>
-                <!-- <form> -->
 <!-- TODO: add bindings to edit page -->
                     <mat-grid-tile [colspan]="2" [rowspan]="2">
                         <!-- FirstName-->
                         <mat-form-field class="dictator_name_field txtCenter" appearance="standard">
-                            <input matInput placeholder="Ex. Adolf"  class="dictator_name_input">
+                            <input [(ngModel)]='dictator.firstName' matInput placeholder="Ex. Adolf"  class="dictator_name_input" >
                         </mat-form-field>
 
                         <!-- LastName-->
                         <mat-form-field class="dictator_name_field txtCenter" appearance="standard"> 
-                            <input matInput placeholder="Ex. Hitler" value="Hitler" class="dictator_name_input">
+                            <input [(ngModel)]='dictator.lastName' matInput placeholder="Ex. Hitler" class="dictator_name_input">
                         </mat-form-field>
                     </mat-grid-tile>
                     <mat-grid-tile [colspan]="2" [rowspan]="1">
@@ -22,28 +19,26 @@
                             <mat-form-field class="dictator_birth_dead_field" appearance="standard">
                                 <mat-label>Født</mat-label>
                 
-                                <input matInput placeholder="2020" value="2020" class="dictator_birth_dead_input txtCenter">
+                                <input [(ngModel)]='dictator.birthYear' matInput placeholder="2020" class="dictator_birth_dead_input txtCenter">
                             </mat-form-field>
                             -
                             <mat-form-field class="dictator_birth_dead_field" appearance="standard">
                                 <mat-label>Død</mat-label>
                 
-                                <input matInput placeholder="2020" value="2020" class="dictator_birth_dead_input txtCenter">
+                                <input [(ngModel)]='dictator.deadYear' matInput placeholder="2020" class="dictator_birth_dead_input txtCenter">
                             </mat-form-field>
                         </p>
                     </mat-grid-tile>
                     <mat-grid-tile [colspan]="2" [rowspan]="3">
                         <mat-form-field id="dictator_desc_field" appearance="outline">
                             <mat-label>Beskrivelse</mat-label>
-                            <textarea id="dictator_desc_txtarea" matInput
+                            <textarea id="dictator_desc_txtarea" [(ngModel)]='dictator.shortDescription' matInput
                                 placeholder="Ex. hvad kan han/hun lide..."></textarea>
                         </mat-form-field>
                     </mat-grid-tile>
                     <mat-grid-tile [colspan]="1" [rowspan]="1">
                         <button mat-flat-button color="primary" (click)="onSaveClick()">Save</button>
                     </mat-grid-tile>
-                <!-- </form> -->
-
             </ng-template>
             <ng-template #elseBlock>
 

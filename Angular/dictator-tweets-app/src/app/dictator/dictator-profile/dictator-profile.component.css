@@ -1,7 +1,7 @@
 
 /* Profile read styles */
 #dictator_name{
-    font-size: 6em;
+    font-size: 4vw;
     font-weight: 400;
 }
 #dictator_birth_dead {
@@ -32,7 +32,7 @@
     border-radius: 5px;
     overflow-y: auto;
     width: 99.5%;
-    max-height: 8em;
+    max-height: 22vh;
 }
 
 #dictator_tweets_header {
@@ -61,11 +61,11 @@
 
 /* Profile editing styles */
 .dictator_name_field {
-    width: 36em;
+    width: 28vw;
     margin: 5px;
 }
 .dictator_name_input {
-    font-size: 6em;
+    font-size: 4vw;
 }
 
 .dictator_birth_dead_field {
@@ -78,5 +78,5 @@
 
 #dictator_desc_txtarea {
     min-height:3em;
-    max-height: 10em;
+    max-height: 22vh;
 }

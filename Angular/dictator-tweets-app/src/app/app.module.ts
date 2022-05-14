@@ -12,14 +12,19 @@ import { MatCommonModule } from '@angular/material/core';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
 import { DictatorProfileComponent } from './dictator/dictator-profile/dictator-profile.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AlldictatorsComponent,
-    DictatorProfileComponent
+    DictatorProfileComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +35,9 @@ import { DictatorProfileComponent } from './dictator/dictator-profile/dictator-p
     MatButtonModule,
     MatInputModule,
     MatGridListModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
     FormsModule,
     BrowserAnimationsModule
   ],

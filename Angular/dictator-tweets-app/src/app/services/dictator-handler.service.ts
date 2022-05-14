@@ -56,6 +56,15 @@ export class DictatorHandlerService {
     
   }
 
+  updateDictators(newDictator: Dictator): void {
+    this.dictatorApi.putDictator(newDictator).subscribe(() => {      
+      complete:
+        // this.dictators$.next(dictator);
+        this.loadDictators();
+    });
+    
+  }
+
   getDictator(id: number): Dictator {
     return this.dictators$.getValue().find(d => d.id === id)!;
   }

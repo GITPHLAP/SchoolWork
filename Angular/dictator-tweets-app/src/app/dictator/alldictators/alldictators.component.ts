@@ -25,20 +25,23 @@ export class AlldictatorsComponent implements OnInit {
   }
   
   onTestClick() {
-    // let test: Dictator = {
-    //   id: 0,
-    //   firstName: 'testign',
-    //   lastName: 'B',
-    //   birthYear: 1,
-    //   deadYear: 2,
-    //   shortDescription: 'beskrivelse',
-    //   mappingText: ''
-    // };
-    // this.dictatorHandler.insertDictators(test);
+    let test: Dictator = {
+      id: 36,
+      firstName: 'Kurt',
+      lastName: 'Jensen',
+      birthYear: 1,
+      deadYear: 2,
+      shortDescription: 'beskrivelse',
+      mappningText: '',
+      tweet$: {} as BehaviorSubject<Tweet>,
+      tweets$: {} as BehaviorSubject<Tweet[]>
+    };
+    console.log("Dictator: ", test);
+    this.dictatorHandler.updateDictators(test);
 
-    let testDic = this.dictators.find(d => d.mappningText === "Twitter Web Client");
-    console.log(testDic);
-    console.log(this.dictators);
+    // let testDic = this.dictators.find(d => d.mappningText === "Twitter Web Client");
+    // console.log(testDic);
+    // console.log(this.dictators);
   }
 
 }

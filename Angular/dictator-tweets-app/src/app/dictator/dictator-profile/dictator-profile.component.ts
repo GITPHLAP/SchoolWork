@@ -31,7 +31,11 @@ export class DictatorProfileComponent implements OnInit {
   }
 
   onSaveClick() {
+    let test: Dictator = this.dictator$.getValue();
+    console.log("Dictator: ", test);
+    this.dicHandler.updateDictators(test);
     this.editMode = false;
+
   }
 
   onDeleteClick() {

@@ -55,7 +55,7 @@ namespace DictatorTweets_API.DAL
             await using var conn = new NpgsqlConnection(connectionString);
             await conn.OpenAsync();
 
-            await using var cmd = new NpgsqlCommand("UPDATE DictatorTweets.Dictators SET firstname = @p1, lastname = @p2, birtyear = @p3, deadyear = @p4, shortdescription = @p5 WHERE id = @p6;", conn)
+            await using var cmd = new NpgsqlCommand("UPDATE DictatorTweets.Dictators SET firstname = @p1, lastname = @p2, birthyear = @p3, deadyear = @p4, shortdesciption = @p5 WHERE id = @p6;", conn)
             {
                 Parameters =
                 {

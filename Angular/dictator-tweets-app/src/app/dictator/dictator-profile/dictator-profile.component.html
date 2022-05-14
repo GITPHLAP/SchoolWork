@@ -2,7 +2,6 @@
         <mat-grid-list cols="2" rowHeight="fit" style="height: 100%;">
             <div *ngIf="editMode; then thenBlock else elseBlock"></div>
             <ng-template #thenBlock>
-<!-- TODO: add bindings to edit page -->
                     <mat-grid-tile [colspan]="2" [rowspan]="2">
                         <!-- FirstName-->
                         <mat-form-field class="dictator_name_field txtCenter" appearance="standard">

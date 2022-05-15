@@ -1,0 +1,30 @@
+#all_dictators_container{
+    margin: auto;
+    width: 80%;
+}
+
+.dictator_card {
+    background-color: #c4c4c4;
+    margin: 10px 0;
+}
+
+.dictator_card_title {
+
+}
+.dictator_card_title a:link {
+    color: black;
+    text-decoration: none;
+}
+.dictator_card_title a:visited {
+    color: black;
+    text-decoration: none;
+}
+.dictator_card_title a:hover {
+    color: blue;
+    text-decoration: none;
+}
+.dictator_card_content{
+    border: 1px solid #639cff;
+    border-radius: 5px;
+    padding: 5px;
+}

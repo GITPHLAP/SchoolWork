@@ -1,3 +1,23 @@
-<app-navbar></app-navbar>
+    <mat-drawer-container class="example-container">
+        <mat-drawer #drawer class="example-sidenav" mode="side">
+            <div *ngFor="let dictator of dictators">
+                <p class="sidenav_dictator_name">
+                    <a class="sidenav_link" [routerLink]="['']">
+                        {{dictator.firstName}} {{dictator.lastName}}
+                    </a>
+                </p>
+            </div>
+        </mat-drawer>
+      
+        <mat-drawer-content>
+        <mat-toolbar>
+            <button mat-icon-button class="example-icon" mat-button (click)="drawer.toggle()">
+                <mat-icon >menu</mat-icon>
+            </button>
+            <a [routerLink]="['']" id="title_a"><span>{{title}}</span></a>
+            
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+        </mat-drawer-content>
 
-<router-outlet></router-outlet>
+    </mat-drawer-container>

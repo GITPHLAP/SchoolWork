@@ -1,0 +1,28 @@
+#title_a:link{
+    color: black;
+    text-decoration: none;
+}
+#title_a:visited{
+    color: black;
+    text-decoration: none;
+}
+#title_a:hover{
+    color: blue;
+    text-decoration: none;
+}
+.sidenav_dictator_name {
+    padding: 0 15px;
+}
+
+.sidenav_link:link{
+    color: black;
+    text-decoration: none;
+}
+.sidenav_link:visited{
+    color: black;
+    text-decoration: none;
+}
+.sidenav_link:hover{
+    color: blue;
+    text-decoration: none;
+}

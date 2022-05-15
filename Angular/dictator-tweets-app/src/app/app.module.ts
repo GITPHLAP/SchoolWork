@@ -16,15 +16,13 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import { DictatorProfileComponent } from './dictator/dictator-profile/dictator-profile.component';
-import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AlldictatorsComponent,
-    DictatorProfileComponent,
-    NavbarComponent
+    DictatorProfileComponent
   ],
   imports: [
     BrowserModule,

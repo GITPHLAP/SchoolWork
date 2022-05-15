@@ -68,4 +68,12 @@ export class DictatorHandlerService {
   getDictator(id: number): Dictator {
     return this.dictators$.getValue().find(d => d.id === id)!;
   }
+
+  deleteDictator(dictator: Dictator): void {
+    this.dictatorApi.deleteDictator(dictator).subscribe(() => {      
+      complete:
+        this.loadDictators();
+    });
+    
+  }
 }

@@ -24,4 +24,10 @@ export class DictatorApiService {
     let dictator: JsonDictator = new JsonDictator(dic.id, dic.firstName, dic. lastName, dic.birthYear, dic.deadYear, dic.shortDescription, dic.mappningText);
     return this.http.put<void>('https://localhost:5001/api/Dictator/update', dictator);
   }
+
+  deleteDictator(dic: Dictator):Observable<void> {
+    // TODO: Find a good solution for this... The problem is that it cant stringify to json because og the behaviour subject
+    let dictator: JsonDictator = new JsonDictator(dic.id, dic.firstName, dic. lastName, dic.birthYear, dic.deadYear, dic.shortDescription, dic.mappningText);
+    return this.http.delete<void>('https://localhost:5001/api/Dictator', {body: dictator});
+  }
 }

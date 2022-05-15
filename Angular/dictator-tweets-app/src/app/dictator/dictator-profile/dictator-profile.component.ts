@@ -20,7 +20,7 @@ export class DictatorProfileComponent implements OnInit {
       // If web page start on this page it cant fetch the data from dictator handler 
       // Then redirect to home page
       if(!this.dicHandler.getDictator(Number(params.get('id')))) {
-        // this.router.navigate([''])
+        this.router.navigate(['']);
       }
       this.dictator$.next(this.dicHandler.getDictator(Number(params.get('id'))));
     })
@@ -39,7 +39,11 @@ export class DictatorProfileComponent implements OnInit {
   }
 
   onDeleteClick() {
-    // this.editMode = false;
+
+    let test: Dictator = this.dictator$.getValue();
+    this.dicHandler.deleteDictator(test);
+    this.editMode = false;
+    this.router.navigate(['']);
   }
 
 }

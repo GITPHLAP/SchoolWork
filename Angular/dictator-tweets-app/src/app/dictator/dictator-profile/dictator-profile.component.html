@@ -59,8 +59,8 @@
                     <div id="dictator_tweets_container">
                         <p id="dictator_tweets_header">Tweets</p>
                         <div id="dictator_tweets">
-                            <p *ngFor="let tweet of dictator.tweets$ | async">
-                                {{tweet.Tweet}}
+                            <p *ngFor="let tweet of dictator.tweets$ | async" [innerHTML]="tweet.Tweet">
+                                
                             </p>
                         </div>
                     </div>                

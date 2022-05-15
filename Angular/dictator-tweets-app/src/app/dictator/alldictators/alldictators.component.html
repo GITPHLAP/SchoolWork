@@ -5,10 +5,7 @@
             <a [routerLink]="['/dictator',_dictator.id]">{{_dictator.firstName}} {{_dictator.lastName}}</a>
         </mat-card-title>
         <mat-card-content *ngIf="_dictator.tweet$ | async as tweet" class="dictator_card_content">
-        <mat-card-content *ngIf="_dictator.tweet$ | async as tweet">
-            <div *ngIf="(tweet | json)!= '{}'">
-
-                Tweet: {{tweet.Tweet}}
+            <div *ngIf="(tweet | json)!= '{}'" [innerHTML]="tweet.Tweet">
             </div>
         </mat-card-content>
     </mat-card>

@@ -9,7 +9,7 @@ import { TweetsHandlerService } from 'src/app/services/tweets-handler.service';
 @Component({
   selector: 'app-alldictators',
   templateUrl: './alldictators.component.html',
-  styleUrls: ['./alldictators.component.css']
+  styleUrls: ['./alldictators.component.scss']
 })
 export class AlldictatorsComponent implements OnInit {
   dictators: Dictator[] = []; 

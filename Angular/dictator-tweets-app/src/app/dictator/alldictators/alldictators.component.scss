@@ -1,6 +1,9 @@
 #all_dictators_container{
     margin: auto;
     width: 80%;
+    height: 20vh;
+    overflow-y: auto;
+    margin-bottom: 10px;
 }
 
 .dictator_card {

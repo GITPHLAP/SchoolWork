@@ -5,7 +5,7 @@ import { DictatorHandlerService } from './services/dictator-handler.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'dictator-tweets-app';

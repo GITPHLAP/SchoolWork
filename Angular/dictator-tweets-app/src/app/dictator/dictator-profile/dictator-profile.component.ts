@@ -7,7 +7,7 @@ import { DictatorHandlerService } from 'src/app/services/dictator-handler.servic
 @Component({
   selector: 'app-dictator-profile',
   templateUrl: './dictator-profile.component.html',
-  styleUrls: ['./dictator-profile.component.css']
+  styleUrls: ['./dictator-profile.component.scss']
 })
 export class DictatorProfileComponent implements OnInit {
 

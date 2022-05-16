@@ -1,0 +1,44 @@
+<div class="center">
+    <mat-grid-list cols="2" rowHeight="fit" style="height: 100%;">
+        <form [formGroup]="dictatorForm" (ngSubmit)="onAddDictator()">
+                <mat-grid-tile [colspan]="2" [rowspan]="2">
+                    <!-- FirstName-->
+                    <mat-form-field class="dictator_name_field txtCenter" appearance="standard">
+                        <input formControlName='firstName' matInput placeholder="Ex. Adolf"  class="dictator_name_input" >
+                    </mat-form-field>
+
+                    <!-- LastName-->
+                    <mat-form-field class="dictator_name_field txtCenter" appearance="standard"> 
+                        <input formControlName='lastName' matInput placeholder="Ex. Hitler" class="dictator_name_input">
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1">
+                    <p>
+                        <mat-form-field class="dictator_birth_dead_field" appearance="standard">
+                            <mat-label>Født</mat-label>
+            
+                            <input formControlName='birthYear' matInput placeholder="2020" class="dictator_birth_dead_input txtCenter">
+                        </mat-form-field>
+                        -
+                        <mat-form-field class="dictator_birth_dead_field" appearance="standard">
+                            <mat-label>Død</mat-label>
+            
+                            <input formControlName='deadYear' matInput placeholder="2020" class="dictator_birth_dead_input txtCenter">
+                        </mat-form-field>
+                    </p>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="3">
+                    <mat-form-field id="dictator_desc_field" appearance="outline">
+                        <mat-label>Beskrivelse</mat-label>
+                        <textarea id="dictator_desc_txtarea" formControlName='shortDescription' matInput
+                            placeholder="Ex. hvad kan han/hun lide..."></textarea>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <button mat-flat-button color="primary" type="submit">Save</button>
+                </mat-grid-tile>
+            </form>
+      </mat-grid-list>
+</div>
+
+

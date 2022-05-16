@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,13 +16,15 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import { DictatorProfileComponent } from './dictator/dictator-profile/dictator-profile.component';
+import { NewDictatorComponent } from './dictator/new-dictator/new-dictator.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AlldictatorsComponent,
-    DictatorProfileComponent
+    DictatorProfileComponent,
+    NewDictatorComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { DictatorProfileComponent } from './dictator/dictator-profile/dictator-p
     MatToolbarModule,
     MatIconModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule
   ],
   providers: [],

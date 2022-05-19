@@ -7,15 +7,15 @@ using DictatorTweets_API.Models;
 
 namespace DictatorTweets_API.DAL
 {
-    public class Postgres
+    public class DictatorDB : IDictatorDB
     {
-        static string connectionString = $"Host={Environment.GetEnvironmentVariable("DB_HOST")};" +
+        private static string connectionString = $"Host={Environment.GetEnvironmentVariable("DB_HOST")};" +
             $"Username={Environment.GetEnvironmentVariable("DB_USERNAME")};" +
             $"Password={Environment.GetEnvironmentVariable("DB_PASSWORD")};" +
             $"Database={Environment.GetEnvironmentVariable("DB_DATABASE")};" +
             $"Port={Environment.GetEnvironmentVariable("DB_PORT")}";
 
-        public static async Task<Dictator> CreateDictator(Dictator dictator)
+        public async Task<Dictator> CreateDictator(Dictator dictator)
         {
             await using var conn = new NpgsqlConnection(connectionString);
             await conn.OpenAsync();
@@ -50,7 +50,7 @@ namespace DictatorTweets_API.DAL
             return newdictator;
         }
 
-        public static async void UpdateDictator(Dictator dictator)
+        public async void UpdateDictator(Dictator dictator)
         {
             await using var conn = new NpgsqlConnection(connectionString);
             await conn.OpenAsync();
@@ -72,7 +72,7 @@ namespace DictatorTweets_API.DAL
             await cmd.ExecuteNonQueryAsync();
         }
 
-        public static async void DeleteDictator(Dictator dictator)
+        public async void DeleteDictator(Dictator dictator)
         {
             // TODO: Create procedure to add mapping text again 
             await using var conn = new NpgsqlConnection(connectionString);
@@ -89,7 +89,7 @@ namespace DictatorTweets_API.DAL
             await cmd.ExecuteNonQueryAsync();
         }
 
-        public static async Task<List<Dictator>> GetDictators()
+        public async Task<List<Dictator>> GetDictators()
         {
             await using var conn = new NpgsqlConnection(connectionString);
             await conn.OpenAsync();

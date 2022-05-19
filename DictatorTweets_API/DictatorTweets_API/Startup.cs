@@ -1,3 +1,4 @@
+using DictatorTweets_API.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -34,6 +35,7 @@ namespace DictatorTweets_API
             //}));
             services.AddCors();
             services.AddControllers();
+            services.AddSingleton<IDictatorDB, DictatorDB>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DictatorTweets_API", Version = "v1" });

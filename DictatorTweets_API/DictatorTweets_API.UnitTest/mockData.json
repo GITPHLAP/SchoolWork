@@ -1,0 +1,20 @@
+﻿[
+  {
+    "firstName": "Egon",
+    "lastName": "Jeppesen",
+    "birthYear": 1945,
+    "deadYear": 2001,
+    "shortDescription": "Han er grim",
+    "mappningText": "Twitter Ads",
+    "id": 38
+  },
+  {
+    "firstName": "Adolf",
+    "lastName": "Hitler",
+    "birthYear": 1,
+    "deadYear": 2,
+    "shortDescription": "En rigtig spasmager som holder af go gas",
+    "mappningText": "Twitter Web Client",
+    "id": 13
+  }
+]

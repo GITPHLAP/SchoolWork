@@ -12,33 +12,38 @@ namespace DictatorTweets_API.Controllers
     [ApiController]
     public class DictatorController : ControllerBase
     {
+        IDictatorDB db;
+        public DictatorController(IDictatorDB _db)
+        {
+            db = _db;
+        }
         // GET: api/DictatorController
         [HttpGet]
         public async Task<List<Dictator>> Get()
         {
             //Response.Headers.Add("Access-Control-Allow-Origin", "*");
-            return await Postgres.GetDictators();
+            return await db.GetDictators();
         }
 
         // POST api/<DictatorController>
         [HttpPost("insert")]
         public Task<Dictator> Post(Dictator newDictator)
         {
-            return Postgres.CreateDictator(newDictator);
+            return db.CreateDictator(newDictator);
         }
 
         // PUT api/<DictatorController>/5
         [HttpPut("update")]
         public void Put(Dictator newDictator)
         {
-            Postgres.UpdateDictator(newDictator);
+            db.UpdateDictator(newDictator);
         }
 
         // DELETE api/<DictatorController>/5
         [HttpDelete()]
         public void Delete(Dictator dictator)
         {
-            Postgres.DeleteDictator(dictator);
+            db.DeleteDictator(dictator);
         }
     }
 }

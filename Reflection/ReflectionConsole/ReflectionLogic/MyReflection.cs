@@ -40,52 +40,60 @@ namespace ReflectionConsole.ReflectionLogic
 
         public void SearchForEverything()
         {
-            //Get type 
-            Type personType = GetType("Person", "PrivateMethods", "ReflectionConsole.dll");
-
-
-            //Get memberinfos
-            MemberInfo[] memberInfo = personType.GetMembers(BindingFlags.Instance | BindingFlags.NonPublic |
-            BindingFlags.Public);
-            Console.WriteLine("MemberInfos");
-
-            foreach (var item in memberInfo)
+            //Get all types in namespace
+            var types = Assembly.LoadFrom("ReflectionConsole.dll").GetTypes();
+            Console.WriteLine("Types in the executing assembly");
+            foreach (var item in types)
             {
-                Console.WriteLine($"Name: {item.Name}  MemberType: {item.MemberType}  ToString(): {item.ToString()}");
+                Console.WriteLine(item.FullName);
+                Type personType = Type.GetType(item.FullName);
+                //Get memberinfos
+                MemberInfo[] memberInfo = personType.GetMembers(BindingFlags.Instance | BindingFlags.NonPublic |
+                BindingFlags.Public);
+                Console.WriteLine("MemberInfos");
 
-
-            }
-
-
-            //Get methodsinfo 
-            MethodInfo[] methodInfos = personType.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            Console.WriteLine("MethodInfos");
-
-            foreach (var method in methodInfos)
-            {
-                var _params = method.GetParameters();
-                Console.Write(method.Name + " Parameters");
-                foreach (var param in _params)
+                foreach (var member in memberInfo)
                 {
-                    Console.Write($"    {param.Name} type: {param.ParameterType}");
+                    Console.WriteLine($"Name: {member.Name}  MemberType: {member.MemberType}  ToString(): {member.ToString()}");
+
+
                 }
+
+
+                //Get methodsinfo 
+                MethodInfo[] methodInfos = personType.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                Console.WriteLine("MethodInfos");
+
+                foreach (var method in methodInfos)
+                {
+                    var _params = method.GetParameters();
+                    Console.Write(method.Name + " Parameters");
+                    foreach (var param in _params)
+                    {
+                        Console.Write($"    {param.Name} type: {param.ParameterType}");
+                    }
+                    Console.WriteLine();
+                }
+
+                //Get constructor info 
+                ConstructorInfo[] constructorInfos = personType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                Console.WriteLine("ConstructorInfos");
+
+                foreach (var constructor in constructorInfos)
+                {
+                    var _params = constructor.GetParameters();
+                    Console.Write(constructor.Name + " Parameters");
+                    foreach (var param in _params)
+                    {
+                        Console.Write($"    {param.Name} type: {param.ParameterType}");
+                    }
+                    Console.WriteLine();
+                }
+
                 Console.WriteLine();
             }
 
-            //Get constructor info 
-            ConstructorInfo[] constructorInfos = personType.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            Console.WriteLine("ConstructorInfos");
-
-            foreach (var constructor in constructorInfos)
-            {
-                var _params = constructor.GetParameters();
-                Console.Write(constructor.Name + " Parameters");
-                foreach (var param in _params)
-                {
-                    Console.Write($"    {param.Name} type: {param.ParameterType}");
-                }
-                Console.WriteLine();
-            }
+            
         }
 
 
@@ -103,7 +111,7 @@ namespace ReflectionConsole.ReflectionLogic
                 args = new object[] { };
             }
             //Creating an instance of object
-            return type.InvokeMember(className, BindingFlags.Public |
+            return type.InvokeMember(className, BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.CreateInstance, null, null, args);
         }
 

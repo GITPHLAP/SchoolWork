@@ -1,4 +1,4 @@
-﻿using ReflectionConsole.ReflectionLogic;
+﻿using MyCustomReflection;
 using System;
 using System.Reflection;
 
@@ -11,7 +11,7 @@ namespace ReflectionConsole
 
             MyReflection reflection = new MyReflection();
 
-            reflection.SearchForEverything();
+            reflection.SearchForEverything("ReflectionConsole.dll");
             //string objFullName = "";
             //string objName = "";
 

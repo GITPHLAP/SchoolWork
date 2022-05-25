@@ -1,5 +1,5 @@
-﻿using NUnit.Framework;
-using ReflectionConsole.ReflectionLogic;
+﻿using MyCustomReflection;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;

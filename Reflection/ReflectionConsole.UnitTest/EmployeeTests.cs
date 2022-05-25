@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using ReflectionConsole.ReflectionLogic;
 using System;
 using System.Reflection;
 using System.Xml.Linq;

@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32602.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSASender", "RSASender\RSASender.csproj", "{042CBC86-51DF-4C6B-9B87-3317A7C070E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSAReceiver", "RSAReceiver\RSAReceiver.csproj", "{7D4387CE-3CB5-4D59-BA88-6065DD7260C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSACrypto", "RSACrypto\RSACrypto.csproj", "{2801526E-991C-4726-9815-53036663ABCC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{042CBC86-51DF-4C6B-9B87-3317A7C070E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{042CBC86-51DF-4C6B-9B87-3317A7C070E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{042CBC86-51DF-4C6B-9B87-3317A7C070E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{042CBC86-51DF-4C6B-9B87-3317A7C070E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D4387CE-3CB5-4D59-BA88-6065DD7260C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D4387CE-3CB5-4D59-BA88-6065DD7260C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D4387CE-3CB5-4D59-BA88-6065DD7260C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D4387CE-3CB5-4D59-BA88-6065DD7260C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2801526E-991C-4726-9815-53036663ABCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2801526E-991C-4726-9815-53036663ABCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2801526E-991C-4726-9815-53036663ABCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2801526E-991C-4726-9815-53036663ABCC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9FB97CB6-A16B-431C-A69B-66BC6912F05A}
+	EndGlobalSection
+EndGlobal

@@ -14,7 +14,7 @@ import { TweetsHandlerService } from 'src/app/services/tweets-handler.service';
 export class AlldictatorsComponent implements OnInit {
   dictators: Dictator[] = []; 
 
-  constructor(public dictatorHandler: DictatorHandlerService, private tweetsHandler: TweetsHandlerService) { 
+  constructor(public dictatorHandler: DictatorHandlerService, public tweetsHandler: TweetsHandlerService) { 
   }
   ngOnInit(): void {
     this.dictatorHandler.loadDictators();

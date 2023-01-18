@@ -11,35 +11,35 @@ namespace Tilfældigheder
         static int iterations = 1000000;
         static void Main(string[] args)
         {
-            string encryptedMsg = Encrypter.Encrypt("Hej Kris!");
-            Console.WriteLine(encryptedMsg);
-            string decryptedMsg = Encrypter.Decrypt(encryptedMsg);
-            Console.WriteLine(decryptedMsg);
+            //string encryptedMsg = Encrypter.Encrypt("Hej Kris!");
+            //Console.WriteLine(encryptedMsg);
+            //string decryptedMsg = Encrypter.Decrypt(encryptedMsg);
+            //Console.WriteLine(decryptedMsg);
 
-            //Stopwatch pseudosw = new Stopwatch();
-            //Stopwatch cryptosw = new Stopwatch();
-            //List<int> pseudoresults = new List<int>();
-            //List<int> cryptoresults = new List<int>();
-            //Console.WriteLine("Crypto");
-            //cryptosw.Start();
-            //for (int i = 0; i < iterations; i++)
-            //{
-            //    cryptoresults.Add(SecureRandom());
-            //}
-            //cryptosw.Stop();
-            //CalculateConvidence(cryptoresults);
-            //Console.WriteLine($"Time: {cryptosw.Elapsed} seconds");
+            Stopwatch pseudosw = new Stopwatch();
+            Stopwatch cryptosw = new Stopwatch();
+            List<int> pseudoresults = new List<int>();
+            List<int> cryptoresults = new List<int>();
+            Console.WriteLine("Crypto");
+            cryptosw.Start();
+            for (int i = 0; i < iterations; i++)
+            {
+                cryptoresults.Add(SecureRandom());
+            }
+            cryptosw.Stop();
+            CalculateConvidence(cryptoresults);
+            Console.WriteLine($"Time: {cryptosw.Elapsed} seconds");
 
-            //// Pseudo
-            //Console.WriteLine("PSEUDO");
-            //pseudosw.Start();
-            //for (int i = 0; i < iterations; i++)
-            //{
-            //    pseudoresults.Add(PseudoRandom());
-            //}
-            //pseudosw.Stop();
-            //CalculateConvidence(pseudoresults);
-            //Console.WriteLine($"Time: {pseudosw.Elapsed} seconds");
+            // Pseudo
+            Console.WriteLine("PSEUDO");
+            pseudosw.Start();
+            for (int i = 0; i < iterations; i++)
+            {
+                pseudoresults.Add(PseudoRandom());
+            }
+            pseudosw.Stop();
+            CalculateConvidence(pseudoresults);
+            Console.WriteLine($"Time: {pseudosw.Elapsed} seconds");
         }
 
         static int SecureRandom()

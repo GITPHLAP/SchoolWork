@@ -17,6 +17,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import { DictatorProfileComponent } from './dictator/dictator-profile/dictator-profile.component';
 import { NewDictatorComponent } from './dictator/new-dictator/new-dictator.component';
+import { TweetComponent } from './tweet/tweet.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { NewDictatorComponent } from './dictator/new-dictator/new-dictator.compo
     AppComponent,
     AlldictatorsComponent,
     DictatorProfileComponent,
-    NewDictatorComponent
+    NewDictatorComponent,
+    TweetComponent
   ],
   imports: [
     BrowserModule,

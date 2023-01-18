@@ -4,7 +4,8 @@
         <mat-card-title class="dictator_card_title">
             <a [routerLink]="['/dictator',_dictator.id]">{{_dictator.firstName}} {{_dictator.lastName}}</a>
         </mat-card-title>
-        <mat-card-content *ngIf="_dictator.tweet$ | async as tweet" class="dictator_card_content">
+        <!-- <app-tweet [tweet]="tweetsHandler.getLatestTweetForDictator(_dictator.mappningText) | async"></app-tweet> -->
+        <mat-card-content *ngIf="(tweetsHandler.getLatestTweetForDictator(_dictator.mappningText) | async) as tweet" class="dictator_card_content">
             <div *ngIf="(tweet | json)!= '{}'" [innerHTML]="tweet.Tweet">
             </div>
         </mat-card-content>

@@ -18,7 +18,7 @@ namespace RSACrypto
             RSACryptoServiceProvider _rsa;
 
             // Create both public and private key
-            _rsa = new RSACryptoServiceProvider(4096);
+            _rsa = new RSACryptoServiceProvider(8192);
 
             return _rsa;
         }
@@ -39,7 +39,7 @@ namespace RSACrypto
             rsaKeyInfo.Exponent = eksponent;
 
 
-            RSACryptoServiceProvider _rsa = new(4096);
+            RSACryptoServiceProvider _rsa = new(8192);
 
             // Import key info
             _rsa.ImportParameters(rsaKeyInfo);

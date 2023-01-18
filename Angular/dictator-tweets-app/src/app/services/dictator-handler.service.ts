@@ -19,26 +19,26 @@ export class DictatorHandlerService {
     let dictators;
     this.dictatorApi.getDictators().subscribe((data: Dictator[]) => {
       next:
-        data.forEach(d => {
-          // // Initilaize tweet subject 
-          // d.tweet$ = new BehaviorSubject<Tweet>({} as Tweet);
+        // data.forEach(d => {
+        //   // // Initilaize tweet subject 
+        //   // d.tweet$ = new BehaviorSubject<Tweet>({} as Tweet);
 
-          // Initilaize tweets subject 
-          d.tweets$ = new BehaviorSubject<Tweet[]>([] as Tweet[]);
-          d.tweets$.getValue().splice(0,length)
-          // Subscribe to tweet subject to add the new tweet to array
-          let newTweet;
-          d.tweet$?.subscribe((data: Tweet) => {
-            next:
-              newTweet = data;
+        //   // Initilaize tweets subject 
+        //   d.tweets$ = new BehaviorSubject<Tweet[]>([] as Tweet[]);
+        //   d.tweets$.getValue().splice(0,length)
+        //   // Subscribe to tweet subject to add the new tweet to array
+        //   let newTweet;
+        //   d.tweet$?.subscribe((data: Tweet) => {
+        //     next:
+        //       newTweet = data;
             
-            complete:
-              if(newTweet != {} as Tweet){
-                d.tweets$.getValue().push(newTweet);
-                d.tweets$.next(d.tweets$.getValue())
-              }
-          });
-        });
+        //     complete:
+        //       if(newTweet != {} as Tweet){
+        //         d.tweets$.getValue().push(newTweet);
+        //         d.tweets$.next(d.tweets$.getValue())
+        //       }
+        //   });
+        // });
         dictators = data;
       
       complete:

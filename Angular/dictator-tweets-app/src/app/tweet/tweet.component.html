@@ -1,0 +1,17 @@
+<div class="card-body">
+    <div *ngIf="tweet != null">
+        <div class="card mb-3" style="background-color: rgb(245, 249, 252);">
+          <div class="card-body">
+            <p class="card-text">
+              {{tweet?.Tweet}}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <i class="col-sm text-center bi bi-chat-left-text"></i>
+          <i class="col-sm text-center container-fluid bi bi-arrow-repeat"></i>
+          <i class="col-sm text-center container-fluid bi bi-suit-heart"></i>
+          <i class="col-sm text-center container-fluid bi bi-upload"></i>
+        </div>
+      </div>
+    </div>

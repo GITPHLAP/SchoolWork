@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Dictator } from '../models/dictator';
 import { Tweet } from '../models/tweet';
 import { DictatorHandlerService } from './dictator-handler.service';
@@ -10,40 +10,42 @@ import { TweetsWsService } from './tweets-ws.service';
 })
 export class TweetsHandlerService {
 
-  constructor(private tweetWs: TweetsWsService,  private dicHandler: DictatorHandlerService) { 
-    this.tweetWs.tweet$.subscribe((msg: Tweet) => {
-      let dictator: Dictator | undefined;
-      next:
-        this.dicHandler.dictators$.forEach(value => {
-          dictator = value.find(d => d.mappningText === msg.Client);
-          console.log("The dictator: " + dictator + "    tweet: "+ msg.Tweet);
+  constructor(private tweetWs: TweetsWsService) {}
 
-          
-          if(dictator != undefined){
-            if(dictator.tweet$ == undefined) {
-              // Initilaize tweet subject 
-              dictator.tweet$ = new BehaviorSubject<Tweet>(msg);
-              // Subscibe to dictator tweet. When new tweet then it will automatically add to tweets list
-              let newTweet;
-              dictator.tweet$.subscribe((data: Tweet) => {
-                next:
-                  newTweet = data;
-                
-                complete:
-                  if(newTweet != {} as Tweet){
-                    dictator?.tweets$.getValue().push(newTweet);
-                  }
-              });
-            } else {
-              dictator.tweet$.next(msg);
+  getTweetsForDictator(mappingText : string): Observable<Tweet[]>{
+    let tweets$ = new BehaviorSubject<Tweet[]>([]);
 
+    this.tweetWs.getTweets().subscribe((tweets: Tweet[]) => {
+      // console.log(tweets);
+      for(let tweet of tweets) {
+        if(tweet.Client == mappingText){
 
-
-              console.log("Dictators last tweet: ");
-              console.log(dictator.tweet$?.getValue());
-            }
-          }
-        })
+          tweets$.getValue().push(tweet);
+        }
+      }
     });
+
+    // console.log(tweets$);
+    return tweets$;
   }
+
+
+  // Use NUll to hide in html
+  getLatestTweetForDictator(mappingText : string): Observable<Tweet|null>{
+    let tweet$ = new BehaviorSubject<Tweet | null>(null );
+    try {
+
+      this.getTweetsForDictator(mappingText).subscribe((tweets: Tweet[]) => {
+        if(tweets.length > 0) {
+          tweet$.next(tweets[tweets.length-1]);
+        }
+        // console.log(tweets[tweets.length-1]);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    return tweet$;
+
+  }
+
 }

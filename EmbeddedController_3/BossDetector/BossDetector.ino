@@ -10,7 +10,7 @@ HUSKYLENS   huskylens;
 void printResult(HUSKYLENSResult result);
 
 #define BOSS_ARRAY_SIZE 10
-#define CAM_ID 2
+#define CAM_ID 1
 // WIFI Setup
 #define SECRET_SSID "AntiBoss"
 
@@ -57,16 +57,16 @@ void setup() {
     huskylens.writeAlgorithm(ALGORITHM_FACE_RECOGNITION);
 
     // Custom names for learned faces
-    while (!huskylens.setCustomName("Henrik",1))  // bool setCustomName(String name,uint8_t id)
-    {
-      Serial.println(F("ID1 customname failed!")); 
-      delay(100);
-    }
-    while (!huskylens.setCustomName("Henrik",2))  // bool setCustomName(String name,uint8_t id)
-    {
-      Serial.println(F("ID1 customname failed!")); 
-      delay(100);
-    }
+    // while (!huskylens.setCustomName("Henrik",1))  // bool setCustomName(String name,uint8_t id)
+    // {
+    //   Serial.println(F("ID1 customname failed!")); 
+    //   delay(100);
+    // }
+    // while (!huskylens.setCustomName("Henrik",2))  // bool setCustomName(String name,uint8_t id)
+    // {
+    //   Serial.println(F("ID1 customname failed!")); 
+    //   delay(100);
+    // }
 }
 
 void loop() {
@@ -80,12 +80,12 @@ void loop() {
         while (huskylens.available())
         {
             HUSKYLENSResult result = huskylens.read();
-            readedIds[result.ID] = true;
 
-            setBossPosition(result.ID, result.xCenter, result.yCenter);
-
-            // printResult(result);
-            printBoss(result.ID);
+            if (result.ID != 0){
+              readedIds[result.ID] = true;
+              setBossPosition(result.ID, result.xCenter, result.yCenter);
+              printBoss(result.ID);
+            }
         }    
 
     }
@@ -99,8 +99,8 @@ void loop() {
           if (client.connected()){
             char* identifiedBoss = reinterpret_cast <char*> (&identBoss);
             client.write(identifiedBoss,sizeof(IdentifiedBoss)); 
+            printIdentBoss(identBoss);
           }
-          printIdentBoss(identBoss);
         }
         // Reset object 
         positions[i] = Position();

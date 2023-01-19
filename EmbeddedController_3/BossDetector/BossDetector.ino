@@ -6,8 +6,6 @@
 #include <WiFi101.h>
 
 HUSKYLENS   huskylens;
-//HUSKYLENS green line >> SDA; blue line >> SCL
-void printResult(HUSKYLENSResult result);
 
 #define BOSS_ARRAY_SIZE 10
 #define CAM_ID 1
@@ -32,7 +30,7 @@ void setup() {
       status = WiFi.begin(ssid);
 
       // wait 10 seconds for connection:
-      delay(10000);
+      delay(1000);
     }
     // you're connected now, so print out the data:
     Serial.println("You're connected to the network");
@@ -55,22 +53,9 @@ void setup() {
 
     // Set huskylens algorithm
     huskylens.writeAlgorithm(ALGORITHM_FACE_RECOGNITION);
-
-    // Custom names for learned faces
-    // while (!huskylens.setCustomName("Henrik",1))  // bool setCustomName(String name,uint8_t id)
-    // {
-    //   Serial.println(F("ID1 customname failed!")); 
-    //   delay(100);
-    // }
-    // while (!huskylens.setCustomName("Henrik",2))  // bool setCustomName(String name,uint8_t id)
-    // {
-    //   Serial.println(F("ID1 customname failed!")); 
-    //   delay(100);
-    // }
 }
 
 void loop() {
-    delay(1000);  
     bool readedIds[BOSS_ARRAY_SIZE]{0};
     if (!huskylens.request()) Serial.println(F("Fail to request data from HUSKYLENS, recheck the connection!"));
     else if(!huskylens.isLearned()) Serial.println(F("Nothing learned, press learn button on HUSKYLENS to learn one!"));

@@ -136,13 +136,6 @@ M=M+1
 @SHOWLOOP
 0;JMP
 
-
-
-
-
-
-
-
 (END)
 @END
 0;JMP
@@ -201,33 +194,19 @@ M=D+M
 @powerCalc
 M=0
 
-@poweri
-M=1
-
-
 @10
 D=A
 @ten
 M=D
 @innerCalc
-M=D
+M=1
 
 (POWERLOOP)
 
-// Check if power is 1 and then return 10   
-@1
-D=A
 @powerNumber
-D=D-M
-@ENDPOWERONE
-D;JEQ
-
-@poweri
 D=M
-@powerNumber
-D=D-M
 @ENDPOWERLOOP
-D;JGE
+D;JLE
 
 @powerj
 M=0
@@ -263,35 +242,18 @@ D=M
 @innerCalc
 M=D
 
-@poweri //i++
-M=M+1
+@powerNumber //i++
+M=M-1
 
 @POWERLOOP
 0;JMP
 
 (ENDPOWERLOOP)
-// Check if calc is 0 then return 1
-@powerCalc
-D=M
-@ENDPOWERZERO
-D;JEQ
 
 // Else return the calculation
+@innerCalc
+D=M
 @R1 // Power result set to the multiciffer 
 M=D // Set the result from RAM[2] to RAM[3]
-@TenPowerEnd
-0;JMP
-
-(ENDPOWERONE) // Set the result to 10 if its power 1
-@10
-D=A
-@powerCalc
-M=D
-@ENDPOWERLOOP
-0;JMP
-
-(ENDPOWERZERO)
-@R1 // Power result set to the multiciffer 
-M=1 // Set the result from RAM[2] to RAM[3]
 @TenPowerEnd
 0;JMP
